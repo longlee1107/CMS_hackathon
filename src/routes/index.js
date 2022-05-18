@@ -8,6 +8,12 @@ export const router = new VueRouter({
             name:'home',
             component:()=>import('../page/HomePage')
         },
+        {
+            path:'/leader',
+            name:'leader',
+            component:()=>import('../page/Leader')
+        },
+
      
 
     ],
