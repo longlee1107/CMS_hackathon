@@ -9,6 +9,11 @@ export const router = new VueRouter({
             component:()=>import('../page/HomePage')
         },
         {
+            path:'/admin',
+            name:'admin',
+            component:()=>import('../page/Admin')
+        },
+        {
             path:'/leader',
             name:'leader',
             component:()=>import('../page/Leader')
