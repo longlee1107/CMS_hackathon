@@ -1,20 +1,13 @@
 <template>
   <div>
-    <Admin/>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-
-
-import Admin from '@/page/Admin.vue';
 export default {
   name: 'App',
-  components:{
-    Admin
 
-},
 }
 </script>
 

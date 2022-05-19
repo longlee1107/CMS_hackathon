@@ -1,15 +1,29 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
+
 Vue.use(VueRouter);
 export const router = new VueRouter({
-    routes:[
+    routes: [
         {
-            path:'/',
-            name:'home',
-            component:()=>import('../page/HomePage')
+            path: '/',
+            name: 'home',
+            component: () => import('../page/HomePage')
         },
-     
-
+        {
+            path: '/admin',
+            name: 'admin',
+            component: () => import('../page/Admin')
+        },
+        {
+            path: '/leader',
+            name: 'leader',
+            component: () => import('../page/Leader')
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: () => import('../page/Login')
+        },
     ],
     mode: "history"
 })
