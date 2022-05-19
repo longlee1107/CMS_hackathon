@@ -94,9 +94,9 @@
                           <input type="password" v-model="password">
                           <label for="">Position</label>
                           <div class="flex">
-                            <input type="checkbox" id="jack" value="LEADER" v-model="position">
+                            <input type="radio" id="jack" value="3" v-model="position">
                             <label for="jack">Leader</label>
-                            <input type="checkbox" id="john" value="STAFF" v-model="position">
+                            <input type="radio" id="john" value="4" v-model="position">
                             <label for="john">Staff</label>
                           </div>
                           <label for="">Salary</label>
@@ -249,7 +249,7 @@ export default {
       position: [],
       email: "",
       password: "",
-      manager: 0,
+      manager: 1,
       birthday: "2000-04-25",
       avatar: "",
       salary: 0,
@@ -299,7 +299,13 @@ export default {
         console.log(error);
       }
     },
-    
+    // async showTime(){
+    //   try {
+    //     const res = 
+    //   } catch (error) {
+        
+    //   }
+    // }
   },
 };
 </script>
