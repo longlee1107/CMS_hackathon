@@ -69,25 +69,25 @@ export default {
   },
   methods: {
     Validate() {
-      if (!this.user.username) {
-        this.err.username = "username is required.";
-        this.countErr++;
-      } else if (!/\S+@\S+\.\S+/.test(this.user.username)) {
-        this.countErr++;
-        this.err.username = "username is invalid.";
-      } else {
-        this.err.username = "";
-      }
-      if (!this.user.password) {
-        this.err.password = "Password is required.";
-        this.countErr++;
-      } else {
-        this.err.password = "";
-      }
-      if (this.countErr > 0) {
-        this.countErr = 0;
-        return false;
-      }
+      // if (!this.user.username) {
+      //   this.err.username = "username is required.";
+      //   this.countErr++;
+      // } else if (!/\S+@\S+\.\S+/.test(this.user.username)) {
+      //   this.countErr++;
+      //   this.err.username = "username is invalid.";
+      // } else {
+      //   this.err.username = "";
+      // }
+      // if (!this.user.password) {
+      //   this.err.password = "Password is required.";
+      //   this.countErr++;
+      // } else {
+      //   this.err.password = "";
+      // }
+      // if (this.countErr > 0) {
+      //   this.countErr = 0;
+      //   return false;
+      // }
       this.countErr = 0;
       return true;
     },
@@ -104,9 +104,12 @@ export default {
         const data = response.data.data;
         console.log(data)
         localStorage.setItem('token', data.token);
+
         alert('Login Successfully');
         if (data.authorities[0] === "ADMINISTRATOR") {
           this.$router.push({name: 'admin'});
+        } else if (data.authorities[0] === "LEADER"){
+          this.$router.push({name: 'leader'});
         }
       } catch (e) {
         console.log(e);

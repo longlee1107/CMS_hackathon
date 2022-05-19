@@ -4,6 +4,11 @@ let axiosInstance = null;
 let headers = {
     'Content-Type': 'application/json'
 }
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
 function setHeaders(inputHeaders){
     headers = inputHeaders;
 }
@@ -20,6 +25,24 @@ function getInstance(){
     })
 
     //hook interceptor cai o day
+    axiosInstance.interceptors.request.use(config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    })
+
+    axiosInstance.interceptors.response.use(response => {
+        return response;
+    }, error => {
+        if (error.response.status === 401) {
+            localStorage.removeItem('token');
+            alert('Bạn phải đăng nhập để truy cập vào api này');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    })
     return axiosInstance;
 }
 
