@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!-- component -->
 <style>
   /* Compiled dark classes from Tailwind */
@@ -106,6 +107,16 @@
   .dark .dark\:hover\:text-blue-500:hover {
     color: rgba(59, 130, 246);
   }
+=======
+<template>
+  <div>
+    
+    <div>
+      <Header/>
+    <SideBar/>
+      <div
+          class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+>>>>>>> Stashed changes
 
   /* Custom style */
   .header-right {
@@ -163,6 +174,7 @@
               <div class="flex flex-row items-center h-8">
                 <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Main</div>
               </div>
+<<<<<<< Updated upstream
             </li>
             <li>
               <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
@@ -201,6 +213,11 @@
             <li class="px-5 hidden md:block">
               <div class="flex flex-row items-center mt-5 h-8">
                 <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Settings</div>
+=======
+              <div class="text-right">
+                <p class="text-2xl">{{this.users.length}}</p>
+                <p>Users</p>
+>>>>>>> Stashed changes
               </div>
             </li>
             <li>
@@ -236,9 +253,26 @@
             <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
               <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
             </div>
+<<<<<<< Updated upstream
             <div class="text-right">
               <p class="text-2xl">1,257</p>
               <p>Visitors</p>
+=======
+            <div
+                class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+              <div
+                  class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+                <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                     class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                </svg>
+              </div>
+              <div class="text-right">
+                <p class="text-2xl">457</p>
+                <p>Orders</p>
+              </div>
+>>>>>>> Stashed changes
             </div>
           </div>
           <div class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
@@ -250,6 +284,7 @@
               <p>Orders</p>
             </div>
           </div>
+<<<<<<< Updated upstream
           <div class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
             <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
               <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
@@ -281,6 +316,54 @@
             <div class="w-full overflow-x-auto">
               <table class="w-full">
                 <thead>
+=======
+          <!-- ./Statistics Cards -->
+
+          <div class="flex justify-end mx-8">
+            <button class="px-2.5 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" @click="showModalUser()">Add new user</button>
+          </div>
+            <!-- add user modal -->
+              <div class="fixed z-40 text-black">
+                <AddUserModal v-show="showModal" @close="closeModalUser">
+                  <template v-slot:body>
+                    <div class="">
+                      <form   @submit.prevent>
+                        <div class="grid grid-cols-1">
+                          <label for="">Name</label>
+                          <input type="text" v-model="staffName">
+                          <label for="">Email</label>
+                          <input type="text" v-model="email">
+                          <label for="">Password</label>
+                          <input type="password" v-model="password">
+                          <label for="">Position</label>
+                          <div class="flex">
+                            <input type="checkbox" id="jack" value="LEADER" v-model="position">
+                            <label for="jack">Leader</label>
+                            <input type="checkbox" id="john" value="STAFF" v-model="position">
+                            <label for="john">Staff</label>
+                          </div>
+                          <label for="">Salary</label>
+                          <div>
+                          <input type="number" v-model="salary"><span>/1 month</span>
+                          </div>
+                        </div>
+                        <div class="">
+                          <button @click="submitAddUser()">Add</button>
+                        </div>
+                      </form>
+                    </div>
+                  </template>
+              </AddUserModal>
+              </div>
+            <!-- ./add user modal -->
+
+          <!-- Client Table -->
+          <div class="mt-4 mx-4">
+            <div class="w-full overflow-hidden rounded-lg shadow-xs">
+              <div class="w-full overflow-x-auto">
+                <table class="w-full">
+                  <thead>
+>>>>>>> Stashed changes
                   <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th class="px-4 py-3">Client</th>
                     <th class="px-4 py-3">Client</th>
@@ -288,6 +371,7 @@
                     <th class="px-4 py-3">Status</th>
                     <th class="px-4 py-3">Date</th>
                   </tr>
+<<<<<<< Updated upstream
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                   <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
@@ -295,17 +379,39 @@
                       <div class="flex items-center text-sm">
                         <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                           <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
+=======
+                  </thead>
+                  <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+
+                  <tr v-for="user in users" :key="user.id" class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                    <td class="px-4 py-3">
+                      <p class="text-center">{{user.id}}</p>
+                    </td>
+                    <td class="px-4 py-3">
+                      <div class="flex items-center text-sm">
+                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                          <img class="object-cover w-full h-full rounded-full"
+                               :src="user.avatar"
+                               alt="" loading="lazy"/>
+>>>>>>> Stashed changes
                           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                         </div>
                         <div>
-                          <p class="font-semibold">Hans Burger</p>
+                          <p class="font-semibold">{{user.staffName}}</p>
                           <p class="text-xs text-gray-600 dark:text-gray-400">10x Developer</p>
                         </div>
                       </div>
                     </td>
+<<<<<<< Updated upstream
                     <td class="px-4 py-3 text-sm">$855.85</td>
                     <td class="px-4 py-3 text-xs">
                       <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> Approved </span>
+=======
+                    <td class="px-4 py-3 text-sm ">{{user.position}}</td>
+                    <td class="px-4 py-3 text-xs ">
+                      <span
+                          class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> Online </span>
+>>>>>>> Stashed changes
                     </td>
                     <td class="px-4 py-3 text-sm">15-01-2021</td>
                   </tr>
@@ -444,6 +550,7 @@
     </div>
 </template>
 
+<<<<<<< Updated upstream
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
   <script>
     const setup = () => {
@@ -457,6 +564,83 @@
       const setTheme = (value) => {
         window.localStorage.setItem('dark', value)
       }
+=======
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer>
+</script>
+<script>
+import AddUserModal from '@/components/AddUserModal.vue';
+import {UserService} from '@/service/UserService';
+import Header from '@/components/Header.vue';
+import SideBar from '@/components/SideBar.vue';
+export default {
+  components:{
+    AddUserModal,
+    SideBar,
+    Header
+  },
+  data() {
+    return {
+      showModal: false,
+      users: [],
+      staffName:'',
+      position:[],
+      email:'',
+      password:'',
+      manager:0,
+      birthday:'2000-04-25',
+      avatar:'',
+      salary:0
+    }
+  },
+  mounted() {
+        this.showUser();
+    },
+  methods: {
+    showModalUser() {
+      console.log(this.staffName)
+      console.log(this.email)
+      console.log(this.password)
+      this.showModal = true;
+    },
+    closeModalUser() {
+      this.showModal = false;
+    },
+    async submitAddUser(){
+      this.staffName = this.staffName.trim();
+      this.email = this.email.trim();
+      this.password = this.password.trim();
+      this.avatar = this.avatar;
+      this.salary = this.salary;
+
+      const user = {
+        staffName:this.staffName,
+        position:this.position,
+        email:this.email,
+        password:this.password,
+        manager:this.manager,
+        birthday:this.birthday,
+        avatar:this.avatar,
+        salary:this.salary
+      };
+      console.log(this.user)
+      await UserService.postNewUser(user);
+      this.showUser();
+      this.closeModalUser();
+    },
+    async showUser(){
+      try {
+        const response = await UserService.getAllUser();
+        this.users = response.data.data.content
+        console.log(this.users);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+}
+
+</script>
+>>>>>>> Stashed changes
 
       return {
         loading: true,
