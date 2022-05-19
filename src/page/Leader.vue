@@ -31,7 +31,7 @@ import SideBar from "@/components/SideBar";
 
 export default {
   components: {SideBar, Header},
-  
+
 }
 </script>
 <style scoped src="../assets/css/pageAdmin.css">
