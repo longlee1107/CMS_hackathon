@@ -83,23 +83,27 @@
               <div class="fixed z-40 text-black">
                 <AddUserModal v-show="showModal" @close="closeModalUser">
                   <template v-slot:body>
-                    <div class="">
-                      <form   @submit.prevent>
+                    <div class="w-96 h-96 p-4">
+                      <form @submit.prevent class="">
                         <div class="grid grid-cols-1">
-                          <label for="">Name</label>
-                          <input type="text" v-model="staffName">
-                          <label for="">Email</label>
-                          <input type="text" v-model="email">
-                          <label for="">Password</label>
-                          <input type="password" v-model="password">
-                          <label for="">Position</label>
-                          <div class="flex">
-                            <input type="radio" id="jack" value="3" v-model="position">
-                            <label for="jack">Leader</label>
-                            <input type="radio" id="john" value="4" v-model="position">
-                            <label for="john">Staff</label>
+                          <label for="" class="font-bold">Name</label>
+                          <input type="text" v-model="staffName" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                          <label for="" class="font-bold">Email</label>
+                          <input type="text" v-model="email" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                          <label for="" class="font-bold">Password</label>
+                          <input type="password" v-model="password" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                          <label for="" class="font-bold">Position</label>
+                          <div class="grid grid-cols-2">
+                            <div class="">
+                              <input type="radio" value="3" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                              <span class="font-bold">Leader</span>
+                            </div>
+                            <div class="">
+                              <input type="radio" value="4" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                              <span class="font-bold">Staff</span>
+                            </div>
                           </div>
-                          <label for="">Salary</label>
+                          <label for="" class="font-bold">Salary</label>
                           <div>
                           <input type="number" v-model="salary"><span>/1 month</span>
                           </div>
@@ -166,7 +170,7 @@
               </div>
               <div
                   class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                <span class="flex items-center col-span-3"> Showing 21-30 of 100 </span>
+                <span class="flex items-center col-span-3"> Showing 1-30 of 100 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
                 <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
