@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Header/>
+    <SideBar/>
     <div x-data="setup()" :class="{ 'dark': isDark }">
       <div
           class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
@@ -74,7 +76,43 @@
           <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
           </div>
 
-
+<div class="flex justify-end mx-8">
+            <button class="px-2.5 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" @click="showModalUser()">Add new user</button>
+          </div>
+            <!-- add user modal -->
+              <div class="fixed z-40 text-black">
+                <AddUserModal v-show="showModal" @close="closeModalUser">
+                  <template v-slot:body>
+                    <div class="">
+                      <form   @submit.prevent>
+                        <div class="grid grid-cols-1">
+                          <label for="">Name</label>
+                          <input type="text" v-model="staffName">
+                          <label for="">Email</label>
+                          <input type="text" v-model="email">
+                          <label for="">Password</label>
+                          <input type="password" v-model="password">
+                          <label for="">Position</label>
+                          <div class="flex">
+                            <input type="radio" id="jack" value="3" v-model="position">
+                            <label for="jack">Leader</label>
+                            <input type="radio" id="john" value="4" v-model="position">
+                            <label for="john">Staff</label>
+                          </div>
+                          <label for="">Salary</label>
+                          <div>
+                          <input type="number" v-model="salary"><span>/1 month</span>
+                          </div>
+                        </div>
+                        <div class="">
+                          <button @click="submitAddUser()">Add</button>
+                        </div>
+                      </form>
+                    </div>
+                  </template>
+              </AddUserModal>
+              </div>
+            <!-- ./add user modal -->
           <!-- Client Table -->
           <div class="mt-4 mx-4">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -91,9 +129,9 @@
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
-                  <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                  <tr v-for="user in users" :key="user.staffId" class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                     <td class="px-4 py-3">
-                      <p class="text-center">1</p>
+                      <p class="text-center">{{user.staffId}}</p>
                     </td>
                     <td class="px-4 py-3">
                       <div class="flex items-center text-sm">
@@ -104,12 +142,12 @@
                           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                         </div>
                         <div>
-                          <p class="font-semibold">Hans Burger</p>
+                          <p class="font-semibold">{{user.staffName}}</p>
                           <p class="text-xs text-gray-600 dark:text-gray-400">10x Developer</p>
                         </div>
                       </div>
                     </td>
-                    <td class="px-4 py-3 text-sm ">Leader</td>
+                    <td class="px-4 py-3 text-sm ">{{user.position}}</td>
                     <td class="px-4 py-3 text-xs ">
                       <span
                           class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> Online </span>
@@ -190,29 +228,86 @@
   </div>
 </template>
 
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer>
+</script>
 <script>
-const setup = () => {
-  const getTheme = () => {
-    if (window.localStorage.getItem('dark')) {
-      return JSON.parse(window.localStorage.getItem('dark'))
-    }
-    return !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-  }
-
-  const setTheme = (value) => {
-    window.localStorage.setItem('dark', value)
-  }
-
-  return {
-    loading: true,
-    isDark: getTheme(),
-    toggleTheme() {
-      this.isDark = !this.isDark
-      setTheme(this.isDark)
+import AddUserModal from "@/components/AddUserModal.vue";
+import { UserService } from "@/service/UserService";
+import Header from "@/components/Header.vue";
+import SideBar from "@/components/SideBar.vue";
+export default {
+  components: {
+    AddUserModal,
+    SideBar,
+    Header,
+  },
+  data() {
+    return {
+      showModal: false,
+      users: [],
+      staffName: "",
+      position: [],
+      email: "",
+      password: "",
+      manager: 1,
+      birthday: "2000-04-25",
+      avatar: "",
+      salary: 0,
+    };
+  },
+  mounted() {
+    this.showUser();
+  },
+  methods: {
+    showModalUser() {
+      console.log(this.staffName);
+      console.log(this.email);
+      console.log(this.password);
+      this.showModal = true;
     },
-  }
-}
+    closeModalUser() {
+      this.showModal = false;
+    },
+    async submitAddUser() {
+      this.staffName = this.staffName.trim();
+      this.email = this.email.trim();
+      this.password = this.password.trim();
+      this.avatar = this.avatar;
+      this.salary = this.salary;
+
+      const user = {
+        staffName: this.staffName,
+        position: this.position,
+        email: this.email,
+        password: this.password,
+        manager: this.manager,
+        birthday: this.birthday,
+        avatar: this.avatar,
+        salary: this.salary,
+      };
+      console.log(this.user);
+      await UserService.postNewUser(user);
+      this.showUser();
+      this.closeModalUser();
+    },
+    async showUser() {
+      try {
+        const response = await UserService.getAllUser();
+        this.users = response.data.data.content;
+        console.log(this.users);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // async showTime(){
+    //   try {
+    //     const res =
+    //   } catch (error) {
+
+    //   }
+    // }
+  },
+};
 </script>
 
 <style scoped src="../assets/css/pageAdmin.css">
