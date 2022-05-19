@@ -19,6 +19,11 @@ export const router = new VueRouter({
             name: 'leader',
             component: () => import('../page/Leader')
         },
+        {
+            path: '/login',
+            name: 'login',
+            component: () => import('../page/Login')
+        },
     ],
     mode: "history"
 })
