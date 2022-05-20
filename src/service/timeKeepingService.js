@@ -5,11 +5,11 @@ function getTimeKeeping() {
     return Axios.get('timekeeping');
 }
 
-function postTimeKeeping(payload) {
-    return Axios.put('timekeeping/change-status/${id}', payload);
+function patchTimeKeeping(id, value) {
+    return Axios.patch(`timekeeping/change-status/${id}?status=${value}`);
 }
 
 export const timeKeepingService = {
     getTimeKeeping,
-    postTimeKeeping
+    patchTimeKeeping
 }
