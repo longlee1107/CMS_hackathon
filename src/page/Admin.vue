@@ -21,8 +21,8 @@
                 </svg>
               </div>
               <div class="text-right">
-                <p class="text-2xl">1,257</p>
-                <p>Visitors</p>
+                <p class="text-2xl">{{this.users.length}}</p>
+                <p>Users</p>
               </div>
             </div>
             <div
@@ -75,9 +75,11 @@
 
           <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
           </div>
-
-<div class="flex justify-end mx-8">
-            <button class="px-2.5 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" @click="showModalUser()">Add new user</button>
+          <div class="flex justify-end mx-8">
+            <button
+                class="px-2.5 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                @click="showModalUser()">Add new user
+            </button>
           </div>
             <!-- add user modal -->
               <div class="fixed z-40 text-black">
@@ -103,6 +105,20 @@
                               <span class="font-bold">Staff</span>
                             </div>
                           </div>
+                          <label class="block text-gray-600 text-sm font-bold mb-2" for="birthday">Select Date</label>
+                          <div class="flex w-full">
+                            <v-date-picker v-model="birthday" class="flex-grow">
+                              <template v-slot="{ inputValue, inputEvents }">
+                                <input id="date" class="bg-white text-gray-700 w-full py-2 px-3 appearance-none border rounded-l focus:outline-none" :class="{ 'border-red-600': errorMessage }" :value="inputValue" v-on="inputEvents" />
+                              </template>
+                            </v-date-picker>
+                          </div>
+                            <p class="text-red-600 text-xs italic mt-1" v-if="errorMessage">
+                              {{ errorMessage }}
+                            </p>
+                            <p class="text-blue-500 text-xs font-bold mt-1" v-else>
+                              We got it. Thanks!
+                            </p>
                           <label for="" class="font-bold">Salary</label>
                           <div>
                           <input type="number" v-model="salary"><span>/1 month</span>
@@ -112,11 +128,11 @@
                           <button @click="submitAddUser()">Add</button>
                         </div>
                       </form>
-                    </div>
-                  </template>
-              </AddUserModal>
-              </div>
-            <!-- ./add user modal -->
+                </div>
+              </template>
+            </AddUserModal>
+          </div>
+          <!-- ./add user modal -->
           <!-- Client Table -->
           <div class="mt-4 mx-4">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -133,9 +149,10 @@
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
-                  <tr v-for="user in users" :key="user.staffId" class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                  <tr v-for="user in users" :key="user.staffId"
+                      class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                     <td class="px-4 py-3">
-                      <p class="text-center">{{user.staffId}}</p>
+                      <p class="text-center">{{ user.staffId }}</p>
                     </td>
                     <td class="px-4 py-3">
                       <div class="flex items-center text-sm">
@@ -146,12 +163,12 @@
                           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                         </div>
                         <div>
-                          <p class="font-semibold">{{user.staffName}}</p>
+                          <p class="font-semibold">{{ user.staffName }}</p>
                           <p class="text-xs text-gray-600 dark:text-gray-400">10x Developer</p>
                         </div>
                       </div>
                     </td>
-                    <td class="px-4 py-3 text-sm ">{{user.position}}</td>
+                    <td class="px-4 py-3 text-sm ">{{ user.position }}</td>
                     <td class="px-4 py-3 text-xs ">
                       <span
                           class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> Online </span>
@@ -170,7 +187,7 @@
               </div>
               <div
                   class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                <span class="flex items-center col-span-3"> Showing 1-30 of 100 </span>
+                <span class="flex items-center col-span-3"> Showing {{this.users.length}} of 100 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
                 <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
@@ -239,6 +256,8 @@ import AddUserModal from "@/components/AddUserModal.vue";
 import { UserService } from "@/service/UserService";
 import Header from "@/components/Header.vue";
 import SideBar from "@/components/SideBar.vue";
+import VCalendar from "v-calendar";
+
 export default {
   components: {
     AddUserModal,
@@ -253,20 +272,23 @@ export default {
       position: [],
       email: "",
       password: "",
-      manager: 1,
-      birthday: "2000-04-25",
+      birthday: "",
       avatar: "",
+      manager: 1,
       salary: 0,
     };
   },
   mounted() {
     this.showUser();
   },
+  computed: {
+    errorMessage() {
+      if (!this.date) return 'Date is required.';
+      return '';
+    },
+  },
   methods: {
     showModalUser() {
-      console.log(this.staffName);
-      console.log(this.email);
-      console.log(this.password);
       this.showModal = true;
     },
     closeModalUser() {
@@ -278,14 +300,15 @@ export default {
       this.password = this.password.trim();
       this.avatar = this.avatar;
       this.salary = this.salary;
+      this.birthday = this.birthday;
 
       const user = {
         staffName: this.staffName,
         position: this.position,
         email: this.email,
         password: this.password,
-        manager: this.manager,
         birthday: this.birthday,
+        manager:this.manager,
         avatar: this.avatar,
         salary: this.salary,
       };
@@ -303,13 +326,7 @@ export default {
         console.log(error);
       }
     },
-    // async showTime(){
-    //   try {
-    //     const res = 
-    //   } catch (error) {
-        
-    //   }
-    // }
+    
   },
 };
 </script>
