@@ -64,7 +64,7 @@ function put(endpointApiUrl, payLoad = {}) {
     return getInstance().put(endpointApiUrl, payLoad);
 }
 
-function patch(endpointApiUrl, payLoad = {}) {
+function patch(endpointApiUrl, payLoad = []) {
     return getInstance().patch(endpointApiUrl, payLoad);
 }
 

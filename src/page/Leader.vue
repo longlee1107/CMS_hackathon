@@ -17,10 +17,13 @@
                            :value="null"
                            color="red"
                            is-dark
-                           is-range
                            trim-weeks
+                           mode="date"
+                           v-model="date"
+                           @click="checkDate()"
             />
           </div>
+          {{ this.date}}
           <!--Calendar-->
 
           <!-- ./Statistics Cards -->
@@ -174,11 +177,15 @@ export default {
                 PENDING: "PENDING",
                 REJECTED: "REJECTED",
             },
-            checkRequest: []
+            checkRequest: [],
+            date: '',
         };
     },
     mounted() {
         this.showRequest();
+    },
+    computed:{
+      
     },
     methods: {
         async showRequest() {
@@ -213,10 +220,10 @@ export default {
             catch (error) {
                 console.log(error);
             }
-        },
+        }
     },
     components: { SideBar, Header }
-}
+};
 </script>
 <style scoped src="../assets/css/pageAdmin.css">
 </style>

@@ -17,6 +17,11 @@ Vue.filter('formatDate', (value) => {
         return moment(value).format('YYYY/MM/DD hh:mm')
     }
 });
+Vue.filter('formatMiliseconds', (value) => {
+    if (value) {
+        return moment(value).format('x')
+    }
+});
 
 new Vue({
     render: h => h(App),

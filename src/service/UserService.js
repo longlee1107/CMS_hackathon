@@ -8,7 +8,12 @@ function getAllUser() {
     return Axios.get('staffs');
 }
 
+function getUserProfileById(id) {
+    return Axios.get(`staffs/profile/${id}`);
+}
+
 export const UserService = {
     postNewUser,
-    getAllUser
+    getAllUser,
+    getUserProfileById
 }
