@@ -5,8 +5,8 @@ function getTimeKeeping() {
     return Axios.get('timekeeping');
 }
 
-function patchTimeKeeping(id, value) {
-    return Axios.patch(`timekeeping/change-status/${id}?status=${value}`);
+function patchTimeKeeping(payload, value) {
+    return Axios.patch(`timekeeping/change-status?status=${value}`, payload);
 }
 
 export const timeKeepingService = {

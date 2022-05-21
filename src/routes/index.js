@@ -7,19 +7,19 @@ export const router = new VueRouter({
             path: '/admin',
             name: 'admin',
             component: () =>
-                import ('../page/Admin')
+                import ('@/page/Admin')
         },
         {
             path: '/leader',
             name: 'leader',
             component: () =>
-                import ('../page/Leader')
+                import ('@/page/Leader')
         },
         {
             path: '/',
             name: 'login',
             component: () =>
-                import ('../page/Login')
+                import ('@/page/Login')
         }
     ],
     mode: "history"
