@@ -21,10 +21,15 @@ function getAllRequestByStaffId(id) {
     return Axios.get(`timekeeping/all-request/${id}`);
 }
 
+function getRequestByDate(date) {
+    return Axios.get(`timekeeping/get-request-by-date/${date}`);
+}
+
 export const timeKeepingService = {
     getTimeKeeping,
     patchTimeKeeping,
     getMyRequest,
     deleteTimeKeeping,
-    getAllRequestByStaffId
+    getAllRequestByStaffId,
+    getRequestByDate
 }

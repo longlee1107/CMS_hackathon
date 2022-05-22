@@ -178,8 +178,7 @@
                           class="px-2 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                         <router-link :to="{name:'detail', params:{id: user.staffId}}">Detail</router-link>
                       </button>
-                      <span
-                          class="px-2.5 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100 uppercase">x</span>
+                      
                     </td>
                   </tr>
                   </tbody>

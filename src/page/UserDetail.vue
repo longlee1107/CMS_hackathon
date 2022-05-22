@@ -81,6 +81,7 @@
                       bg-gray-50
                       whitespace-no-wrap
                       w-2/6
+                      mr-2
                     "
                     >Birthday::
                     <span
@@ -100,7 +101,12 @@
                       {{ this.user.birthday }}
                     </span>
                   </span>
+                    <div>
+                        <button class="px-4 py-2 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-3xl dark:bg-green-700 dark:text-green-100" @click="updateProfileUserById()">Update</button>
+                        <button v-if="this.user.position != 'ADMINISTRATOR'" class="px-4 py-2 mr-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-3xl dark:bg-red-700 dark:text-red-100" @click="deleteUserById()">Delete</button>
+                    </div>
                 </div>
+                
                 <div class="flex">
                   <span
                     class="
@@ -375,7 +381,8 @@
                 No Request Created!
                 </div>
           </div>
-          
+          <div>
+          </div>
         </div>
       </div>
     </div>
@@ -415,12 +422,19 @@ export default {
             this.staffId = this.$route.params.id;
             const res = await timeKeepingService.getAllRequestByStaffId(this.staffId);
             this.userRequest = res.data.data.content;
-            console.log('userrequest',this.userRequest);
-            
         } catch (error) {
             console.log("error", error);
         }
-    }
+    },
+    async deleteUserById(){
+        try {
+            await UserService.deleteUserById(this.staffId);
+            alert("Delete Success!");
+            this.$router.push("/admin");
+        } catch (error) {
+            console.log("error", error);
+        }
+    },
   },
   components: { Header, SideBar, RequestPoint },
 };
