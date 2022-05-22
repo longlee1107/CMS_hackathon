@@ -102,7 +102,7 @@
                     </span>
                   </span>
                     <div>
-                        <button class="px-4 py-2 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-3xl dark:bg-green-700 dark:text-green-100" @click="updateProfileUserById()">Update</button>
+                        <button class="px-4 py-2 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-3xl dark:bg-green-700 dark:text-green-100">Update</button>
                         <button v-if="this.user.position != 'ADMINISTRATOR'" class="px-4 py-2 mr-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-3xl dark:bg-red-700 dark:text-red-100" @click="deleteUserById()">Delete</button>
                     </div>
                 </div>
