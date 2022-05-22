@@ -26,6 +26,12 @@ export const router = new VueRouter({
             name: 'detail',
             component: () =>
                 import ('@/page/UserDetail')
+        },
+        {
+            path: '/profile',
+            name: 'profile',
+            component: () =>
+                import ('@/page/Profile')
         }
     ],
     mode: "history"

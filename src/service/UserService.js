@@ -12,8 +12,13 @@ function getUserProfileById(id) {
     return Axios.get(`staffs/profile/${id}`);
 }
 
+function getProfileOfCurrentUser() {
+    return Axios.get('staffs/profile');
+}
+
 export const UserService = {
     postNewUser,
     getAllUser,
-    getUserProfileById
+    getUserProfileById,
+    getProfileOfCurrentUser
 }

@@ -271,7 +271,6 @@ export default {
       try {
         this.staffId = this.$route.params.id;
         const resp = await UserService.getUserProfileById(this.staffId);
-        console.log("resp", resp.data.data);
         this.user = resp.data.data;
       } catch (error) {
         console.log("error", error);

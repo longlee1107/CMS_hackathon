@@ -144,7 +144,7 @@
                     <th class="px-4 py-3">Name</th>
                     <th class="px-4 py-3">Roll</th>
                     <th class="px-4 py-3">Status</th>
-                    <th class="px-4 py-3">Request</th>
+                    <th class="px-4 py-3">Profile</th>
                   </tr>
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -283,7 +283,7 @@ export default {
   },
   computed: {
     errorMessage() {
-      if (!this.date) return 'Date is required.';
+      if (!this.inputValue) return 'Date is required.';
       return '';
     },
   },
@@ -321,14 +321,10 @@ export default {
       try {
         const response = await UserService.getAllUser();
         this.users = response.data.data.content;
-        console.log(this.users);
       } catch (error) {
         console.log(error);
       }
     },
-    async showProfileById(){
-
-    }
   },
 };
 </script>
