@@ -4,14 +4,23 @@ let axiosInstance = null;
 let headers = {
     'Content-Type': 'application/json'
 }
-function setHeaders(inputHeaders){
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function setHeaders(inputHeaders) {
     headers = inputHeaders;
 }
-function getHeaders(){
+
+function getHeaders() {
     return headers;
 }
-function getInstance(){
-    if(axiosInstance != null){
+
+function getInstance() {
+    if (axiosInstance != null) {
         return axiosInstance;
     }
     axiosInstance = axios.create({
@@ -20,22 +29,47 @@ function getInstance(){
     })
 
     //hook interceptor cai o day
+    axiosInstance.interceptors.request.use(config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    })
+
+    axiosInstance.interceptors.response.use(response => {
+        return response;
+    }, error => {
+        if (error.response.status === 401) {
+            localStorage.removeItem('token');
+            alert('Bạn phải đăng nhập để truy cập vào đây');
+            window.location.href = '/';
+        }
+        return Promise.reject(error);
+    })
     return axiosInstance;
 }
 
-function get(endpointApiUrl,payLoad={}){
-    return getInstance().get(endpointApiUrl,{
+function get(endpointApiUrl, payLoad = {}) {
+    return getInstance().get(endpointApiUrl, {
         params: payLoad
     })
 }
-function post(endpointApiUrl,payLoad={}){
-    return getInstance().post(endpointApiUrl,payLoad)
+
+function post(endpointApiUrl, payLoad = {}) {
+    return getInstance().post(endpointApiUrl, payLoad)
 }
-function put(endpointApiUrl,payLoad={}){
-    return getInstance().put(endpointApiUrl,payLoad);
+
+function put(endpointApiUrl, payLoad = {}) {
+    return getInstance().put(endpointApiUrl, payLoad);
 }
-function del(endpointApiUrl,payLoad={}){
-    return getInstance().delete(endpointApiUrl,payLoad);
+
+function patch(endpointApiUrl, payLoad = []) {
+    return getInstance().patch(endpointApiUrl, payLoad);
+}
+
+function del(endpointApiUrl, payLoad = {}) {
+    return getInstance().delete(endpointApiUrl, payLoad);
 }
 
 export const Axios = {
@@ -44,9 +78,7 @@ export const Axios = {
     setHeaders,
     get,
     post,
+    patch,
     put,
     del
 }
-
-
-
