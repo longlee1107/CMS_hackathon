@@ -1,4 +1,4 @@
-# shoestore
+# Point Break
 
 ## Project setup
 ```
