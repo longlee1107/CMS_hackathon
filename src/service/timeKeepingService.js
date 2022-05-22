@@ -17,9 +17,14 @@ function deleteTimeKeeping(id) {
     return Axios.delete(`timekeeping/${id}`);
 }
 
+function getAllRequestByStaffId(id) {
+    return Axios.get(`timekeeping/all-request/${id}`);
+}
+
 export const timeKeepingService = {
     getTimeKeeping,
     patchTimeKeeping,
     getMyRequest,
-    deleteTimeKeeping
+    deleteTimeKeeping,
+    getAllRequestByStaffId
 }

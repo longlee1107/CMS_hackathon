@@ -250,7 +250,7 @@
               gap-2
               rounded-xl">
               <RequestPoint/>
-              <div class="mt-4 mx-4">
+              <div class="mt-4 mx-4" v-if="this.userRequest.length > 0">
                 <div class="w-full overflow-hidden rounded-lg shadow-xs">
                   <div class="w-full overflow-x-auto">
                     <table class="w-full">
@@ -371,6 +371,9 @@
                   </div>
                 </div>
               </div>
+              <div v-else class="italic text-center text-gray-50">
+                No Request Created!
+                </div>
           </div>
         </div>
       </div>
