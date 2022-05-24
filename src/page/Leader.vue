@@ -162,46 +162,6 @@
 
           <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
           </div>
-          <div class="flex justify-end mx-8">
-            <button
-                class="px-2.5 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                @click="showModalUser()">Add new user
-            </button>
-          </div>
-          <!-- add user modal -->
-          <div class="fixed z-40 text-black">
-            <AddUserModal v-show="showModal" @close="closeModalUser">
-              <template v-slot:body>
-                <div class="">
-                  <form @submit.prevent>
-                    <div class="grid grid-cols-1">
-                      <label for="">Name</label>
-                      <input type="text" v-model="staffName">
-                      <label for="">Email</label>
-                      <input type="text" v-model="email">
-                      <label for="">Password</label>
-                      <input type="password" v-model="password">
-                      <label for="">Position</label>
-                      <div class="flex">
-                        <input type="radio" id="jack" value="3" v-model="position">
-                        <label for="jack">Leader</label>
-                        <input type="radio" id="john" value="4" v-model="position">
-                        <label for="john">Staff</label>
-                      </div>
-                      <label for="">Salary</label>
-                      <div>
-                        <input type="number" v-model="salary"><span>/1 month</span>
-                      </div>
-                    </div>
-                    <div class="">
-                      <button @click="submitAddUser()">Add</button>
-                    </div>
-                  </form>
-                </div>
-              </template>
-            </AddUserModal>
-          </div>
-          <!-- ./add user modal -->
           <!-- Client Table -->
           <div class="mt-4 mx-4">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -212,16 +172,18 @@
                     <th class="px-4 py-3 w-1 ">Number</th>
                     <th class="px-4 py-3">Name</th>
                     <th class="px-4 py-3">Roll</th>
+                    <th class="px-4 py-3">Note</th>
                     <th class="px-4 py-3">Status</th>
+                    <th class="px-4 py-3">Date</th>
                     <th class="px-4 py-3">Request</th>
                   </tr>
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
-                  <tr v-for="user in users" :key="user.staffId"
+                  <tr v-for="request in requests" :key="request.id"
                       class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                     <td class="px-4 py-3">
-                      <p class="text-center">{{ user.staffId }}</p>
+                      <p class="text-center">{{ request.id }}</p>
                     </td>
                     <td class="px-4 py-3">
                       <div class="flex items-center text-sm">
@@ -237,18 +199,27 @@
                         </div>
                       </div>
                     </td>
-                    <td class="px-4 py-3 text-sm ">{{ user.position }}</td>
+                    <td class="px-4 py-3 text-sm ">{{ user.position.positionName }}</td>
+                    <td class="px-4 py-3 text-sm ">{{ request.note }}</td>
                     <td class="px-4 py-3 text-xs ">
                       <span
-                          class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> Online </span>
+                          class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> {{request.status}} </span>
                     </td>
-                    <td class="px-4 py-3 text-sm">
+                    <td class="px-4 py-3 text-sm" >
+                      {{request.timeIn | formatDate}}
+                    </td>
+                    <td class="px-4 py-3 text-sm" v-if="request.status === 'PENDING'">
                       <button
-                          class="px-2 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                        Request detail
+                          class="px-2 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" @click="checkRequestAccept()">
+                        Accept
                       </button>
-                      <span
-                          class="px-2.5 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">1</span>
+                      <button
+                          class="px-2 py-1 mr-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100" @click="checkRequestReject()">
+                        Reject
+                      </button>
+                    </td>
+                    <td class="px-4 py-3 text-sm" v-else>
+                      <span class="text-green-500 italic">Check</span>
                     </td>
                   </tr>
                   </tbody>
@@ -318,78 +289,45 @@
 </template>
 
 <script>
-
-import AddUserModal from "@/components/AddUserModal";
-import {UserService} from "@/service/UserService";
-
+import {timeKeepingService} from "@/service/timeKeepingService";
 export default {
-  components: {
-    AddUserModal,
-  },
+  
   data() {
     return {
-      showModal: false,
-      users: [],
-      staffName: "",
-      position: [],
-      email: "",
-      password: "",
-      manager: 1,
-      birthday: "2000-04-25",
-      avatar: "",
-      salary: 0,
+      requests:[],
+      user:[]
     };
   },
   mounted() {
-    this.showUser();
+    this.showRequest();
   },
   methods: {
-    showModalUser() {
-      console.log(this.staffName);
-      console.log(this.email);
-      console.log(this.password);
-      this.showModal = true;
-    },
-    closeModalUser() {
-      this.showModal = false;
-    },
-    async submitAddUser() {
-      this.staffName = this.staffName.trim();
-      this.email = this.email.trim();
-      this.password = this.password.trim();
-
-
-      const user = {
-        staffName: this.staffName,
-        position: this.position,
-        email: this.email,
-        password: this.password,
-        manager: this.manager,
-        birthday: this.birthday,
-        avatar: this.avatar,
-        salary: this.salary,
-      };
-      console.log(this.user);
-      await UserService.postNewUser(user);
-
-      this.closeModalUser();
-    },
-    async showUser() {
+    async showRequest(){
       try {
-        const response = await UserService.getAllUser();
-        this.users = response.data.data.content;
-        console.log(this.users);
+        const resp = await timeKeepingService.getTimeKeeping();
+        this.requests = resp.data.data.content;
+        for (let i = 0; i < this.requests.length; i++) {
+          this.user = this.requests[i].staff;
+        }
+        
       } catch (error) {
         console.log(error);
       }
     },
-    // async showTime(){
-    //   try {
-    //     const res =
-    //   } catch (error) {
-
-    //   }
-    // }
+    async checkRequestAccept(){
+      try {
+        const resp = await timeKeepingService.postTimeKeeping(this.requests.id);
+        console.log("okw",resp);
+        this.showRequest();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    checkRequestReject(){
+      for(let i = 0; i < this.requests.length; i++){
+        this.requests[i].status = "REJECTED";
+      }
+    },
   },
 };
 </script>

@@ -29,7 +29,7 @@
           id="modalTitle"
         >
           <slot name="header">
-            <b>Information</b>
+            <b>Add New User</b>
           </slot>
           <button
             type="button"

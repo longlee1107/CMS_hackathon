@@ -21,8 +21,8 @@
                 </svg>
               </div>
               <div class="text-right">
-                <p class="text-2xl">1,257</p>
-                <p>Visitors</p>
+                <p class="text-2xl">{{this.users.length}}</p>
+                <p>Users</p>
               </div>
             </div>
             <div
@@ -81,35 +81,53 @@
                 @click="showModalUser()">Add new user
             </button>
           </div>
-          <!-- add user modal -->
-          <div class="fixed z-40 text-black">
-            <AddUserModal v-show="showModal" @close="closeModalUser">
-              <template v-slot:body>
-                <div class="">
-                  <form @submit.prevent>
-                    <div class="grid grid-cols-1">
-                      <label for="">Name</label>
-                      <input type="text" v-model="staffName">
-                      <label for="">Email</label>
-                      <input type="text" v-model="email">
-                      <label for="">Password</label>
-                      <input type="password" v-model="password">
-                      <label for="">Position</label>
-                      <div class="flex">
-                        <input type="radio" id="jack" value="3" v-model="position">
-                        <label for="jack">Leader</label>
-                        <input type="radio" id="john" value="4" v-model="position">
-                        <label for="john">Staff</label>
-                      </div>
-                      <label for="">Salary</label>
-                      <div>
-                        <input type="number" v-model="salary"><span>/1 month</span>
-                      </div>
-                    </div>
-                    <div class="">
-                      <button @click="submitAddUser()">Add</button>
-                    </div>
-                  </form>
+            <!-- add user modal -->
+              <div class="fixed z-40 text-black">
+                <AddUserModal v-show="showModal" @close="closeModalUser">
+                  <template v-slot:body>
+                    <div class="w-96 h-96 p-4">
+                      <form @submit.prevent class="">
+                        <div class="grid grid-cols-1">
+                          <label for="" class="font-bold">Name</label>
+                          <input type="text" v-model="staffName" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                          <label for="" class="font-bold">Email</label>
+                          <input type="text" v-model="email" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                          <label for="" class="font-bold">Password</label>
+                          <input type="password" v-model="password" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                          <label for="" class="font-bold">Position</label>
+                          <div class="grid grid-cols-2">
+                            <div class="">
+                              <input type="radio" value="3" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                              <span class="font-bold">Leader</span>
+                            </div>
+                            <div class="">
+                              <input type="radio" value="4" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                              <span class="font-bold">Staff</span>
+                            </div>
+                          </div>
+                          <label class="block text-gray-600 text-sm font-bold mb-2" for="birthday">Select Date</label>
+                          <div class="flex w-full">
+                            <v-date-picker v-model="birthday" class="flex-grow">
+                              <template v-slot="{ inputValue, inputEvents }">
+                                <input id="date" class="bg-white text-gray-700 w-full py-2 px-3 appearance-none border rounded-l focus:outline-none" :class="{ 'border-red-600': errorMessage }" :value="inputValue" v-on="inputEvents" />
+                              </template>
+                            </v-date-picker>
+                          </div>
+                            <p class="text-red-600 text-xs italic mt-1" v-if="errorMessage">
+                              {{ errorMessage }}
+                            </p>
+                            <p class="text-blue-500 text-xs font-bold mt-1" v-else>
+                              We got it. Thanks!
+                            </p>
+                          <label for="" class="font-bold">Salary</label>
+                          <div>
+                          <input type="number" v-model="salary"><span>/1 month</span>
+                          </div>
+                        </div>
+                        <div class="">
+                          <button @click="submitAddUser()">Add</button>
+                        </div>
+                      </form>
                 </div>
               </template>
             </AddUserModal>
@@ -169,7 +187,7 @@
               </div>
               <div
                   class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                <span class="flex items-center col-span-3"> Showing 21-30 of 100 </span>
+                <span class="flex items-center col-span-3"> Showing {{this.users.length}} of 100 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
                 <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
@@ -238,6 +256,8 @@ import AddUserModal from "@/components/AddUserModal.vue";
 import { UserService } from "@/service/UserService";
 import Header from "@/components/Header.vue";
 import SideBar from "@/components/SideBar.vue";
+import VCalendar from "v-calendar";
+
 export default {
   components: {
     AddUserModal,
@@ -252,20 +272,23 @@ export default {
       position: [],
       email: "",
       password: "",
-      manager: 1,
-      birthday: "2000-04-25",
+      birthday: "",
       avatar: "",
+      manager: 1,
       salary: 0,
     };
   },
   mounted() {
     this.showUser();
   },
+  computed: {
+    errorMessage() {
+      if (!this.date) return 'Date is required.';
+      return '';
+    },
+  },
   methods: {
     showModalUser() {
-      console.log(this.staffName);
-      console.log(this.email);
-      console.log(this.password);
       this.showModal = true;
     },
     closeModalUser() {
@@ -277,14 +300,15 @@ export default {
       this.password = this.password.trim();
       this.avatar = this.avatar;
       this.salary = this.salary;
+      this.birthday = this.birthday;
 
       const user = {
         staffName: this.staffName,
         position: this.position,
         email: this.email,
         password: this.password,
-        manager: this.manager,
         birthday: this.birthday,
+        manager:this.manager,
         avatar: this.avatar,
         salary: this.salary,
       };
@@ -302,13 +326,7 @@ export default {
         console.log(error);
       }
     },
-    // async showTime(){
-    //   try {
-    //     const res = 
-    //   } catch (error) {
-        
-    //   }
-    // }
+    
   },
 };
 </script>

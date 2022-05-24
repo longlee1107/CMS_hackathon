@@ -110,6 +110,8 @@ export default {
           this.$router.push({name: 'admin'});
         } else if (data.authorities[0] === "LEADER"){
           this.$router.push({name: 'leader'});
+        } else if (data.authorities[0] === "STAFF"){
+          this.$router.push({name: 'staff'});
         }
       } catch (e) {
         console.log(e);

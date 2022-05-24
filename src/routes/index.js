@@ -5,11 +5,6 @@ Vue.use(VueRouter);
 export const router = new VueRouter({
     routes: [
         {
-            path: '/',
-            name: 'home',
-            component: () => import('../page/HomePage')
-        },
-        {
             path: '/admin',
             name: 'admin',
             component: () => import('../page/Admin')
@@ -20,7 +15,7 @@ export const router = new VueRouter({
             component: () => import('../page/Leader')
         },
         {
-            path: '/login',
+            path: '/',
             name: 'login',
             component: () => import('../page/Login')
         },

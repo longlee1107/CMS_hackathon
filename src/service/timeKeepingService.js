@@ -5,6 +5,11 @@ function getTimeKeeping() {
     return Axios.get('timekeeping');
 }
 
-export const UserService = {
-    getTimeKeeping
+function postTimeKeeping(payload) {
+    return Axios.put('timekeeping/change-status/${id}', payload);
+}
+
+export const timeKeepingService = {
+    getTimeKeeping,
+    postTimeKeeping
 }
