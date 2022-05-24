@@ -287,7 +287,7 @@
               </a>
             </li>
           </router-link>
-          <router-link to="/day-offs">
+          <router-link to="/admin/day-offs">
             <li>
               <a
                 href="#"
@@ -329,7 +329,7 @@
               </a>
             </li>
           </router-link>
-          <router-link to="/timelate">
+          <router-link to="/admin/timelate">
             <li>
               <a
                 href="#"
@@ -371,7 +371,7 @@
               </a>
             </li>
           </router-link>
-          <router-link to="/overtime">
+          <router-link to="/admin/overtime">
             <li>
               <a
                 href="#"

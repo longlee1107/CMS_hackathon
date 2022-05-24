@@ -31,7 +31,7 @@ export const router = new VueRouter({
             component: () => import ('@/page/Profile')
         },
         {
-            path: '/overtime',
+            path: '/admin/overtime',
             name: 'overtime',
             component: () =>
                 import ('@/page/AdminOverTime')
