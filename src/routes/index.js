@@ -30,6 +30,12 @@ export const router = new VueRouter({
             name: 'profile',
             component: () =>
                 import ('@/page/Profile')
+        },
+        {
+            path: '/admin/attendance',
+            name: 'attendance',
+            component: () =>
+                import ('@/page/AdminAttendanceManagement')
         }
     ],
     mode: "history"
