@@ -5,11 +5,31 @@ function getTimeKeeping() {
     return Axios.get('timekeeping');
 }
 
-function patchTimeKeeping(id, value) {
-    return Axios.patch(`timekeeping/change-status/${id}?status=${value}`);
+function patchTimeKeeping(payload, value) {
+    return Axios.patch(`timekeeping/change-status?status=${value}`, payload);
+}
+
+function getMyRequest() {
+    return Axios.get('timekeeping/my-request');
+}
+
+function deleteTimeKeeping(id) {
+    return Axios.delete(`timekeeping/${id}`);
+}
+
+function getAllRequestByStaffId(id) {
+    return Axios.get(`timekeeping/all-request/${id}`);
+}
+
+function getRequestByDate(date) {
+    return Axios.get(`timekeeping/get-request-by-date/${date}`);
 }
 
 export const timeKeepingService = {
     getTimeKeeping,
-    patchTimeKeeping
+    patchTimeKeeping,
+    getMyRequest,
+    deleteTimeKeeping,
+    getAllRequestByStaffId,
+    getRequestByDate
 }
