@@ -43,19 +43,19 @@ export const router = new VueRouter({
                 import ('@/page/AdminAttendanceManagement')
         },
         {
-            path: '/timelate',
+            path: '/admin/timelate',
             name: 'timelate',
             component: () =>
                 import ('@/page/AdminTimeLate')
         },
         {
-            path: '/day-offs',
+            path: '/admin/day-offs',
             name: 'day-offs',
             component: () =>
                 import ('@/page/AdminAbsentRequest')
         },
         {
-            path: '/detail/:id',
+            path: '/admin/detail/:id',
             name: 'detail',
             component: () =>
                 import ('@/page/AdminUserDetail')

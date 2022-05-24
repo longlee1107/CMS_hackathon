@@ -238,7 +238,6 @@ import {authService} from "@/service/authService"
 import {UserService} from "@/service/UserService";
 import CompoStaffPage from "@/components/CompoStaffPage";
 import {timeKeepingService} from "@/service/timeKeepingService";
-
 export default {
   name: "Staff",
   components: {CompoStaffPage},
