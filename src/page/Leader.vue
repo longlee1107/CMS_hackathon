@@ -166,6 +166,22 @@
 
           <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
           </div>
+          <!-- Approved or Rejected -->
+          <div class="flex justify-end mx-8">
+            <button
+                class="px-2 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                @click="approveRequest()">
+              Accept
+            </button>
+            <button
+                class="px-2 py-1 mr-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100"
+                @click="rejectRequest()">
+              Reject
+            </button>
+          </div>
+          <!-- ./Approved or Rejected -->
+
+
           <!-- Client Table -->
           <div class="mt-4 mx-4">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -213,16 +229,7 @@
                       {{ request.timeIn | formatDate }}
                     </td>
                     <td class="px-4 py-3 text-sm" v-if="request.status === 'PENDING'">
-                      <button
-                          class="px-2 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                          @click="checkRequestAccept()">
-                        Accept
-                      </button>
-                      <button
-                          class="px-2 py-1 mr-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100"
-                          @click="checkRequestReject()">
-                        Reject
-                      </button>
+                      <input type="checkbox" name="" v-model="checkRequest" :value="request.id">
                     </td>
                     <td class="px-4 py-3 text-sm" v-else>
                       <span class="text-green-500 italic">Check</span>
@@ -314,7 +321,6 @@ export default {
       try {
         const resp = await timeKeepingService.getTimeKeeping();
         this.requests = resp.data.data.content;
-        console.log('afsdfsdfsdfsdf',this.requests)
         for (let i = 0; i < this.requests.length; i++) {
           this.user = this.requests[i].staff;
         }
@@ -323,22 +329,25 @@ export default {
         console.log(error);
       }
     },
-    async checkRequestAccept() {
+    async approveRequest() {
       try {
-        const resp = await timeKeepingService.postTimeKeeping(this.requests.id);
-        console.log("okw", resp);
+        const resp = await timeKeepingService.patchTimeKeeping(this.checkRequest, this.status.APPROVED);
         this.showRequest();
       } catch (error) {
         console.log(error);
       }
     },
-    checkRequestReject() {
-      for (let i = 0; i < this.requests.length; i++) {
-        this.requests[i].status = "REJECTED";
+    async rejectRequest() {
+      try {
+        const resp = await timeKeepingService.patchTimeKeeping(this.checkRequest, this.status.REJECTED);
+        this.showRequest();
+      } catch (error) {
+        console.log(error);
       }
     },
-  },
-};
+  }
+
+}
 </script>
 <style scoped src="../assets/css/pageAdmin.css">
 </style>
