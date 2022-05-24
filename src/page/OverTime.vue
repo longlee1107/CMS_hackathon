@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- Header -->
-    <Header />
-    <!-- ./Header -->
-    <!-- Sidebar -->
-    <SideBar />
-    <!-- ./Sidebar -->
+    <CompoAdminPage/>
     <div x-data="setup()" >
       <div
         class="
@@ -100,7 +96,6 @@
                     >
                       <th class="px-4 py-3 w-1">Number</th>
                       <th class="px-4 py-3">Name</th>
-                      <th class="px-4 py-3">Roll</th>
                       <th class="px-4 py-3">Note</th>
                       <th class="px-4 py-3">Status</th>
                       <th class="px-4 py-3">Date</th>
@@ -113,6 +108,7 @@
                       divide-y
                       dark:divide-gray-700 dark:bg-gray-800
                     "
+                    v-if="this.requests.length > 0"
                   >
                     <tr
                       v-for="request in requests"
@@ -130,39 +126,7 @@
                         <p class="text-center">{{ request.id }}</p>
                       </td>
                       <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-                          <div
-                            class="
-                              relative
-                              hidden
-                              w-8
-                              h-8
-                              mr-3
-                              rounded-full
-                              md:block
-                            "
-                          >
-                            <img
-                              class="object-cover w-full h-full rounded-full"
-                              src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                              alt=""
-                              loading="lazy"
-                            />
-                            <div
-                              class="absolute inset-0 rounded-full shadow-inner"
-                              aria-hidden="true"
-                            ></div>
-                          </div>
-                          <div>
-                            <p class="font-semibold">{{ user.staffName }}</p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400">
-                              10x Developer
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        {{ user.position.positionName }}
+                          <p class="text-center">{{ request.staff }}</p>
                       </td>
                       <td class="px-4 py-3 text-sm">{{ request.note }}</td>
                       <td class="px-4 py-3 text-xs">
@@ -182,7 +146,7 @@
                         </span>
                       </td>
                       <td class="px-4 py-3 text-sm">
-                        {{ request.timeIn | formatDate }}
+                        {{ request.time_created | formatDate }}
                       </td>
                       <td
                         class="px-4 py-3 text-sm"
@@ -197,9 +161,20 @@
                         />
                       </td>
                       <td class="px-4 py-3 text-sm" v-else>
-                        <span class="text-green-500 italic">Check</span>
+                        <span class="text-green-500 italic">Checked</span>
                       </td>
                     </tr>
+                  </tbody>
+                  <tbody class="
+                      bg-white
+                      divide-y
+                      dark:divide-gray-700 dark:bg-gray-800
+                      text-center
+                      italic
+                    "
+                    v-else
+                    >
+                    No Request
                   </tbody>
                 </table>
               </div>
@@ -372,8 +347,7 @@
 
 <script>
 import { overTimeService } from "@/service/overTimeService";
-import SideBar from "@/components/SideBar.vue";
-import Header from "@/components/Header.vue";
+import CompoAdminPage from "@/components/CompoAdminPage.vue";
 
 export default {
   data() {
@@ -411,9 +385,6 @@ export default {
         this.requests = resp.data.data.content;
         console.log('requests', this.requests);
         
-        for (let i = 0; i < this.requests.length; i++) {
-          this.user = this.requests[i].staff;
-        }
       } catch (error) {
         console.log(error);
       }
@@ -446,7 +417,7 @@ export default {
 
     }
   },
-  components: { SideBar, Header },
+  components: {CompoAdminPage },
 };
 </script>
 <style scoped src="../assets/css/pageAdmin.css">

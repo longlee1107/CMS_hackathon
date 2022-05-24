@@ -32,6 +32,12 @@ export const router = new VueRouter({
             name: 'profile',
             component: () =>
                 import ('@/page/Profile')
+        },
+        {
+            path: '/overtime',
+            name: 'overtime',
+            component: () =>
+                import ('@/page/OverTime')
         }
     ],
     mode: "history"

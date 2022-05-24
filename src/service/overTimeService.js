@@ -28,7 +28,7 @@ function postOT(payload) {
     return Axios.post('ots', payload);
 }
 
-export const positionService = {
+export const overTimeService = {
     getOT,
     patchOT,
     getMyOT,
