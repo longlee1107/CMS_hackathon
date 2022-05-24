@@ -118,17 +118,13 @@
                           <label for="" class="font-bold">Password</label>
                           <input type="password" v-model="password" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
                           <label for="" class="font-bold">Position</label>
-                          <div class="grid grid-cols-2">
+                          <div class="flex" v-for="pos in listPosition" :key="pos.positionId">
                             <div class="">
-                              <input type="radio" value="STAFF" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                              <span class="font-bold">Staff</span>
-                            </div>
-                            <div class="">
-                              <input type="radio" value="LEADER" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                              <span class="font-bold">Leader</span>
+                              <input type="radio" :value="pos.positionName" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                              <span class="font-bold">{{pos.positionName}}</span>
                             </div>
                           </div>
-                          <label class="block text-gray-600 text-sm font-bold mb-2" for="birthday">Select Date</label>
+                          <label class="block text-gray-600 text-sm font-bold mb-2" for="birthday">Birthday</label>
                           <div class="flex w-full">
                             <v-date-picker v-model="birthday" class="flex-grow">
                               <template v-slot="{ inputValue, inputEvents }">
@@ -500,6 +496,7 @@ export default {
       this.position = this.user.position;
       this.birthday = this.user.birthday;
       this.salary = this.user.salary;
+      console.log("ok",this.position)
     },
     closeModalUser() {
       this.showModal = false;
@@ -541,18 +538,20 @@ export default {
           password: this.password,
           birthday: this.birthday,
           salary: this.salary,
-          position: this.listPosition.find(pos => pos.positionName === this.position).id,
+          position: this.listPosition.find((item) => item.positionName == this.position).positionId,
         }
         await UserService.updateProfileOfUser(this.staffId,this.updateUser);
         alert("Update User Success!");
+        this.showModal = false;
+        this.getProfileById();
       } catch (error) {
         console.log("error", error);
       }
     },
     async getPosition(){
       try {
-        const r = await positionService.getPosition();
-        console.log(r);
+        const dataRes = await positionService.getPosition();
+        this.listPosition = dataRes.data.data;
       } catch (error) {
         console.log("error", error);
       }
