@@ -7,25 +7,25 @@ export const router = new VueRouter({
             path: '/admin',
             name: 'admin',
             component: () =>
-                import ('@/page/Admin')
+                import ('../page/Admin')
         },
         {
             path: '/leader',
             name: 'leader',
             component: () =>
-                import ('@/page/Leader')
+                import ('../page/Leader')
         },
         {
             path: '/',
             name: 'login',
             component: () =>
-                import ('@/page/Login')
+                import ('../page/Login')
         },
         {
-            path: '/detail/:id',
-            name: 'detail',
+            path: '/staff',
+            name: 'staff',
             component: () =>
-                import ('@/page/UserDetail')
+                import ('../page/Staff')
         },
         {
             path: '/profile',
@@ -38,7 +38,32 @@ export const router = new VueRouter({
             name: 'overtime',
             component: () =>
                 import ('@/page/OverTime')
-        }
+        },
+        {
+            path: '/admin/attendance',
+            name: 'attendance',
+            component: () =>
+                import ('@/page/AdminAttendanceManagement')
+        },
+        {
+            path: '/timelate',
+            name: 'timelate',
+            component: () =>
+                import ('@/page/TimeLate')
+        },
+        {
+            path: '/day-offs',
+            name: 'day-offs',
+            component: () =>
+                import ('@/page/AbsentRequest')
+        },
+        {
+            path: '/detail/:id',
+            name: 'detail',
+            component: () =>
+                import ('@/page/UserDetail')
+        },
+
     ],
     mode: "history"
 })

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Header -->
-    <CompoLeaderPage/>
+    <CompoAdminPage/>
     <!-- ./Sidebar -->
     <div x-data="setup()">
       <div
@@ -397,10 +397,10 @@
 
 <script>
 import {timeKeepingService} from "@/service/timeKeepingService";
-import CompoLeaderPage from "@/components/CompoLeaderPage";
+import CompoAdminPage from "@/components/CompoAdminPage";
 
 export default {
-  components: {CompoLeaderPage},
+  components: {CompoAdminPage,},
   data() {
     return {
       requests: [],

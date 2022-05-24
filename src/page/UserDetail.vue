@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Header />
-    <SideBar />
+    <CompoAdminPage/>
     <!-- Profile Card -->
     <div x-data="setup()">
       <div
@@ -126,7 +125,7 @@
                             </div>
                             <div class="">
                               <input type="radio" value="LEADER" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                              <span class="font-bold">LEADER</span>
+                              <span class="font-bold">Leader</span>
                             </div>
                           </div>
                           <label class="block text-gray-600 text-sm font-bold mb-2" for="birthday">Select Date</label>
@@ -460,8 +459,7 @@
 import { UserService } from "@/service/UserService";
 import { timeKeepingService } from "@/service/timeKeepingService";
 import {positionService} from "@/service/positionService";
-import Header from "@/components/Header.vue";
-import SideBar from "@/components/SideBar.vue";
+import CompoAdminPage from "@/components/CompoAdminPage.vue";
 import RequestPoint from "@/components/requestPoint.vue";
 import UpdateUserInfomation from "./UpdateUserInfomation.vue";
 export default {
@@ -584,6 +582,6 @@ export default {
       }
     },
   },
-  components: { Header, SideBar, RequestPoint, UpdateUserInfomation },
+  components: { CompoAdminPage, RequestPoint, UpdateUserInfomation },
 };
 </script>

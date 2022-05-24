@@ -30,16 +30,13 @@
               @click="checkDate()"
             />
           </div>
-          {{ this.range.start | formatMiliseconds}}
-          <br>
-          {{ this.range.end | formatMiliseconds}}
           <!--Calendar-->
 
           <!-- ./Statistics Cards -->
 
           <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4"></div>
           <!-- Approved or Rejected -->
-          <div class="flex justify-end mx-8">
+           <div class="flex justify-end mx-8" v-if="this.requests.length > 0">
             <button
               class="
                 px-2
@@ -76,7 +73,7 @@
           <!-- ./Approved or Rejected -->
 
           <!-- Client Table -->
-          <div class="mt-4 mx-4">
+          <div class="mt-4 mx-4" v-if="this.requests.length > 0">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
                 <table class="w-full">
@@ -108,7 +105,6 @@
                       divide-y
                       dark:divide-gray-700 dark:bg-gray-800
                     "
-                    v-if="this.requests.length > 0"
                   >
                     <tr
                       v-for="request in requests"
@@ -164,17 +160,6 @@
                         <span class="text-green-500 italic">Checked</span>
                       </td>
                     </tr>
-                  </tbody>
-                  <tbody class="
-                      bg-white
-                      divide-y
-                      dark:divide-gray-700 dark:bg-gray-800
-                      text-center
-                      italic
-                    "
-                    v-else
-                    >
-                    No Request
                   </tbody>
                 </table>
               </div>
@@ -338,6 +323,9 @@
               </div>
             </div>
           </div>
+          <div class="italic text-center" v-else>
+              No Request Created
+          </div>
           <!-- ./Client Table -->
         </div>
       </div>
@@ -383,8 +371,6 @@ export default {
       try {
         const resp = await overTimeService.getOT();
         this.requests = resp.data.data.content;
-        console.log('requests', this.requests);
-        
       } catch (error) {
         console.log(error);
       }
