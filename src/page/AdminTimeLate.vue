@@ -27,9 +27,24 @@
               is-range
               v-model="range"
               :model-config="modelConfig"
-              @click="checkDate()"
             />
           </div>
+          <button
+              class="
+                px-2
+                py-1
+                mr-1
+                font-semibold
+                leading-tight
+                text-green-700
+                bg-green-100
+                rounded-full
+                dark:bg-green-700 dark:text-green-100
+              "
+              @click="getRequestByDate()"
+            >
+              Filter
+            </button>
           <!--Calendar-->
 
           <!-- ./Statistics Cards -->
@@ -391,6 +406,9 @@ export default {
           timeAdjust: "23:59:59",
         },
       },
+      timeStart:'',
+      timeEnd:'',
+      requestByDate:[],
     };
   },
   mounted() {
@@ -430,9 +448,6 @@ export default {
         console.log(error);
       }
     },
-    async checkDate(){
-
-    }
   },
   components: {CompoAdminPage },
 };

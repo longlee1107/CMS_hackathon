@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Header />
-    <SideBar />
+    <CompoAdminPage/>
     <!-- Profile Card -->
     <div x-data="setup()">
       <div
@@ -384,9 +383,8 @@
 <script>
 import { UserService } from "@/service/UserService";
 import { timeKeepingService } from "@/service/timeKeepingService";
-import Header from "@/components/Header.vue";
-import SideBar from "@/components/SideBar.vue";
-import RequestPoint from "../components/requestPoint.vue";
+import CompoAdminPage from "@/components/CompoAdminPage.vue";
+import RequestPoint from "@/components/requestPoint.vue";
 export default {
   data() {
     return {
@@ -408,6 +406,6 @@ export default {
       this.myRequest = response.data.data.content;
     },
   },
-  components: { Header, SideBar, RequestPoint },
+  components: { CompoAdminPage, RequestPoint },
 };
 </script>
