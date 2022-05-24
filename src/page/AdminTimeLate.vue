@@ -127,20 +127,51 @@
                       <td class="px-4 py-3 text-sm">{{ request.note }}</td>
                       <td class="px-4 py-3 text-xs">
                         <span
+                            class="
+                            px-2
+                            py-1
+                            font-semibold
+                            leading-tight
+                            text-yellow-50
+                            bg-orange-600
+                            rounded-full
+                            dark:bg-orange-600 dark:text-green-50"
+                            v-if="request.status === 'PENDING'"
+                        >
+
+                          {{ request.status }}
+                        </span>
+                      <span
                           class="
                             px-2
                             py-1
                             font-semibold
                             leading-tight
-                            text-green-700
-                            bg-green-100
+                            text-green-50
+                            bg-green-700
                             rounded-full
-                            dark:bg-green-700 dark:text-green-100
-                          "
-                        >
+                            dark:bg-green-700 dark:text-green-100"
+                          v-else-if="request.status === 'APPROVED'"
+                      >
+
                           {{ request.status }}
                         </span>
-                      </td>
+                      <span
+                          class="
+                            px-2
+                            py-1
+                            font-semibold
+                            leading-tight
+                            text-white
+                            bg-red-600
+                            rounded-full
+                            dark:bg-red-600 dark:text-green-100"
+                          v-else
+                      >
+
+                          {{ request.status }}
+                        </span>
+                    </td>
                       <td class="px-4 py-3 text-sm">
                         {{ request.time_created | formatDate }}
                       </td>

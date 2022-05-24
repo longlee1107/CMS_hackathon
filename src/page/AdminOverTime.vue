@@ -30,7 +30,6 @@
               @click="checkDate()"
             />
           </div>
-          
           <!--Calendar-->
 
           <!-- ./Statistics Cards -->
@@ -128,20 +127,51 @@
                       <td class="px-4 py-3 text-sm">{{ request.note }}</td>
                       <td class="px-4 py-3 text-xs">
                         <span
+                            class="
+                            px-2
+                            py-1
+                            font-semibold
+                            leading-tight
+                            text-yellow-50
+                            bg-orange-600
+                            rounded-full
+                            dark:bg-orange-600 dark:text-green-50"
+                            v-if="request.status === 'PENDING'"
+                        >
+
+                          {{ request.status }}
+                        </span>
+                      <span
                           class="
                             px-2
                             py-1
                             font-semibold
                             leading-tight
-                            text-green-700
-                            bg-green-100
+                            text-green-50
+                            bg-green-700
                             rounded-full
-                            dark:bg-green-700 dark:text-green-100
-                          "
-                        >
+                            dark:bg-green-700 dark:text-green-100"
+                          v-else-if="request.status === 'APPROVED'"
+                      >
+
                           {{ request.status }}
                         </span>
-                      </td>
+                      <span
+                          class="
+                            px-2
+                            py-1
+                            font-semibold
+                            leading-tight
+                            text-white
+                            bg-red-600
+                            rounded-full
+                            dark:bg-red-600 dark:text-green-100"
+                          v-else
+                      >
+
+                          {{ request.status }}
+                        </span>
+                    </td>
                       <td class="px-4 py-3 text-sm">
                         {{ request.time_created | formatDate }}
                       </td>
@@ -335,7 +365,7 @@
 </template>
 
 <script>
-import { absentService } from "@/service/absentService";
+import { overTimeService } from "@/service/overTimeService";
 import CompoAdminPage from "@/components/CompoAdminPage.vue";
 
 export default {
@@ -370,7 +400,7 @@ export default {
   methods: {
     async showRequest() {
       try {
-        const resp = await absentService.getDayOff();
+        const resp = await overTimeService.getOT();
         this.requests = resp.data.data.content;
       } catch (error) {
         console.log(error);
@@ -378,7 +408,7 @@ export default {
     },
     async approveRequest() {
       try {
-        const resp = await absentService.patchDayOff(
+        const resp = await overTimeService.patchOT(
           this.checkRequest,
           this.statusChecked.APPROVED
         );
@@ -390,7 +420,7 @@ export default {
     },
     async rejectRequest() {
       try {
-        const resp = await absentService.patchDayOff(
+        const resp = await overTimeService.patchOT(
           this.checkRequest,
           this.statusChecked.REJECTED
         );

@@ -166,10 +166,10 @@
                             py-1
                             font-semibold
                             leading-tight
-                            text-yellow-400
-                            bg-yellow-400
+                            text-yellow-50
+                            bg-orange-600
                             rounded-full
-                            dark:bg-yellow-500 dark:text-green-100"
+                            dark:bg-orange-600 dark:text-green-50"
                             v-if="request.status === 'PENDING'"
                         >
 
@@ -181,7 +181,7 @@
                             py-1
                             font-semibold
                             leading-tight
-                            text-green-700
+                            text-green-50
                             bg-green-700
                             rounded-full
                             dark:bg-green-700 dark:text-green-100"

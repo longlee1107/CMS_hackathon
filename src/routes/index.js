@@ -37,7 +37,7 @@ export const router = new VueRouter({
             path: '/overtime',
             name: 'overtime',
             component: () =>
-                import ('@/page/OverTime')
+                import ('@/page/AdminOverTime')
         },
         {
             path: '/admin/attendance',
@@ -49,19 +49,19 @@ export const router = new VueRouter({
             path: '/timelate',
             name: 'timelate',
             component: () =>
-                import ('@/page/TimeLate')
+                import ('@/page/AdminTimeLate')
         },
         {
             path: '/day-offs',
             name: 'day-offs',
             component: () =>
-                import ('@/page/AbsentRequest')
+                import ('@/page/AdminAbsentRequest')
         },
         {
             path: '/detail/:id',
             name: 'detail',
             component: () =>
-                import ('@/page/UserDetail')
+                import ('@/page/AdminUserDetail')
         },
 
     ],
