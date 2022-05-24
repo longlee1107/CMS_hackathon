@@ -4,11 +4,11 @@ import Vue from "vue";
 Vue.use(VueRouter);
 export const router = new VueRouter({
     routes: [{
-        path: '/admin',
-        name: 'admin',
-        component: () =>
-            import ('../page/Admin')
-    },
+            path: '/admin',
+            name: 'admin',
+            component: () =>
+                import ('../page/Admin')
+        },
         {
             path: '/leader',
             name: 'leader',
@@ -31,10 +31,36 @@ export const router = new VueRouter({
             component: () => import ('@/page/Profile')
         },
         {
+            path: '/overtime',
+            name: 'overtime',
+            component: () =>
+                import ('@/page/AdminOverTime')
+        },
+        {
             path: '/admin/attendance',
             name: 'attendance',
-            component: () => import ('@/page/AdminAttendanceManagement')
-        }
+            component: () =>
+                import ('@/page/AdminAttendanceManagement')
+        },
+        {
+            path: '/timelate',
+            name: 'timelate',
+            component: () =>
+                import ('@/page/AdminTimeLate')
+        },
+        {
+            path: '/day-offs',
+            name: 'day-offs',
+            component: () =>
+                import ('@/page/AdminAbsentRequest')
+        },
+        {
+            path: '/detail/:id',
+            name: 'detail',
+            component: () =>
+                import ('@/page/AdminUserDetail')
+        },
+
     ],
     mode: "history"
 })

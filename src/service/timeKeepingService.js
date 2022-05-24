@@ -25,11 +25,16 @@ function getRequestByDate(date) {
     return Axios.get(`timekeeping/get-request-by-date/${date}`);
 }
 
+function postRequest(payload) {
+    return Axios.post('timekeeping', payload);
+}
+
 export const timeKeepingService = {
     getTimeKeeping,
     patchTimeKeeping,
     getMyRequest,
     deleteTimeKeeping,
     getAllRequestByStaffId,
-    getRequestByDate
+    getRequestByDate,
+    postRequest
 }

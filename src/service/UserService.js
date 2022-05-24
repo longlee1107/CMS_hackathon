@@ -16,8 +16,8 @@ function getProfileOfCurrentUser() {
     return Axios.get('staffs/profile');
 }
 
-function updateProfileOfUser(id) {
-    return Axios.put(`staffs/${id}`);
+function updateProfileOfUser(id, payload) {
+    return Axios.put(`staffs/${id}`, payload);
 }
 
 function deleteUserById(id) {
