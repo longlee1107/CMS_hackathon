@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Header/>
-    <SideBar/>
+    <CompoAdminPage/>
     <div x-data="setup()" class="">
       <div
           class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
@@ -250,20 +249,17 @@
   </div>
 </template>
 
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer>
-</script>
 <script>
 import AddUserModal from "@/components/AddUserModal.vue";
 import { UserService } from "@/service/UserService";
-import Header from "@/components/Header.vue";
-import SideBar from "@/components/SideBar.vue";
+import CompoAdminPage from "@/components/CompoAdminPage";
+
 import VCalendar from "v-calendar";
 
 export default {
   components: {
     AddUserModal,
-    SideBar,
-    Header,
+    CompoAdminPage
   },
   data() {
     return {
@@ -299,9 +295,6 @@ export default {
       this.staffName = this.staffName.trim();
       this.email = this.email.trim();
       this.password = this.password.trim();
-      this.avatar = this.avatar;
-      this.salary = this.salary;
-      this.birthday = this.birthday;
 
       const user = {
         staffName: this.staffName,
