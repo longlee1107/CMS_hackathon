@@ -85,7 +85,7 @@
               <div class="fixed z-40 text-black">
                 <AddUserModal v-show="showModal" @close="closeModalUser">
                   <template v-slot:body>
-                    <div class="w-96 h-96 p-4">
+                    <div class="w-96 h-full p-4">
                       <form @submit.prevent class="">
                         <div class="grid grid-cols-1">
                           <label for="" class="font-bold">Name</label>
@@ -121,13 +121,15 @@
                             </p>
                           <label for="" class="font-bold">Salary</label>
                           <div>
-                          <input type="number" v-model="salary"><span>/1 month</span>
+                          <input class="w-3/4 px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl" type="number" v-model="salary"><span>/1 month</span>
                           </div>
                         </div>
-                        <div class="">
-                          <button @click="submitAddUser()">Add</button>
-                        </div>
                       </form>
+                </div>
+              </template>
+              <template v-slot:footer>
+                <div class="">
+                  <button class="ml-36 mt-3 px-4 py-2 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" @click="submitAddUser()">Add</button>
                 </div>
               </template>
             </AddUserModal>

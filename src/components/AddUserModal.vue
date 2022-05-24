@@ -19,7 +19,7 @@
 <template>
   <transition name="modal-fade">
     <div class="modal-backdrop">
-      <div class="modal"
+      <div class="modal rounded-2xl"
         role="dialog"
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
