@@ -2,7 +2,7 @@
   <div>
     <Header/>
     <SideBar/>
-    <div x-data="setup()" :class="{ 'dark': isDark }">
+    <div x-data="setup()" class="">
       <div
           class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
 
@@ -109,7 +109,7 @@
                           <div class="flex w-full">
                             <v-date-picker v-model="birthday" class="flex-grow">
                               <template v-slot="{ inputValue, inputEvents }">
-                                <input id="date" class="bg-white text-gray-700 w-full py-2 px-3 appearance-none border rounded-l focus:outline-none" :class="{ 'border-red-600': errorMessage }" :value="inputValue" v-on="inputEvents" />
+                                <input id="date" class="bg-white text-gray-700 w-full py-2 px-3 appearance-none border rounded-3xl focus:outline-none" :class="{ 'border-red-600': errorMessage }" :value="inputValue" v-on="inputEvents" />
                               </template>
                             </v-date-picker>
                           </div>
@@ -144,7 +144,7 @@
                     <th class="px-4 py-3">Name</th>
                     <th class="px-4 py-3">Roll</th>
                     <th class="px-4 py-3">Status</th>
-                    <th class="px-4 py-3">Request</th>
+                    <th class="px-4 py-3">Profile</th>
                   </tr>
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -176,10 +176,9 @@
                     <td class="px-4 py-3 text-sm">
                       <button
                           class="px-2 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                        Request detail
+                        <router-link :to="{name:'detail', params:{id: user.staffId}}">Detail</router-link>
                       </button>
-                      <span
-                          class="px-2.5 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">1</span>
+                      
                     </td>
                   </tr>
                   </tbody>
@@ -283,7 +282,7 @@ export default {
   },
   computed: {
     errorMessage() {
-      if (!this.date) return 'Date is required.';
+      if (!this.inputValue) return 'Date is required.';
       return '';
     },
   },
@@ -321,12 +320,10 @@ export default {
       try {
         const response = await UserService.getAllUser();
         this.users = response.data.data.content;
-        console.log(this.users);
       } catch (error) {
         console.log(error);
       }
     },
-    
   },
 };
 </script>

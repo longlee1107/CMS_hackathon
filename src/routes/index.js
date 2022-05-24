@@ -3,16 +3,17 @@ import Vue from "vue";
 
 Vue.use(VueRouter);
 export const router = new VueRouter({
-    routes: [
-        {
+    routes: [{
             path: '/admin',
             name: 'admin',
-            component: () => import('../page/Admin')
+            component: () =>
+                import ('../page/Admin')
         },
         {
             path: '/leader',
             name: 'leader',
-            component: () => import('../page/Leader')
+            component: () =>
+                import ('../page/Leader')
         },
         {
             path: '/',
@@ -24,6 +25,12 @@ export const router = new VueRouter({
             name: 'staff',
             component: () => import('../page/Staff')
         },
+        {
+            path: '/profile',
+            name: 'profile',
+            component: () =>
+                import ('@/page/Profile')
+        }
     ],
     mode: "history"
 })
