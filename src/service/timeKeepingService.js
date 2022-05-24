@@ -21,8 +21,8 @@ function getAllRequestByStaffId(id) {
     return Axios.get(`timekeeping/all-request/${id}`);
 }
 
-function getRequestByDate(date) {
-    return Axios.get(`timekeeping/get-request-by-date/${date}`);
+function getRequestByDate(timeIn, timeOut) {
+    return Axios.get(`timekeeping/get-request-by-date/${timeIn}/${timeOut}`);
 }
 
 function postRequest(payload) {

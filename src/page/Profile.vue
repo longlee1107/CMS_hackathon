@@ -227,7 +227,7 @@
                       w-4/6
                     "
                   >
-                    {{ currentUser.createdAt }}
+                    {{ currentUser.createdAt | formatDate }}
                   </span>
                 </span>
               </div>
