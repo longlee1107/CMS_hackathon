@@ -95,7 +95,8 @@ export default {
       try{
         const data = await staffService.postStaff({
           note:"chấm công",
-          staff:1,
+          status: "PENDING",
+          staff:this.dataUser.staffId,
           timeIn:Date.parse(this.date.start)
         })
         alert("request sent successfully")
