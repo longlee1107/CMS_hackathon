@@ -1,12 +1,7 @@
 <template>
   <div>
-    <div v-if="currentUser.position == 'ADMINISTRATOR'">
-      <CompoAdminPage/>
-    </div>
-    <div v-if="currentUser.position == 'LEADER'">
-      <CompoLeaderPage/>
-    </div>
-    <!--Profile Card-->
+    <CompoStaffPage />
+    <!-- Profile Card -->
     <div x-data="setup()">
       <div
         class="
@@ -19,7 +14,7 @@
           dark:text-black
         "
       >
-        <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
+        <div class="h-full w-5/6 mx-auto mt-14 mb-10">
           <div
             class="
               md:grid
@@ -231,7 +226,7 @@
                       w-4/6
                     "
                   >
-                    {{ currentUser.createdAt | formatDate}}
+                    {{ currentUser.createdAt | formatDate }}
                   </span>
                 </span>
               </div>
@@ -249,9 +244,6 @@
               </p>
             </div>
           </div>
-          <div>
-            <a-progress type="circle" :percent="percent" />
-          </div>
         </div>
       </div>
     </div>
@@ -261,8 +253,7 @@
 <script>
 import { UserService } from "@/service/UserService";
 import { timeKeepingService } from "@/service/timeKeepingService";
-import CompoAdminPage from "@/components/CompoAdminPage.vue";
-
+import CompoStaffPage from "@/components/CompoStaffPage.vue";
 export default {
   data() {
     return {
@@ -282,8 +273,9 @@ export default {
     async getMyRequest() {
       const response = await timeKeepingService.getMyRequest();
       this.myRequest = response.data.data.content;
+      console.log('myRequest', this.myRequest);
     },
   },
-  components: { CompoAdminPage},
+  components: { CompoStaffPage },
 };
 </script>

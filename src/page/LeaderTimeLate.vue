@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- Header -->
-    <CompoAdminPage/>
+    <CompoLeaderPage/>
     <div x-data="setup()" >
       <div
-        class="
+          class="
           min-h-screen
           flex flex-col flex-auto flex-shrink-0
           antialiased
@@ -18,21 +18,21 @@
           <!--Calendar-->
           <div class="m-5">
             <v-date-picker
-              is-expanded
-              :value="null"
-              color="red"
-              is-dark
-              trim-weeks
-              mode="range"
-              is-range
-              v-model="range"
-              :model-config="modelConfig"
+                is-expanded
+                :value="null"
+                color="red"
+                is-dark
+                trim-weeks
+                mode="range"
+                is-range
+                v-model="range"
+                :model-config="modelConfig"
             />
           </div>
           <!--Calendar-->
-            <div class="flex justify-start mx-8">
+          <div class="flex justify-start mx-8">
             <button
-              class="
+                class="
                 px-3
                 py-1
                 mr-1
@@ -43,7 +43,7 @@
                 rounded-full
                 dark:bg-green-700 dark:text-green-100
               "
-              @click="getRequestByDate()"
+                @click="getRequestByDate()"
             >
               Filter
             </button>
@@ -52,9 +52,9 @@
 
           <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4"></div>
           <!-- Approved or Rejected -->
-           <div class="flex justify-end mx-8" v-if="this.requests.length > 0">
+          <div class="flex justify-end mx-8" v-if="this.requests.length > 0">
             <button
-              class="
+                class="
                 px-2
                 py-1
                 mr-1
@@ -65,12 +65,12 @@
                 rounded-full
                 dark:bg-green-700 dark:text-green-100
               "
-              @click="approveRequest()"
+                @click="approveRequest()"
             >
               Accept
             </button>
             <button
-              class="
+                class="
                 px-2
                 py-1
                 mr-1
@@ -81,7 +81,7 @@
                 rounded-full
                 dark:bg-red-700 dark:text-red-100
               "
-              @click="rejectRequest()"
+                @click="rejectRequest()"
             >
               Reject
             </button>
@@ -89,14 +89,14 @@
           <!-- ./Approved or Rejected -->
 
           <!-- Client Table -->
-                    <div v-if="this.requests.length > 0">
+          <div v-if="this.requests.length > 0">
             <div class="mt-4 mx-4" v-if="this.requestByDate.length == 0">
-            <div class="w-full overflow-hidden rounded-lg shadow-xs">
-              <div class="w-full overflow-x-auto">
-                <table class="w-full">
-                  <thead>
-                  <tr
-                      class="
+              <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                <div class="w-full overflow-x-auto">
+                  <table class="w-full">
+                    <thead>
+                    <tr
+                        class="
                         text-xs
                         font-semibold
                         tracking-wide
@@ -107,26 +107,26 @@
                         bg-gray-50
                         dark:text-gray-400 dark:bg-gray-800
                       "
-                  >
-                    <th class="px-4 py-3 w-1">Number</th>
-                    <th class="px-4 py-3">Name</th>
-                    <th class="px-4 py-3">Note</th>
-                    <th class="px-4 py-3">Status</th>
-                    <th class="px-4 py-3">Date</th>
-                    <th class="px-4 py-3">Request</th>
-                  </tr>
-                  </thead>
-                  <tbody
-                      class="
+                    >
+                      <th class="px-4 py-3 w-1">Number</th>
+                      <th class="px-4 py-3">Name</th>
+                      <th class="px-4 py-3">Note</th>
+                      <th class="px-4 py-3">Status</th>
+                      <th class="px-4 py-3">Date</th>
+                      <th class="px-4 py-3">Request</th>
+                    </tr>
+                    </thead>
+                    <tbody
+                        class="
                       bg-white
                       divide-y
                       dark:divide-gray-700 dark:bg-gray-800
                     "
-                  >
-                  <tr
-                      v-for="request in requests"
-                      :key="request.id"
-                      class="
+                    >
+                    <tr
+                        v-for="request in requests"
+                        :key="request.id"
+                        class="
                         bg-gray-50
                         dark:bg-gray-800
                         hover:bg-gray-100
@@ -134,14 +134,14 @@
                         text-gray-700
                         dark:text-gray-400
                       "
-                  >
-                    <td class="px-4 py-3">
-                      <p class="text-center">{{ request.id }}</p>
-                    </td>
-                    <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
-                        <div
-                            class="
+                    >
+                      <td class="px-4 py-3">
+                        <p class="text-center">{{ request.id }}</p>
+                      </td>
+                      <td class="px-4 py-3">
+                        <div class="flex items-center text-sm">
+                          <div
+                              class="
                               relative
                               hidden
                               w-8
@@ -150,28 +150,28 @@
                               rounded-full
                               md:block
                             "
-                        >
-                          <img
-                              class="object-cover w-full h-full rounded-full"
-                              src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                              alt=""
-                              loading="lazy"
-                          />
-                          <div
-                              class="absolute inset-0 rounded-full shadow-inner"
-                              aria-hidden="true"
-                          ></div>
+                          >
+                            <img
+                                class="object-cover w-full h-full rounded-full"
+                                src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                alt=""
+                                loading="lazy"
+                            />
+                            <div
+                                class="absolute inset-0 rounded-full shadow-inner"
+                                aria-hidden="true"
+                            ></div>
+                          </div>
+                          <div>
+                            <p class="font-semibold">{{ request.staff }}</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">
+                              10x Developer
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <p class="font-semibold">{{ request.staff }}</p>
-                          <p class="text-xs text-gray-600 dark:text-gray-400">
-                            10x Developer
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm">{{ request.note }}</td>
-                    <td class="px-4 py-3 text-xs">
+                      </td>
+                      <td class="px-4 py-3 text-sm">{{ request.note }}</td>
+                      <td class="px-4 py-3 text-xs">
                         <span
                             class="
                             px-2
@@ -187,8 +187,8 @@
 
                           {{ request.status }}
                         </span>
-                      <span
-                          class="
+                        <span
+                            class="
                             px-2
                             py-1
                             font-semibold
@@ -197,13 +197,13 @@
                             bg-green-700
                             rounded-full
                             dark:bg-green-700 dark:text-green-100"
-                          v-else-if="request.status === 'APPROVED'"
-                      >
+                            v-else-if="request.status === 'APPROVED'"
+                        >
 
                           {{ request.status }}
                         </span>
-                      <span
-                          class="
+                        <span
+                            class="
                             px-2
                             py-1
                             font-semibold
@@ -212,36 +212,36 @@
                             bg-red-600
                             rounded-full
                             dark:bg-red-600 dark:text-green-100"
-                          v-else
-                      >
+                            v-else
+                        >
 
                           {{ request.status }}
                         </span>
-                    </td>
-                    <td class="px-4 py-3 text-sm">
-                      {{ request.timeIn | formatDate }}
-                    </td>
-                    <td
-                        class="px-4 py-3 text-sm"
-                        v-if="request.status === 'PENDING'"
-                    >
-                      <input
-                          type="checkbox"
-                          name=""
-                          id=""
-                          v-model="checkRequest"
-                          :value="request.id"
-                      />
-                    </td>
-                    <td class="px-4 py-3 text-sm" v-else>
-                      <span class="text-green-500 italic">Checked</span>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div
-                  class="
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        {{ request.timeIn | formatDate }}
+                      </td>
+                      <td
+                          class="px-4 py-3 text-sm"
+                          v-if="request.status === 'PENDING'"
+                      >
+                        <input
+                            type="checkbox"
+                            name=""
+                            id=""
+                            v-model="checkRequest"
+                            :value="request.id"
+                        />
+                      </td>
+                      <td class="px-4 py-3 text-sm" v-else>
+                        <span class="text-green-500 italic">Checked</span>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                    class="
                   grid
                   px-4
                   py-3
@@ -256,13 +256,13 @@
                   sm:grid-cols-9
                   dark:text-gray-400 dark:bg-gray-800
                 "
-              >
+                >
                 <span class="flex items-center col-span-3">
                   Showing {{this.requests.length}} of {{this.requests.length}}
                 </span>
-                <span class="col-span-2"></span>
-                <!-- Pagination -->
-                <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                  <span class="col-span-2"></span>
+                  <!-- Pagination -->
+                  <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
                   <nav aria-label="Table navigation">
                     <ul class="inline-flex items-center">
                       <li>
@@ -397,16 +397,16 @@
                     </ul>
                   </nav>
                 </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="mt-4 mx-4" v-else>
-            <div class="w-full overflow-hidden rounded-lg shadow-xs">
-              <div class="w-full overflow-x-auto">
-                <table class="w-full">
-                  <thead>
-                  <tr
-                      class="
+            <div class="mt-4 mx-4" v-else>
+              <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                <div class="w-full overflow-x-auto">
+                  <table class="w-full">
+                    <thead>
+                    <tr
+                        class="
                         text-xs
                         font-semibold
                         tracking-wide
@@ -417,26 +417,26 @@
                         bg-gray-50
                         dark:text-gray-400 dark:bg-gray-800
                       "
-                  >
-                    <th class="px-4 py-3 w-1">Number</th>
-                    <th class="px-4 py-3">Name</th>
-                    <th class="px-4 py-3">Note</th>
-                    <th class="px-4 py-3">Status</th>
-                    <th class="px-4 py-3">Date</th>
-                    <th class="px-4 py-3">Request</th>
-                  </tr>
-                  </thead>
-                  <tbody
-                      class="
+                    >
+                      <th class="px-4 py-3 w-1">Number</th>
+                      <th class="px-4 py-3">Name</th>
+                      <th class="px-4 py-3">Note</th>
+                      <th class="px-4 py-3">Status</th>
+                      <th class="px-4 py-3">Date</th>
+                      <th class="px-4 py-3">Request</th>
+                    </tr>
+                    </thead>
+                    <tbody
+                        class="
                       bg-white
                       divide-y
                       dark:divide-gray-700 dark:bg-gray-800
                     "
-                  >
-                  <tr
-                      v-for="requestlog in requestByDate"
-                      :key="requestlog.id"
-                      class="
+                    >
+                    <tr
+                        v-for="requestlog in requestByDate"
+                        :key="requestlog.id"
+                        class="
                         bg-gray-50
                         dark:bg-gray-800
                         hover:bg-gray-100
@@ -444,14 +444,14 @@
                         text-gray-700
                         dark:text-gray-400
                       "
-                  >
-                    <td class="px-4 py-3">
-                      <p class="text-center">{{ requestlog.id }}</p>
-                    </td>
-                    <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
-                        <div
-                            class="
+                    >
+                      <td class="px-4 py-3">
+                        <p class="text-center">{{ requestlog.id }}</p>
+                      </td>
+                      <td class="px-4 py-3">
+                        <div class="flex items-center text-sm">
+                          <div
+                              class="
                               relative
                               hidden
                               w-8
@@ -460,28 +460,28 @@
                               rounded-full
                               md:block
                             "
-                        >
-                          <img
-                              class="object-cover w-full h-full rounded-full"
-                              src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                              alt=""
-                              loading="lazy"
-                          />
-                          <div
-                              class="absolute inset-0 rounded-full shadow-inner"
-                              aria-hidden="true"
-                          ></div>
+                          >
+                            <img
+                                class="object-cover w-full h-full rounded-full"
+                                src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                alt=""
+                                loading="lazy"
+                            />
+                            <div
+                                class="absolute inset-0 rounded-full shadow-inner"
+                                aria-hidden="true"
+                            ></div>
+                          </div>
+                          <div>
+                            <p class="font-semibold">{{ requestlog.staff }}</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">
+                              10x Developer
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <p class="font-semibold">{{ requestlog.staff }}</p>
-                          <p class="text-xs text-gray-600 dark:text-gray-400">
-                            10x Developer
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm">{{ requestlog.note }}</td>
-                    <td class="px-4 py-3 text-xs">
+                      </td>
+                      <td class="px-4 py-3 text-sm">{{ requestlog.note }}</td>
+                      <td class="px-4 py-3 text-xs">
                         <span
                             class="
                             px-2
@@ -497,8 +497,8 @@
 
                           {{ requestlog.status }}
                         </span>
-                      <span
-                          class="
+                        <span
+                            class="
                             px-2
                             py-1
                             font-semibold
@@ -507,13 +507,13 @@
                             bg-green-700
                             rounded-full
                             dark:bg-green-700 dark:text-green-100"
-                          v-else-if="requestlog.status === 'APPROVED'"
-                      >
+                            v-else-if="requestlog.status === 'APPROVED'"
+                        >
 
                           {{ requestlog.status }}
                         </span>
-                      <span
-                          class="
+                        <span
+                            class="
                             px-2
                             py-1
                             font-semibold
@@ -522,36 +522,36 @@
                             bg-red-600
                             rounded-full
                             dark:bg-red-600 dark:text-green-100"
-                          v-else
-                      >
+                            v-else
+                        >
 
                           {{ requestlog.status }}
                         </span>
-                    </td>
-                    <td class="px-4 py-3 text-sm">
-                      {{ requestlog.timeIn | formatDate }}
-                    </td>
-                    <td
-                        class="px-4 py-3 text-sm"
-                        v-if="requestlog.status === 'PENDING'"
-                    >
-                      <input
-                          type="checkbox"
-                          name=""
-                          id=""
-                          v-model="checkRequest"
-                          :value="requestlog.id"
-                      />
-                    </td>
-                    <td class="px-4 py-3 text-sm" v-else>
-                      <span class="text-green-500 italic">Checked</span>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div
-                  class="
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        {{ requestlog.timeIn | formatDate }}
+                      </td>
+                      <td
+                          class="px-4 py-3 text-sm"
+                          v-if="requestlog.status === 'PENDING'"
+                      >
+                        <input
+                            type="checkbox"
+                            name=""
+                            id=""
+                            v-model="checkRequest"
+                            :value="requestlog.id"
+                        />
+                      </td>
+                      <td class="px-4 py-3 text-sm" v-else>
+                        <span class="text-green-500 italic">Checked</span>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                    class="
                   grid
                   px-4
                   py-3
@@ -566,13 +566,13 @@
                   sm:grid-cols-9
                   dark:text-gray-400 dark:bg-gray-800
                 "
-              >
+                >
                 <span class="flex items-center col-span-3">
                   Showing {{this.requestByDate.length}} of {{this.requests.length}}
                 </span>
-                <span class="col-span-2"></span>
-                <!-- Pagination -->
-                <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                  <span class="col-span-2"></span>
+                  <!-- Pagination -->
+                  <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
                   <nav aria-label="Table navigation">
                     <ul class="inline-flex items-center">
                       <li>
@@ -707,12 +707,12 @@
                     </ul>
                   </nav>
                 </span>
+                </div>
               </div>
             </div>
           </div>
-          </div>
           <div class="italic text-center" v-else>
-              No Request Created
+            No Request Created
           </div>
           <!-- ./Client Table -->
         </div>
@@ -722,8 +722,8 @@
 </template>
 
 <script>
-import { overTimeService } from "@/service/overTimeService";
-import CompoAdminPage from "@/components/CompoAdminPage.vue";
+import { lateTimeService } from "@/service/lateTimeService";
+import CompoLeaderPage from "@/components/CompoLeaderPage";
 
 export default {
   data() {
@@ -736,7 +736,6 @@ export default {
         REJECTED: "REJECTED",
       },
       checkRequest: [],
-      requestByDate: [],
       range: {
         start: new Date(),
         end: new Date(),
@@ -749,6 +748,9 @@ export default {
           timeAdjust: "23:59:59",
         },
       },
+      timeStart:'',
+      timeEnd:'',
+      requestByDate:[],
     };
   },
   mounted() {
@@ -758,18 +760,17 @@ export default {
   methods: {
     async showRequest() {
       try {
-        const resp = await overTimeService.getOT();
+        const resp = await lateTimeService.getTimeLate();
         this.requests = resp.data.data.content;
-        console.log("request", this.requests);
       } catch (error) {
         console.log(error);
       }
     },
     async approveRequest() {
       try {
-        const resp = await overTimeService.patchOT(
-          this.checkRequest,
-          this.statusChecked.APPROVED
+        const resp = await lateTimeService.patchTimeLate(
+            this.checkRequest,
+            this.statusChecked.APPROVED
         );
         this.checkRequest = [];
         this.showRequest();
@@ -779,9 +780,9 @@ export default {
     },
     async rejectRequest() {
       try {
-        const resp = await overTimeService.patchOT(
-          this.checkRequest,
-          this.statusChecked.REJECTED
+        const resp = await lateTimeService.patchTimeLate(
+            this.checkRequest,
+            this.statusChecked.REJECTED
         );
         this.checkRequest = [];
         this.showRequest();
@@ -793,14 +794,14 @@ export default {
       try {
         this.timeStart = Date.parse(this.range.start);
         this.timeEnd = Date.parse(this.range.end);
-        const reply = await overTimeService.getOTByDate(this.timeStart, this.timeEnd);
+        const reply = await lateTimeService.getTimeLateByDate(this.timeStart, this.timeEnd);
         this.requestByDate = reply.data.data.content;
       } catch (error) {
         console.log(error);
       }
     }
   },
-  components: {CompoAdminPage },
+  components: {CompoLeaderPage},
 };
 </script>
 <style scoped src="../assets/css/pageAdmin.css">
