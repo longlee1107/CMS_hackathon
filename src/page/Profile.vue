@@ -249,135 +249,8 @@
               </p>
             </div>
           </div>
-          <div class="
-          mt-4
-              gap-2
-              rounded-xl">
-              <RequestPoint/>
-              <div class="mt-4 mx-4" v-if="this.myRequest.length > 0">
-                <div class="w-full overflow-hidden rounded-lg shadow-xs">
-                  <div class="w-full overflow-x-auto">
-                    <table class="w-full">
-                      <thead>
-                        <tr
-                          class="
-                            text-xs
-                            font-semibold
-                            tracking-wide
-                            text-left text-gray-500
-                            uppercase
-                            border-b
-                            dark:border-gray-700
-                            bg-gray-50
-                            dark:text-gray-400 dark:bg-gray-800
-                          "
-                        >
-                          <th class="px-4 py-3 w-1 text-center">Number</th>
-                          <th class="px-4 py-3 text-center">Note</th>
-                          <th class="px-4 py-3 text-center">Created at</th>
-                          <th class="px-4 py-3 text-center">Status</th>
-                          <th class="px-4 py-3 text-center">Other</th>
-                        </tr>
-                      </thead>
-                      <tbody
-                        class="
-                          bg-white
-                          divide-y
-                          dark:divide-gray-700 dark:bg-gray-800
-                        "
-                      >
-                        <tr
-                          v-for="request in myRequest"
-                          :key="request.id"
-                          class="
-                            bg-gray-50
-                            dark:bg-gray-800
-                            hover:bg-gray-100
-                            dark:hover:bg-gray-900
-                            text-gray-700
-                            dark:text-gray-400
-                          "
-                        >
-                          <td class="px-4 py-3">
-                            <p class="text-center">
-                              {{ request.id }}
-                            </p>
-                          </td>
-                          <td class="px-4 py-3 ">
-                            <div class="flex items-center  text-sm">
-                              <div
-                                class="
-                                  relative
-                                  hidden
-                                  w-44
-                                  h-8
-                                  mr-3
-                                  rounded-full
-                                  md:block
-                                "
-                              >
-                                <div
-                                  class="
-                                    absolute
-                                    inset-0
-                                    rounded-full
-                                    shadow-inner
-                                  "
-                                  aria-hidden="true"
-                                ></div>
-                              </div>
-                              <div>
-                                <p class="font-semibold">
-                                  {{ request.note }}
-                                </p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-4 py-3 text-sm text-center">
-                            {{ request.timeIn | formatDate }}
-                          </td>
-                          <td class="px-4 py-3 text-xs text-center">
-                            <span
-                              class="
-                                px-2
-                                py-1
-                                text-right
-                                font-semibold
-                                leading-tight
-                                text-green-700
-                                bg-green-100
-                                rounded-full
-                                dark:bg-green-700 dark:text-green-100
-                              "
-                            >
-                              {{ request.status }}
-                            </span>
-                          </td>
-                          <td class="text-center">
-                            <span
-                              class="
-                                px-2
-                                py-1
-                                text-right
-                                font-semibold
-                                leading-tight
-                                text-red-700
-                                bg-red-100
-                                rounded-full
-                                dark:bg-red-700 dark:text-red-100
-                              "
-                              >Delete</span
-                            >
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div v-else class="italic text-center text-gray-50">
-                No Request Created!
-                </div>
+          <div>
+            <a-progress type="circle" :percent="percent" />
           </div>
         </div>
       </div>
@@ -389,7 +262,7 @@
 import { UserService } from "@/service/UserService";
 import { timeKeepingService } from "@/service/timeKeepingService";
 import CompoAdminPage from "@/components/CompoAdminPage.vue";
-import RequestPoint from "@/components/requestPoint.vue";
+
 export default {
   data() {
     return {
@@ -411,6 +284,6 @@ export default {
       this.myRequest = response.data.data.content;
     },
   },
-  components: { CompoAdminPage, RequestPoint },
+  components: { CompoAdminPage},
 };
 </script>
