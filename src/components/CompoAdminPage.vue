@@ -1,32 +1,9 @@
 <template>
   <div>
     <!-- Header -->
-    <div
-      class="
-        fixed
-        w-full
-        flex
-        items-center
-        justify-between
-        h-14
-        text-white
-        z-10
-      "
-    >
+    <div class="fixed w-full flex items-center justify-between h-14 text-white z-10">
       <div
-        class="
-          flex
-          items-center
-          justify-start
-          md:justify-center
-          pl-3
-          w-14
-          md:w-64
-          h-14
-          bg-blue-800
-          dark:bg-gray-800
-          border-none
-        "
+        class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none"
       >
         <img
           class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
@@ -35,29 +12,10 @@
         <span class="hidden md:block">ADMIN</span>
       </div>
       <div
-        class="
-          flex
-          justify-between
-          items-center
-          h-14
-          bg-blue-800
-          dark:bg-gray-800
-          header-right
-        "
+        class="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right"
       >
         <div
-          class="
-            bg-white
-            rounded
-            flex
-            items-center
-            w-full
-            max-w-xl
-            mr-4
-            p-2
-            shadow-sm
-            border border-gray-200
-          "
+          class="bg-white rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm border border-gray-200"
         >
           <button class="outline-none focus:outline-none">
             <svg
@@ -77,14 +35,7 @@
             name=""
             id=""
             placeholder="Search"
-            class="
-              w-full
-              pl-3
-              text-sm text-black
-              outline-none
-              focus:outline-none
-              bg-transparent
-            "
+            class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent"
           />
         </div>
         <ul class="flex items-center">
@@ -92,21 +43,7 @@
             <li>
               <a
                 href="#"
-                class="
-                  relative
-                  flex flex-row
-                  items-center
-                  h-11
-                  focus:outline-none
-                  hover:text-blue-300
-                  dark:hover:text-blue-300
-                  text-white-600
-                  hover:text-white-800
-                  border-l-4 border-transparent
-                  hover:border-blue-500
-                  dark:hover:border-gray-800
-                  pr-6
-                "
+                class="relative flex flex-row items-center h-11 focus:outline-none hover:text-blue-300 dark:hover:text-blue-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
               >
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg
@@ -164,41 +101,15 @@
     <!-- ./Header -->
     <!--Sidebar-->
     <div
-      class="
-        fixed
-        flex
-        z-0
-        flex-col
-        top-14
-        left-0
-        w-14
-        hover:w-64
-        md:w-64
-        bg-blue-900
-        dark:bg-gray-900
-        h-full
-        text-white
-        transition-all
-        duration-300
-        border-none
-        z-10
-        sidebar
-      "
+      class="fixed flex z-0 flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-blue-900 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar"
     >
       <div
-        class="
-          overflow-y-auto overflow-x-hidden
-          flex flex-col
-          justify-between
-          flex-grow
-        "
+        class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow"
       >
         <ul class="flex flex-col py-4 space-y-1">
           <li class="px-5 hidden md:block">
             <div class="flex flex-row items-center h-8">
-              <div
-                class="text-sm font-light tracking-wide text-gray-400 uppercase"
-              >
+              <div class="text-sm font-light tracking-wide text-gray-400 uppercase">
                 Main
               </div>
             </div>
@@ -207,21 +118,7 @@
             <li>
               <a
                 href="#"
-                class="
-                  relative
-                  flex flex-row
-                  items-center
-                  h-11
-                  focus:outline-none
-                  hover:bg-blue-800
-                  dark:hover:bg-gray-600
-                  text-white-600
-                  hover:text-white-800
-                  border-l-4 border-transparent
-                  hover:border-blue-500
-                  dark:hover:border-gray-800
-                  pr-6
-                "
+                class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
               >
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg
@@ -239,9 +136,7 @@
                     ></path>
                   </svg>
                 </span>
-                <span class="ml-2 text-sm tracking-wide truncate"
-                  >User management</span
-                >
+                <span class="ml-2 text-sm tracking-wide truncate">User management</span>
               </a>
             </li>
           </router-link>
@@ -249,21 +144,7 @@
             <li>
               <a
                 href="#"
-                class="
-                  relative
-                  flex flex-row
-                  items-center
-                  h-11
-                  focus:outline-none
-                  hover:bg-blue-800
-                  dark:hover:bg-gray-600
-                  text-white-600
-                  hover:text-white-800
-                  border-l-4 border-transparent
-                  hover:border-blue-500
-                  dark:hover:border-gray-800
-                  pr-6
-                "
+                class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
               >
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg
@@ -291,21 +172,7 @@
             <li>
               <a
                 href="#"
-                class="
-                  relative
-                  flex flex-row
-                  items-center
-                  h-11
-                  focus:outline-none
-                  hover:bg-blue-800
-                  dark:hover:bg-gray-600
-                  text-white-600
-                  hover:text-white-800
-                  border-l-4 border-transparent
-                  hover:border-blue-500
-                  dark:hover:border-gray-800
-                  pr-6
-                "
+                class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
               >
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg
@@ -333,21 +200,7 @@
             <li>
               <a
                 href="#"
-                class="
-                  relative
-                  flex flex-row
-                  items-center
-                  h-11
-                  focus:outline-none
-                  hover:bg-blue-800
-                  dark:hover:bg-gray-600
-                  text-white-600
-                  hover:text-white-800
-                  border-l-4 border-transparent
-                  hover:border-blue-500
-                  dark:hover:border-gray-800
-                  pr-6
-                "
+                class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
               >
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg
@@ -375,21 +228,7 @@
             <li>
               <a
                 href="#"
-                class="
-                  relative
-                  flex flex-row
-                  items-center
-                  h-11
-                  focus:outline-none
-                  hover:bg-blue-800
-                  dark:hover:bg-gray-600
-                  text-white-600
-                  hover:text-white-800
-                  border-l-4 border-transparent
-                  hover:border-blue-500
-                  dark:hover:border-gray-800
-                  pr-6
-                "
+                class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
               >
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg
@@ -416,21 +255,7 @@
           <li>
             <a
               href="#"
-              class="
-                relative
-                flex flex-row
-                items-center
-                h-11
-                focus:outline-none
-                hover:bg-blue-800
-                dark:hover:bg-gray-600
-                text-white-600
-                hover:text-white-800
-                border-l-4 border-transparent
-                hover:border-blue-500
-                dark:hover:border-gray-800
-                pr-6
-              "
+              class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
             >
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -448,15 +273,11 @@
                   ></path>
                 </svg>
               </span>
-              <span class="ml-2 text-sm tracking-wide truncate"
-                >Salary management</span
-              >
+              <span class="ml-2 text-sm tracking-wide truncate">Salary management</span>
             </a>
           </li>
         </ul>
-        <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">
-          Copyright @2021
-        </p>
+        <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright @2021</p>
       </div>
     </div>
     <!--Sidebar-->
@@ -473,5 +294,4 @@ export default {
 };
 </script>
 
-<style scoped src="../assets/css/pageAdmin.css">
-</style>
+<style scoped src="../assets/css/pageAdmin.css"></style>
