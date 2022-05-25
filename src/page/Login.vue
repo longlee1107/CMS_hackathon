@@ -6,19 +6,19 @@
         <div class="card bg-red-400 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
         <div class="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
           <label class="block mt-3 text-2xl text-gray-700 text-center font-semibold">
-            Login
+            Login {{Date.now()}}
           </label>
           <form method="" action="" class="mt-10" @submit.prevent="_login()">
 
             <div>
               <input type="text" v-model="user.username" placeholder="Username"
-                     class="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                     class="mt-1 pl-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
               <p class="error font-semibold text-red-600">{{ err.username }} </p>
             </div>
 
             <div class="mt-7">
               <input type="password" v-model="user.password" placeholder="Password"
-                     class="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                     class="mt-1 pl-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
               <p class="error font-semibold text-red-600">{{ err.password }}</p>
             </div>
 
