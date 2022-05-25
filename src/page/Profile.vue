@@ -244,7 +244,9 @@
               </p>
             </div>
           </div>
-          
+          <div>
+            <a-progress type="circle" :percent="percent" />
+          </div>
         </div>
       </div>
     </div>
@@ -260,6 +262,7 @@ export default {
     return {
       currentUser: {},
       myRequest: {},
+      percent:0
     };
   },
   mounted() {
@@ -275,6 +278,7 @@ export default {
       const response = await timeKeepingService.getMyRequest();
       this.myRequest = response.data.data.content;
     },
+    
   },
   components: { CompoAdminPage },
 };

@@ -796,8 +796,6 @@ export default {
         this.timeEnd = Date.parse(this.range.end);
         const reply = await absentService.getDayOffByDate(this.timeStart, this.timeEnd);
         this.requestByDate = reply.data.data.content;
-        console.log('requestByDate', this.requestByDate);
-        
       } catch (error) {
         console.log(error);
       }
