@@ -256,7 +256,7 @@
 import AddUserModal from "@/components/AddUserModal.vue";
 import { UserService } from "@/service/UserService";
 import CompoAdminPage from "@/components/CompoAdminPage";
-
+import {positionService} from "@/service/positionService"
 
 export default {
   components: {
@@ -275,10 +275,12 @@ export default {
       avatar: "",
       manager: 1,
       salary: 0,
+      positionList: [],
     };
   },
   mounted() {
     this.showUser();
+    this.showPosition();
   },
   computed: {
     errorMessage() {
@@ -321,6 +323,15 @@ export default {
         console.log(error);
       }
     },
+    async showPosition(){
+      try {
+        const reply = await positionService.getPosition();
+        this.positionList = reply.data;
+        console.log('positionList', this.positionList);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 };
 </script>
