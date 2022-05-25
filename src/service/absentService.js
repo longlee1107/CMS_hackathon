@@ -20,8 +20,8 @@ function getAllDayOffByStaffId(id) {
     return Axios.get(`day-offs/all-request/${id}`);
 }
 
-function getDayOffByDate(date) {
-    return Axios.get(`day-offs/get-request-by-date/${date}`);
+function getDayOffByDate(timeIn, timeOut) {
+    return Axios.get(`day-offs/get-request-by-date/${timeIn}/${timeOut}`);
 }
 
 function postDayOff(payload) {

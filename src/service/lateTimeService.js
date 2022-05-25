@@ -20,8 +20,8 @@ function getAllTimeLateByStaffId(id) {
     return Axios.get(`timeLate/all-request/${id}`);
 }
 
-function getTimeLateByDate(date) {
-    return Axios.get(`timeLate/get-request-by-date/${date}`);
+function getTimeLateByDate(timeIn, timeOut) {
+    return Axios.get(`timeLate/get-request-by-date/${timeIn}/${timeOut}`);
 }
 
 function postTimeLate(payload) {

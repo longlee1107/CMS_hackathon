@@ -20,8 +20,8 @@ function getAllOTByStaffId(id) {
     return Axios.get(`ots/all-request/${id}`);
 }
 
-function getOTByDate(date) {
-    return Axios.get(`ots/get-request-by-date/${date}`);
+function getOTByDate(timeIn, timeOut) {
+    return Axios.get(`ots/get-request-by-date/${timeIn}/${timeOut}`);
 }
 
 function postOT(payload) {
