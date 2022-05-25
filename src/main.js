@@ -14,9 +14,6 @@ Vue.use(VCalendar, {
 });
 Vue.use(Antd);
 
-
-
-
 Vue.filter('formatDate', (value) => {
     if (value) {
         return moment(value).format('YYYY/MM/DD hh:mm')
