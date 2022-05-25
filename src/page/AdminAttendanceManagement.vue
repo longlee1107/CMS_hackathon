@@ -5,15 +5,7 @@
     <!-- ./Sidebar -->
     <div x-data="setup()">
       <div
-        class="
-          min-h-screen
-          flex flex-col flex-auto flex-shrink-0
-          antialiased
-          bg-white
-          dark:bg-gray-700
-          text-black
-          dark:text-white
-        "
+        class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white"
       >
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
           <!--Calendar-->
@@ -33,17 +25,7 @@
           <!--Calendar-->
           <div class="flex justify-start mx-8">
             <button
-              class="
-                px-3
-                py-1
-                mr-1
-                font-semibold
-                leading-tight
-                text-green-700
-                bg-green-100
-                rounded-full
-                dark:bg-green-700 dark:text-green-100
-              "
+              class="px-3 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
               @click="getRequestByDate()"
             >
               Filter
@@ -55,33 +37,13 @@
           <!-- Approved or Rejected -->
           <div class="flex justify-end mx-8">
             <button
-              class="
-                px-2
-                py-1
-                mr-1
-                font-semibold
-                leading-tight
-                text-green-700
-                bg-green-100
-                rounded-full
-                dark:bg-green-700 dark:text-green-100
-              "
+              class="px-2 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
               @click="approveRequest()"
             >
               Accept
             </button>
             <button
-              class="
-                px-2
-                py-1
-                mr-1
-                font-semibold
-                leading-tight
-                text-red-700
-                bg-red-100
-                rounded-full
-                dark:bg-red-700 dark:text-red-100
-              "
+              class="px-2 py-1 mr-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100"
               @click="rejectRequest()"
             >
               Reject
@@ -97,17 +59,7 @@
                   <table class="w-full">
                     <thead>
                       <tr
-                        class="
-                          text-xs
-                          font-semibold
-                          tracking-wide
-                          text-left text-gray-500
-                          uppercase
-                          border-b
-                          dark:border-gray-700
-                          bg-gray-50
-                          dark:text-gray-400 dark:bg-gray-800
-                        "
+                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                       >
                         <th class="px-4 py-3 w-1">Number</th>
                         <th class="px-4 py-3">Name</th>
@@ -118,23 +70,12 @@
                       </tr>
                     </thead>
                     <tbody
-                      class="
-                        bg-white
-                        divide-y
-                        dark:divide-gray-700 dark:bg-gray-800
-                      "
+                      class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                     >
                       <tr
                         v-for="request in requests"
                         :key="request.id"
-                        class="
-                          bg-gray-50
-                          dark:bg-gray-800
-                          hover:bg-gray-100
-                          dark:hover:bg-gray-900
-                          text-gray-700
-                          dark:text-gray-400
-                        "
+                        class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                       >
                         <td class="px-4 py-3">
                           <p class="text-center">{{ request.id }}</p>
@@ -142,15 +83,7 @@
                         <td class="px-4 py-3">
                           <div class="flex items-center text-sm">
                             <div
-                              class="
-                                relative
-                                hidden
-                                w-8
-                                h-8
-                                mr-3
-                                rounded-full
-                                md:block
-                              "
+                              class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                             >
                               <img
                                 class="object-cover w-full h-full rounded-full"
@@ -159,20 +92,13 @@
                                 loading="lazy"
                               />
                               <div
-                                class="
-                                  absolute
-                                  inset-0
-                                  rounded-full
-                                  shadow-inner
-                                "
+                                class="absolute inset-0 rounded-full shadow-inner"
                                 aria-hidden="true"
                               ></div>
                             </div>
                             <div>
                               <p class="font-semibold">{{ request.staff }}</p>
-                              <p
-                                class="text-xs text-gray-600 dark:text-gray-400"
-                              >
+                              <p class="text-xs text-gray-600 dark:text-gray-400">
                                 10x Developer
                               </p>
                             </div>
@@ -181,46 +107,19 @@
                         <td class="px-4 py-3 text-sm">{{ request.note }}</td>
                         <td class="px-4 py-3 text-xs">
                           <span
-                            class="
-                              px-2
-                              py-1
-                              font-semibold
-                              leading-tight
-                              text-yellow-50
-                              bg-orange-600
-                              rounded-full
-                              dark:bg-orange-600 dark:text-green-50
-                            "
+                            class="px-2 py-1 font-semibold leading-tight text-yellow-50 bg-orange-600 rounded-full dark:bg-orange-600 dark:text-green-50"
                             v-if="request.status === 'PENDING'"
                           >
                             {{ request.status }}
                           </span>
                           <span
-                            class="
-                              px-2
-                              py-1
-                              font-semibold
-                              leading-tight
-                              text-green-50
-                              bg-green-700
-                              rounded-full
-                              dark:bg-green-700 dark:text-green-100
-                            "
+                            class="px-2 py-1 font-semibold leading-tight text-green-50 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
                             v-else-if="request.status === 'APPROVED'"
                           >
                             {{ request.status }}
                           </span>
                           <span
-                            class="
-                              px-2
-                              py-1
-                              font-semibold
-                              leading-tight
-                              text-white
-                              bg-red-600
-                              rounded-full
-                              dark:bg-red-600 dark:text-green-100
-                            "
+                            class="px-2 py-1 font-semibold leading-tight text-white bg-red-600 rounded-full dark:bg-red-600 dark:text-green-100"
                             v-else
                           >
                             {{ request.status }}
@@ -229,10 +128,7 @@
                         <td class="px-4 py-3 text-sm">
                           {{ request.timeIn | formatDate }}
                         </td>
-                        <td
-                          class="px-4 py-3 text-sm"
-                          v-if="request.status === 'PENDING'"
-                        >
+                        <td class="px-4 py-3 text-sm" v-if="request.status === 'PENDING'">
                           <input
                             type="checkbox"
                             name=""
@@ -249,21 +145,7 @@
                   </table>
                 </div>
                 <div
-                  class="
-                    grid
-                    px-4
-                    py-3
-                    text-xs
-                    font-semibold
-                    tracking-wide
-                    text-gray-500
-                    uppercase
-                    border-t
-                    dark:border-gray-700
-                    bg-gray-50
-                    sm:grid-cols-9
-                    dark:text-gray-400 dark:bg-gray-800
-                  "
+                  class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
                 >
                   <span class="flex items-center col-span-3">
                     Showing {{ this.requests.length }} of
@@ -273,7 +155,13 @@
                   <!-- Pagination -->
                   <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
                     <nav aria-label="Table navigation">
-                      <a-pagination @change="showRequest()" v-model="current" :default-current="1" :total="this.totalPage" :defaultPageSize="1" />
+                      <a-pagination
+                        @change="showRequest()"
+                        v-model="current"
+                        :default-current="1"
+                        :total="this.totalPage"
+                        :defaultPageSize="1"
+                      />
                     </nav>
                   </span>
                 </div>
@@ -285,17 +173,7 @@
                   <table class="w-full">
                     <thead>
                       <tr
-                        class="
-                          text-xs
-                          font-semibold
-                          tracking-wide
-                          text-left text-gray-500
-                          uppercase
-                          border-b
-                          dark:border-gray-700
-                          bg-gray-50
-                          dark:text-gray-400 dark:bg-gray-800
-                        "
+                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                       >
                         <th class="px-4 py-3 w-1">Number</th>
                         <th class="px-4 py-3">Name</th>
@@ -306,23 +184,12 @@
                       </tr>
                     </thead>
                     <tbody
-                      class="
-                        bg-white
-                        divide-y
-                        dark:divide-gray-700 dark:bg-gray-800
-                      "
+                      class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                     >
                       <tr
                         v-for="requestlog in requestByDate"
                         :key="requestlog.id"
-                        class="
-                          bg-gray-50
-                          dark:bg-gray-800
-                          hover:bg-gray-100
-                          dark:hover:bg-gray-900
-                          text-gray-700
-                          dark:text-gray-400
-                        "
+                        class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                       >
                         <td class="px-4 py-3">
                           <p class="text-center">{{ requestlog.id }}</p>
@@ -330,15 +197,7 @@
                         <td class="px-4 py-3">
                           <div class="flex items-center text-sm">
                             <div
-                              class="
-                                relative
-                                hidden
-                                w-8
-                                h-8
-                                mr-3
-                                rounded-full
-                                md:block
-                              "
+                              class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                             >
                               <img
                                 class="object-cover w-full h-full rounded-full"
@@ -347,12 +206,7 @@
                                 loading="lazy"
                               />
                               <div
-                                class="
-                                  absolute
-                                  inset-0
-                                  rounded-full
-                                  shadow-inner
-                                "
+                                class="absolute inset-0 rounded-full shadow-inner"
                                 aria-hidden="true"
                               ></div>
                             </div>
@@ -360,9 +214,7 @@
                               <p class="font-semibold">
                                 {{ requestlog.staff }}
                               </p>
-                              <p
-                                class="text-xs text-gray-600 dark:text-gray-400"
-                              >
+                              <p class="text-xs text-gray-600 dark:text-gray-400">
                                 10x Developer
                               </p>
                             </div>
@@ -371,46 +223,19 @@
                         <td class="px-4 py-3 text-sm">{{ requestlog.note }}</td>
                         <td class="px-4 py-3 text-xs">
                           <span
-                            class="
-                              px-2
-                              py-1
-                              font-semibold
-                              leading-tight
-                              text-yellow-50
-                              bg-orange-600
-                              rounded-full
-                              dark:bg-orange-600 dark:text-green-50
-                            "
+                            class="px-2 py-1 font-semibold leading-tight text-yellow-50 bg-orange-600 rounded-full dark:bg-orange-600 dark:text-green-50"
                             v-if="requestlog.status === 'PENDING'"
                           >
                             {{ requestlog.status }}
                           </span>
                           <span
-                            class="
-                              px-2
-                              py-1
-                              font-semibold
-                              leading-tight
-                              text-green-50
-                              bg-green-700
-                              rounded-full
-                              dark:bg-green-700 dark:text-green-100
-                            "
+                            class="px-2 py-1 font-semibold leading-tight text-green-50 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
                             v-else-if="requestlog.status === 'APPROVED'"
                           >
                             {{ requestlog.status }}
                           </span>
                           <span
-                            class="
-                              px-2
-                              py-1
-                              font-semibold
-                              leading-tight
-                              text-white
-                              bg-red-600
-                              rounded-full
-                              dark:bg-red-600 dark:text-green-100
-                            "
+                            class="px-2 py-1 font-semibold leading-tight text-white bg-red-600 rounded-full dark:bg-red-600 dark:text-green-100"
                             v-else
                           >
                             {{ requestlog.status }}
@@ -478,7 +303,7 @@ export default {
         },
       },
       current: 1,
-      totalPage: '',
+      totalPage: "",
     };
   },
   mounted() {
@@ -535,5 +360,4 @@ export default {
   },
 };
 </script>
-<style scoped src="../assets/css/pageAdmin.css">
-</style>
+<style scoped src="../assets/css/pageAdmin.css"></style>
