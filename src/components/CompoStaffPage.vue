@@ -38,7 +38,7 @@
             class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent"
           />
         </div>
-        <ul class="flex items-center">
+        <ul class="flex my-auto items-center">
           <li>
             <a
               href="#"
