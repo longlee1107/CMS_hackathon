@@ -256,6 +256,8 @@ export default {
       if (this.date === "") {
         alert("Please select a date");
         return;
+      }else{
+        
       }
       try {
         const data = await staffService.postStaff({
