@@ -12,7 +12,7 @@
     <!--Profile Card-->
     <div x-data="setup()">
       <div
-          class="
+        class="
           min-h-screen
           flex flex-col flex-auto flex-shrink-0
           antialiased
@@ -24,7 +24,7 @@
       >
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
           <div
-              class="
+            class="
               md:grid
               grid-cols-4 grid-rows-2
               bg-white
@@ -36,16 +36,16 @@
             <div class="md:col-span-1 h-48 shadow-xl">
               <div class="flex w-full h-full relative">
                 <img
-                    src="https://th.bing.com/th/id/R.f11a623e2d5994eba9ef4e6da950b62c?rik=K3LlgywjliCTjA&pid=ImgRaw&r=0"
-                    class="w-44 h-44 m-auto rounded-full"
-                    alt=""
+                  src="https://th.bing.com/th/id/R.f11a623e2d5994eba9ef4e6da950b62c?rik=K3LlgywjliCTjA&pid=ImgRaw&r=0"
+                  class="w-44 h-44 m-auto rounded-full"
+                  alt=""
                 />
               </div>
             </div>
             <div class="md:col-span-3 h-48 shadow-xl p-4 space-y-2">
               <div class="flex">
                 <span
-                    class="
+                  class="
                     text-sm
                     font-bold
                     uppercase
@@ -58,9 +58,9 @@
                     w-2/6
                     mr-2
                   "
-                >Name:
+                  >Name:
                   <span
-                      class="
+                    class="
                       px-4
                       font-normal
                       border-l-0
@@ -77,7 +77,7 @@
                   </span>
                 </span>
                 <span
-                    class="
+                  class="
                     text-sm
                     font-bold
                     uppercase
@@ -89,9 +89,9 @@
                     whitespace-no-wrap
                     w-2/6
                   "
-                >Birthday::
+                  >Birthday::
                   <span
-                      class="
+                    class="
                       px-4
                       font-normal
                       border-l-0
@@ -110,7 +110,7 @@
               </div>
               <div class="flex">
                 <span
-                    class="
+                  class="
                     text-sm
                     font-bold
                     uppercase
@@ -123,9 +123,9 @@
                     w-2/6
                     mr-2
                   "
-                >Email:
+                  >Email:
                   <span
-                      class="
+                    class="
                       px-4
                       font-normal
                       border-l-0
@@ -142,7 +142,7 @@
                   </span>
                 </span>
                 <span
-                    class="
+                  class="
                     text-sm
                     font-bold
                     uppercase
@@ -154,9 +154,9 @@
                     whitespace-no-wrap
                     w-2/6
                   "
-                >Manage by:
+                  >Manage by:
                   <span
-                      class="
+                    class="
                       px-4
                       font-normal
                       border-l-0
@@ -175,7 +175,7 @@
               </div>
               <div class="flex">
                 <span
-                    class="
+                  class="
                     text-sm
                     font-bold
                     uppercase
@@ -188,9 +188,9 @@
                     w-2/6
                     mr-2
                   "
-                >Role:
+                  >Role:
                   <span
-                      class="
+                    class="
                       px-6
                       font-normal
                       border-l-0
@@ -207,7 +207,7 @@
                   </span>
                 </span>
                 <span
-                    class="
+                  class="
                     text-sm
                     font-bold
                     uppercase
@@ -219,9 +219,9 @@
                     whitespace-no-wrap
                     w-2/6
                   "
-                >Created at:
+                  >Created at:
                   <span
-                      class="
+                    class="
                       px-4
                       font-normal
                       border-l-0
@@ -240,7 +240,7 @@
               </div>
             </div>
             <div
-                class="md:col-span-4 h-48 shadow-xl p-4 space-y-2 hidden md:block"
+              class="md:col-span-4 h-48 shadow-xl p-4 space-y-2 hidden md:block"
             >
               <h3 class="font-bold uppercase">Profile Description</h3>
               <p class="">
@@ -256,14 +256,14 @@
           mt-4
               gap-2
               rounded-xl">
-            <RequestPoint/>
-            <div class="mt-4 mx-4" v-if="this.myRequest.length > 0">
-              <div class="w-full overflow-hidden rounded-lg shadow-xs">
-                <div class="w-full overflow-x-auto">
-                  <table class="w-full">
-                    <thead>
-                    <tr
-                        class="
+              <RequestPoint/>
+              <div class="mt-4 mx-4" v-if="this.myRequest.length > 0">
+                <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                  <div class="w-full overflow-x-auto">
+                    <table class="w-full">
+                      <thead>
+                        <tr
+                          class="
                             text-xs
                             font-semibold
                             tracking-wide
@@ -274,25 +274,25 @@
                             bg-gray-50
                             dark:text-gray-400 dark:bg-gray-800
                           "
-                    >
-                      <th class="px-4 py-3 w-1 text-center">Number</th>
-                      <th class="px-4 py-3 text-center">Note</th>
-                      <th class="px-4 py-3 text-center">Created at</th>
-                      <th class="px-4 py-3 text-center">Status</th>
-                      <th class="px-4 py-3 text-center">Other</th>
-                    </tr>
-                    </thead>
-                    <tbody
+                        >
+                          <th class="px-4 py-3 w-1 text-center">Number</th>
+                          <th class="px-4 py-3 text-center">Note</th>
+                          <th class="px-4 py-3 text-center">Created at</th>
+                          <th class="px-4 py-3 text-center">Status</th>
+                          <th class="px-4 py-3 text-center">Other</th>
+                        </tr>
+                      </thead>
+                      <tbody
                         class="
                           bg-white
                           divide-y
                           dark:divide-gray-700 dark:bg-gray-800
                         "
-                    >
-                    <tr
-                        v-for="request in myRequest"
-                        :key="request.id"
-                        class="
+                      >
+                        <tr
+                          v-for="request in myRequest"
+                          :key="request.id"
+                          class="
                             bg-gray-50
                             dark:bg-gray-800
                             hover:bg-gray-100
@@ -300,16 +300,16 @@
                             text-gray-700
                             dark:text-gray-400
                           "
-                    >
-                      <td class="px-4 py-3">
-                        <p class="text-center">
-                          {{ request.id }}
-                        </p>
-                      </td>
-                      <td class="px-4 py-3 ">
-                        <div class="flex items-center  text-sm">
-                          <div
-                              class="
+                        >
+                          <td class="px-4 py-3">
+                            <p class="text-center">
+                              {{ request.id }}
+                            </p>
+                          </td>
+                          <td class="px-4 py-3 ">
+                            <div class="flex items-center  text-sm">
+                              <div
+                                class="
                                   relative
                                   hidden
                                   w-44
@@ -318,30 +318,30 @@
                                   rounded-full
                                   md:block
                                 "
-                          >
-                            <div
-                                class="
+                              >
+                                <div
+                                  class="
                                     absolute
                                     inset-0
                                     rounded-full
                                     shadow-inner
                                   "
-                                aria-hidden="true"
-                            ></div>
-                          </div>
-                          <div>
-                            <p class="font-semibold">
-                              {{ request.note }}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm text-center">
-                        {{ request.timeIn | formatDate }}
-                      </td>
-                      <td class="px-4 py-3 text-xs text-center">
+                                  aria-hidden="true"
+                                ></div>
+                              </div>
+                              <div>
+                                <p class="font-semibold">
+                                  {{ request.note }}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="px-4 py-3 text-sm text-center">
+                            {{ request.timeIn | formatDate }}
+                          </td>
+                          <td class="px-4 py-3 text-xs text-center">
                             <span
-                                class="
+                              class="
                                 px-2
                                 py-1
                                 text-right
@@ -355,10 +355,10 @@
                             >
                               {{ request.status }}
                             </span>
-                      </td>
-                      <td class="text-center">
+                          </td>
+                          <td class="text-center">
                             <span
-                                class="
+                              class="
                                 px-2
                                 py-1
                                 text-right
@@ -369,18 +369,18 @@
                                 rounded-full
                                 dark:bg-red-700 dark:text-red-100
                               "
-                            >Delete</span
+                              >Delete</span
                             >
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div v-else class="italic text-center text-gray-50">
-              No Request Created!
-            </div>
+              <div v-else class="italic text-center text-gray-50">
+                No Request Created!
+                </div>
           </div>
         </div>
       </div>
@@ -389,17 +389,17 @@
 </template>
 
 <script>
-import {UserService} from "@/service/UserService";
-import {timeKeepingService} from "@/service/timeKeepingService";
+import { UserService } from "@/service/UserService";
+import { timeKeepingService } from "@/service/timeKeepingService";
+import Header from "@/components/Header.vue";
+import SideBar from "@/components/SideBar.vue";
 import RequestPoint from "../components/requestPoint.vue";
 import CompoAdminPage from "@/components/CompoAdminPage";
 import CompoLeaderPage from "@/components/CompoLeaderPage";
 import CompoStaffPage from "@/components/CompoStaffPage";
-
 export default {
   data() {
     return {
-      loading: false,
       currentUser: {},
       myRequest: {},
     };

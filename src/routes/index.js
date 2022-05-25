@@ -10,6 +10,22 @@ export const router = new VueRouter({
                 import ('../page/Admin')
         },
         {
+            path: '/leader/attendance-management',
+            name: 'leaderAttendance',
+            component: () =>
+                import ('../page/LeaderAttendanceManagement')
+        },{
+            path: '/leader/absent-management',
+            name: 'leaderAbsent',
+            component: () =>
+                import ('../page/LeaderAbsentRequest')
+        },{
+            path: '/leader/late-management',
+            name: 'leaderLate',
+            component: () =>
+                import ('../page/LeaderTimeLate')
+        },
+        {
             path: '/leader',
             name: 'leader',
             component: () =>

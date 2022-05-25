@@ -15,9 +15,10 @@
           dark:text-white">
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
           <div class="m-5">
-            <v-date-picker v-model="date" is-expanded
+            <v-date-picker v-model="date"
+                           :attributes="attributes"
+                           is-expanded
                            :value=[1,2,3]
-                           color="red"
                            is-dark
                            is-range
                            trim-weeks
@@ -251,6 +252,7 @@ export default {
       dataUser: [],
       currentUser: {},
       myRequest: {},
+      attributes: []
     }
   },
   methods: {
@@ -261,6 +263,20 @@ export default {
     async getMyRequest() {
       const response = await timeKeepingService.getMyRequest();
       this.myRequest = response.data.data.content;
+      const statusColor={
+        "APPROVED": 'green',
+        "PENDING": 'orange',
+        "REJECTED": 'red'
+      }
+      this.attributes = (this.myRequest.map(req=> {
+        return {
+          highlight: {
+            color: statusColor[req.status],
+            fillMode: 'solid',
+          },
+          dates: req.timeIn,
+        }
+      }))
     },
     async Timekeeping() {
       if (this.date === "") {
