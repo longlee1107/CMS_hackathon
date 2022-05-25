@@ -262,6 +262,7 @@
 import { UserService } from "@/service/UserService";
 import { timeKeepingService } from "@/service/timeKeepingService";
 import CompoAdminPage from "@/components/CompoAdminPage.vue";
+import CompoLeaderPage from "@/components/CompoLeaderPage";
 
 export default {
   data() {
@@ -284,6 +285,6 @@ export default {
       this.myRequest = response.data.data.content;
     },
   },
-  components: { CompoAdminPage},
+  components: { CompoAdminPage,CompoLeaderPage},
 };
 </script>
