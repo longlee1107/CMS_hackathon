@@ -13,7 +13,7 @@
           dark:bg-gray-700
           text-black
           dark:text-white">
-        <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
+        <div class="h-full w-5/6 mx-auto mt-14 mb-10">
           <div class="m-5">
             <v-date-picker v-model="date" is-expanded
                            :value=[1,2,3]
@@ -238,7 +238,6 @@ import {authService} from "@/service/authService"
 import {UserService} from "@/service/UserService";
 import CompoStaffPage from "@/components/CompoStaffPage";
 import {timeKeepingService} from "@/service/timeKeepingService";
-
 export default {
   name: "Staff",
   components: {CompoStaffPage},

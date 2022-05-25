@@ -13,8 +13,8 @@ function getMyRequest() {
     return Axios.get('timekeeping/my-request');
 }
 
-function deleteTimeKeeping(id) {
-    return Axios.delete(`timekeeping/${id}`);
+function deleteTimeKeeping(payload) {
+    return Axios.delete(`timekeeping/deletes`, payload);
 }
 
 function getAllRequestByStaffId(id) {

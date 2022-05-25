@@ -405,7 +405,6 @@ export default {
       const response = await timeKeepingService.getMyRequest();
       this.myRequest = response.data.data.content;
       console.log('myRequest', this.myRequest);
-      
     },
   },
   components: { CompoAdminPage, RequestPoint },
