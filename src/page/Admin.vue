@@ -131,11 +131,11 @@
                   <button class="ml-36 mt-3 px-4 py-2 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" @click="submitAddUser()">Add</button>
                 </div>
               </template>
-            </AddUserModal>
+                </AddUserModal>
           </div>
           <!-- ./add user modal -->
           <!-- Client Table -->
-          <div class="mt-4 mx-4">
+          <div class="mt-4 mx-4" v-if="this.users.length > 0">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
                 <table class="w-full">
@@ -241,6 +241,9 @@
               </div>
             </div>
           </div>
+          <div class="italic text-center" v-else>
+              Unavailable
+          </div>
           <!-- ./Client Table -->
         </div>
       </div>
@@ -254,7 +257,6 @@ import AddUserModal from "@/components/AddUserModal.vue";
 import { UserService } from "@/service/UserService";
 import CompoAdminPage from "@/components/CompoAdminPage";
 
-import VCalendar from "v-calendar";
 
 export default {
   components: {
