@@ -19,7 +19,7 @@
                 </svg>
               </div>
               <div class="text-right">
-                <p class="text-2xl">{{this.users.length}}</p>
+                <p class="text-2xl">{{ this.users.length }}</p>
                 <p>Users</p>
               </div>
             </div>
@@ -94,58 +94,69 @@
                 @click="showModalUser()">Add new user
             </button>
           </div>
-            <!-- add user modal -->
-              <div class="fixed z-40 text-black">
-                <AddUserModal v-show="showModal" @close="closeModalUser">
-                  <template v-slot:body>
-                    <div class="w-96 h-full p-4">
-                      <form @submit.prevent class="">
-                        <div class="grid grid-cols-1">
-                          <label for="" class="font-bold">Name</label>
-                          <input type="text" v-model="staffName" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                          <label for="" class="font-bold">Email</label>
-                          <input type="text" v-model="email" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                          <label for="" class="font-bold">Password</label>
-                          <input type="password" v-model="password" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                          <label for="" class="font-bold">Position</label>
-                          <div class="grid grid-cols-2">
-                            <div class="">
-                              <input type="radio" value="3" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                              <span class="font-bold">Leader</span>
-                            </div>
-                            <div class="">
-                              <input type="radio" value="4" v-model="position" class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                              <span class="font-bold">Staff</span>
-                            </div>
-                          </div>
-                          <label class="block text-gray-600 text-sm font-bold mb-2" for="birthday">Select Date</label>
-                          <div class="flex w-full">
-                            <v-date-picker v-model="birthday" class="flex-grow">
-                              <template v-slot="{ inputValue, inputEvents }">
-                                <input id="date" class="bg-white text-gray-700 w-full py-2 px-3 appearance-none border rounded-3xl focus:outline-none" :class="{ 'border-red-600': errorMessage }" :value="inputValue" v-on="inputEvents" />
-                              </template>
-                            </v-date-picker>
-                          </div>
-                            <p class="text-red-600 text-xs italic mt-1" v-if="errorMessage">
-                              {{ errorMessage }}
-                            </p>
-                            <p class="text-blue-500 text-xs font-bold mt-1" v-else>
-                              We got it. Thanks!
-                            </p>
-                          <label for="" class="font-bold">Salary</label>
-                          <div>
-                          <input class="w-3/4 px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl" type="number" v-model="salary"><span>/1 month</span>
-                          </div>
+          <!-- add user modal -->
+          <div class="fixed z-40 text-black">
+            <AddUserModal v-show="showModal" @close="closeModalUser">
+              <template v-slot:body>
+                <div class="w-96 h-full p-4">
+                  <form @submit.prevent class="">
+                    <div class="grid grid-cols-1">
+                      <label for="" class="font-bold">Name</label>
+                      <input type="text" v-model="staffName"
+                             class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                      <label for="" class="font-bold">Email</label>
+                      <input type="text" v-model="email"
+                             class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                      <label for="" class="font-bold">Password</label>
+                      <input type="password" v-model="password"
+                             class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                      <label for="" class="font-bold">Position</label>
+                      <div class="grid grid-cols-2">
+                        <div class="">
+                          <input type="radio" value="3" v-model="position"
+                                 class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                          <span class="font-bold">Leader</span>
                         </div>
-                      </form>
+                        <div class="">
+                          <input type="radio" value="4" v-model="position"
+                                 class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
+                          <span class="font-bold">Staff</span>
+                        </div>
+                      </div>
+                      <label class="block text-gray-600 text-sm font-bold mb-2" for="birthday">Select Date</label>
+                      <div class="flex w-full">
+                        <v-date-picker v-model="birthday" class="flex-grow">
+                          <template v-slot="{ inputValue, inputEvents }">
+                            <input id="date"
+                                   class="bg-white text-gray-700 w-full py-2 px-3 appearance-none border rounded-3xl focus:outline-none"
+                                   :class="{ 'border-red-600': errorMessage }" :value="inputValue" v-on="inputEvents"/>
+                          </template>
+                        </v-date-picker>
+                      </div>
+                      <p class="text-red-600 text-xs italic mt-1" v-if="errorMessage">
+                        {{ errorMessage }}
+                      </p>
+                      <p class="text-blue-500 text-xs font-bold mt-1" v-else>
+                        We got it. Thanks!
+                      </p>
+                      <label for="" class="font-bold">Salary</label>
+                      <div>
+                        <input class="w-3/4 px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl" type="number"
+                               v-model="salary"><span>/1 month</span>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </template>
               <template v-slot:footer>
                 <div class="">
-                  <button class="ml-36 mt-3 px-4 py-2 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" @click="submitAddUser()">Add</button>
+                  <button
+                      class="ml-36 mt-3 px-4 py-2 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                      @click="submitAddUser()">Add
+                  </button>
                 </div>
               </template>
-                </AddUserModal>
+            </AddUserModal>
           </div>
           <!-- ./add user modal -->
           <!-- Client Table -->
@@ -199,80 +210,35 @@
               </div>
               <div
                   class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                <span class="flex items-center col-span-3"> Showing {{this.users.length}} of 100 </span>
+                <span class="flex items-center col-span-3"> Showing {{ this.users.length }} of 100 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
                 <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                <nav aria-label="Table navigation">
-                  <ul class="inline-flex items-center">
-                    <li>
-                      <button class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                              aria-label="Previous">
-                        <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                          <path
-                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                              clip-rule="evenodd" fill-rule="evenodd"></path>
-                        </svg>
-                      </button>
-                    </li>
-                    <li>
-                      <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">1</button>
-                    </li>
-                    <li>
-                      <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">2</button>
-                    </li>
-                    <li>
-                      <button
-                          class="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">3</button>
-                    </li>
-                    <li>
-                      <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">4</button>
-                    </li>
-                    <li>
-                      <span class="px-3 py-1">...</span>
-                    </li>
-                    <li>
-                      <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">8</button>
-                    </li>
-                    <li>
-                      <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">9</button>
-                    </li>
-                    <li>
-                      <button class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                              aria-label="Next">
-                        <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                          <path
-                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd" fill-rule="evenodd"></path>
-                        </svg>
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
+                <a-pagination @change="paginationAdmin()" v-model="current" :default-current="1" :total="this.totalPage" :defaultPageSize="1" />
               </span>
               </div>
             </div>
           </div>
           <div class="italic text-center" v-else>
-              Unavailable
+            Unavailable
           </div>
           <!-- ./Client Table -->
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import AddUserModal from "@/components/AddUserModal.vue";
-import { UserService } from "@/service/UserService";
+import {UserService} from "@/service/UserService";
 import CompoAdminPage from "@/components/CompoAdminPage";
 import {positionService} from "@/service/positionService";
 import { overTimeService } from "@/service/overTimeService";
 import { absentService } from "@/service/absentService";
 import { lateTimeService } from "@/service/lateTimeService";
 import { timeKeepingService } from "@/service/timeKeepingService";
+import { authService } from "@/service/authService";
 
 export default {
   components: {
@@ -313,6 +279,15 @@ export default {
     },
   },
   methods: {
+    async paginationAdmin(){
+      try {
+        const response = await authService.paging(this.current-1);
+        this.users = response.data.data.content;
+        this.totalPage = response.data.data.totalPages;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     showModalUser() {
       this.showModal = true;
     },
@@ -330,7 +305,7 @@ export default {
         email: this.email,
         password: this.password,
         birthday: this.birthday,
-        manager:this.manager,
+        manager: this.manager,
         avatar: this.avatar,
         salary: this.salary,
       };

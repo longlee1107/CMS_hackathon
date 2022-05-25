@@ -1,7 +1,15 @@
 <template>
   <div>
-    <CompoAdminPage/>
-    <!-- Profile Card -->
+    <div v-if="currentUser.position == 'ADMINISTRATOR'">
+      <CompoAdminPage/>
+    </div>
+    <div v-if="currentUser.position == 'LEADER'">
+      <CompoLeaderPage/>
+    </div>
+    <div v-if="currentUser.position == 'STAFF'">
+      <CompoStaffPage/>
+    </div>
+    <!--Profile Card-->
     <div x-data="setup()">
       <div
         class="

@@ -1,8 +1,7 @@
 import { Axios } from "./Axios";
 
-
-function getTimeKeeping() {
-    return Axios.get('timekeeping');
+function getTimeKeeping(payload) {
+    return Axios.get(`timekeeping?page=${payload}&size=10`);
 }
 
 function patchTimeKeeping(payload, value) {
