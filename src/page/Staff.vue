@@ -66,7 +66,6 @@
                       <th class="px-4 py-3 text-center">Note</th>
                       <th class="px-4 py-3 text-center">Created at</th>
                       <th class="px-4 py-3 text-center">Status</th>
-                      <th class="px-4 py-3 text-center">Other</th>
                     </tr>
                     </thead>
                     <tbody
@@ -142,22 +141,6 @@
                             >
                               {{ request.status }}
                             </span>
-                      </td>
-                      <td class="text-center">
-                            <span
-                                class="
-                                px-2
-                                py-1
-                                text-right
-                                font-semibold
-                                leading-tight
-                                text-red-700
-                                bg-red-100
-                                rounded-full
-                                dark:bg-red-700 dark:text-red-100
-                              "
-                            >Delete</span
-                            >
                       </td>
                     </tr>
                     </tbody>

@@ -18,17 +18,26 @@ export const router = new VueRouter({
         {
             path: '/',
             name: 'login',
-            component: () => import('../page/Login')
+            component: () =>
+                import ('../page/Login')
         },
         {
             path: '/staff',
             name: 'staff',
-            component: () => import('../page/Staff')
+            component: () =>
+                import ('../page/Staff')
         },
         {
             path: '/profile',
             name: 'profile',
-            component: () => import ('@/page/Profile')
+            component: () =>
+                import ('@/page/Profile')
+        },
+        {
+            path: '/staff/profile',
+            name: 'staff-profile',
+            component: () =>
+                import ('@/page/StaffProfile')
         },
         {
             path: '/admin/overtime',

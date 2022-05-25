@@ -4,11 +4,10 @@
     <div x-data="setup()" class="">
       <div
           class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
-
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
 
           <!-- Statistics Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-4 gap-6">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -35,8 +34,8 @@
                 </svg>
               </div>
               <div class="text-right">
-                <p class="text-2xl">557</p>
-                <p>Orders</p>
+                <p class="text-2xl">{{this.timeKeeping.length}}</p>
+                <p>TimeKeeping Requests</p>
               </div>
             </div>
             <div
@@ -50,8 +49,8 @@
                 </svg>
               </div>
               <div class="text-right">
-                <p class="text-2xl">$11,257</p>
-                <p>Sales</p>
+                <p class="text-2xl">{{this.overTime.length}}</p>
+                <p>OT Requests</p>
               </div>
             </div>
             <div
@@ -65,8 +64,23 @@
                 </svg>
               </div>
               <div class="text-right">
-                <p class="text-2xl">$75,257</p>
-                <p>Balances</p>
+                <p class="text-2xl">{{this.absentTime.length}}</p>
+                <p>Absent Requests</p>
+              </div>
+            </div>
+            <div
+                class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+              <div
+                  class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+                <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                     class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div class="text-right">
+                <p class="text-2xl">{{this.lateTime.length}}</p>
+                <p>Late Time Requests</p>
               </div>
             </div>
           </div>
@@ -149,10 +163,9 @@
                   </tr>
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-
                   <tr v-for="user in users" :key="user.staffId"
                       class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3">
+                    <td class="px-4 py-3" v-if="user.staffId">
                       <p class="text-center">{{ user.staffId }}</p>
                     </td>
                     <td class="px-4 py-3">
@@ -179,7 +192,6 @@
                           class="px-2 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                         <router-link :to="{name:'detail', params:{id: user.staffId}}">Detail</router-link>
                       </button>
-                      
                     </td>
                   </tr>
                   </tbody>
@@ -256,7 +268,11 @@
 import AddUserModal from "@/components/AddUserModal.vue";
 import { UserService } from "@/service/UserService";
 import CompoAdminPage from "@/components/CompoAdminPage";
-import {positionService} from "@/service/positionService"
+import {positionService} from "@/service/positionService";
+import { overTimeService } from "@/service/overTimeService";
+import { absentService } from "@/service/absentService";
+import { lateTimeService } from "@/service/lateTimeService";
+import { timeKeepingService } from "@/service/timeKeepingService";
 
 export default {
   components: {
@@ -276,11 +292,19 @@ export default {
       manager: 1,
       salary: 0,
       positionList: [],
+      timeKeeping:[],
+      overTime:[],
+      absentTime:[],
+      lateTime:[],
     };
   },
   mounted() {
     this.showUser();
     this.showPosition();
+    this.getOverTimeRequest();
+    this.getTimeLateRequest();
+    this.getAbsentTimeRequest();
+    this.getTimeKeepingRequest();
   },
   computed: {
     errorMessage() {
@@ -327,7 +351,38 @@ export default {
       try {
         const reply = await positionService.getPosition();
         this.positionList = reply.data;
-        console.log('positionList', this.positionList);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getOverTimeRequest(){
+      try {
+        const log1 = await overTimeService.getOT();
+        this.overTime = log1.data.data.content;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getTimeLateRequest(){
+      try {
+        const log2 = await lateTimeService.getTimeLate();
+        this.lateTime = log2.data.data.content;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getAbsentTimeRequest(){
+      try {
+        const log3 = await absentService.getDayOff();
+        this.absentTime = log3.data.data.content;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getTimeKeepingRequest(){
+      try {
+        const log4 = await timeKeepingService.getTimeKeeping();
+        this.timeKeeping = log4.data.data.content;
       } catch (error) {
         console.log(error);
       }

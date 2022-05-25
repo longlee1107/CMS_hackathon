@@ -35,7 +35,7 @@
           <li>
             <div class="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700"></div>
           </li>
-          <router-link to="/profile">
+          <router-link to="/staff/profile">
             <li>
               <a href="#"
                  class="relative flex flex-row items-center h-11 focus:outline-none hover:text-blue-300 dark:hover:text-blue-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
@@ -69,7 +69,6 @@
       </div>
     </div>
     <!-- ./Header -->
-  
   </div>
 </template>
 

@@ -6,8 +6,7 @@ import VCalendar from 'v-calendar';
 import moment from 'moment';
 
 Vue.config.productionTip = false
-
-// Use v-calendar & v-date-picker components
+    // Use v-calendar & v-date-picker components
 Vue.use(VCalendar, {
     componentPrefix: 'v', // Use <vc-calendar /> instead of <v-calendar />
 });
