@@ -8,8 +8,7 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 
 Vue.config.productionTip = false
-
-// Use v-calendar & v-date-picker components
+    // Use v-calendar & v-date-picker components
 Vue.use(VCalendar, {
     componentPrefix: 'v', // Use <vc-calendar /> instead of <v-calendar />
 });
