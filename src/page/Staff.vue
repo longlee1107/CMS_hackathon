@@ -37,6 +37,9 @@
             <div>
               <button class="w-64 h-10 rounded-lg bg-blue-400" @click="showTakeOff()">Xin nghỉ</button>
             </div>
+            <div>
+              <button class="w-64 h-10 rounded-lg bg-blue-400" @click="showOT()">OT</button>
+            </div>
 
           </div>
           <!-- Client Table -->
@@ -209,6 +212,39 @@
             </form>
           </div>
         </div>
+
+        <div class="fixed top-0 w-[100vw] h-[100vh] z-[10] flex items-center background"
+             v-if="this.showModalOT === true">
+          <div class=" absolute right-2 top-2 text-white text-4xl cursor-pointer"
+               @click="()=>{this.showModalOT = false}">x
+          </div>
+          <div class="w-1/2 h-auto mx-auto flex items-center justify-center bg-white  opacity-100 z-[1000]">
+            <form @submit.prevent="handleOT()">
+              <div class=" bg-white rounded-md px-6 py-10 max-w-2xl mx-auto ">
+                <h1 class="text-center text-2xl font-bold text-gray-500 mb-10">Over Time Table</h1>
+                <div class="flex justify-center">
+                  <v-date-picker v-model="dateOT" mode="dateTime" :minute-increment="5" :min-date='new Date()' />
+                </div>
+                <div class="space-y-4 mt-4">
+                  <div>
+                    <label for="ot" class="text-lx font-serif">Thời gian làm việc (phút) :</label>
+                    <input type="number" placeholder="minutes late" id="ot" v-model="timeOT"
+                           class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md"/>
+                  </div>
+                  <div>
+                    <label for="noteOT" class="text-lx font-serif">Note :</label>
+                    <input type="text" placeholder="minutes late" id="noteOT" v-model="noteOverTime"
+                           class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md"/>
+                  </div>
+                  <button
+                      class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
+                    SUBMIT
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -222,6 +258,11 @@ import {authService} from "@/service/authService"
 import {UserService} from "@/service/UserService";
 import CompoStaffPage from "@/components/CompoStaffPage";
 import {timeKeepingService} from "@/service/timeKeepingService";
+import Vue from 'vue'
+import CxltToastr from 'cxlt-vue2-toastr'
+Vue.use(CxltToastr)
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
+
 export default {
   name: "Staff",
   components: {CompoStaffPage},
@@ -235,7 +276,11 @@ export default {
       dataUser: [],
       currentUser: {},
       myRequest: {},
-      attributes: []
+      attributes: [],
+      showModalOT:false,
+      dateOT:"",
+      timeOT:"",
+      noteOverTime:"",
     }
   },
   methods: {
@@ -263,19 +308,40 @@ export default {
     },
     async Timekeeping() {
       if (this.date === "") {
-        alert("Please select a date");
+        this.$toast.error({
+          title:'Please select a date',
+          message:'Please select a date',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
         return;
       }
       try {
         const data = await staffService.postStaff({
           note: "chấm công",
-          staff: 1,
+          staff: this.dataUser.staffId,
           timeIn: Date.parse(this.date.start)
         })
-        alert("request sent successfully")
+        this.$toast.success({
+          title:'request sent successfully',
+          message:'request sent successfully',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
       } catch (e) {
         console.log(e)
-        alert("Submit request failed")
+        this.$toast.error({
+          title:'Submit request failed',
+          message:'Submit request failed',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
       }
     },
     async getUser() {
@@ -283,13 +349,98 @@ export default {
       this.dataUser = res.data.data;
     },
     showTakeOff() {
-      if (this.date === "") {
-        alert("Please select a date");
+      if (this.date == "") {
+        this.$toast.error({
+          title:'Please select a date',
+          message:'Please select a date',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
         return;
       }
       this.showModal = true;
     },
+    showOT(){
+      this.showModalOT = true;
+    },
+    async handleOT(){
+      if (this.dateOT === "") {
+        this.$toast.error({
+          title:'Please select a date',
+          message:'Please select a date',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
+        return;
+      }else if (this.timeOT == ""){
+        this.$toast.error({
+          title:'Enter working time',
+          message:'Enter working time',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
+        return;
+      }else if (this.noteOverTime == ""){
+        this.$toast.error({
+          title:'Note Over Time',
+          message:'Note Over Time Not Be Empty',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
+        return;
+      }
+      try {
+        const data = await authService.overTime({
+          multiply: 2,
+          note: this.noteOverTime,
+          staff_id: this.dataUser.staffId,
+          status: "PENDING",
+          time_end: Number(this.timeOT)*60000,
+          time_start: Date.parse(this.dateOT),
+        })
+        this.$toast.success({
+          title:'request sent successfully',
+          message:'request sent successfully',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
+        this.timeOT ="";
+        this.dateOT ="";
+      } catch (e) {
+        console.log(e)
+        this.$toast.error({
+          title:'Submit request failed',
+          message:'Submit request failed',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
+      }
+    },
     async takeOff() {
+      if (this.contentTakeOff === "") {
+        this.$toast.error({
+          title:'Not Be Empty',
+          message:'contentTakeOff Not Be Empty',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
+        return;
+      }
+
       try {
         const data = await authService.takeOff({
           note: this.contentTakeOff,
@@ -300,16 +451,51 @@ export default {
           time_start: Date.parse(this.date.start),
         });
         this.contentTakeOff = ""
-        alert("request sent successfully")
+        this.$toast.success({
+          title:'request sent successfully',
+          message:'request sent successfully',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
       } catch (e) {
         console.log(e)
-        alert("Submit request failed")
+        this.$toast.error({
+          title:'Submit request failed',
+          message:'Submit request failed',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
       }
     },
     showLateForWork() {
       this.showModalLateForWork = true;
     },
     async lateForWork() {
+      if (this.contentTakeOff === "") {
+        this.$toast.error({
+          title:'Not Be Empty',
+          message:'contentTakeOff Not Be Empty',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
+        return;
+      }else if (this.dateLateForWork == ""){
+        this.$toast.error({
+          title:'Not Be Empty',
+          message:'dateLateForWork Not Be Empty',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
+        return;
+      }
       try {
         const data = await authService.lateForWork({
           note: this.contentTakeOff,
@@ -319,10 +505,24 @@ export default {
         });
         this.contentTakeOff = "";
         this.dateLateForWork = "";
-        alert("request sent successfully")
+        this.$toast.success({
+          title:'request sent successfully',
+          message:'request sent successfully',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
       } catch (e) {
         console.log(e)
-        alert("Submit request failed")
+        this.$toast.error({
+          title:'Submit request failed',
+          message:'Submit request failed',
+          position: 'top right',
+          showDuration: 4000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
       }
     }
   },
