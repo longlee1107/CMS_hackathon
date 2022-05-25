@@ -4,22 +4,22 @@ import Vue from "vue";
 Vue.use(VueRouter);
 export const router = new VueRouter({
     routes: [{
-            path: '/admin',
-            name: 'admin',
-            component: () =>
-                import ('../page/Admin')
-        },
+        path: '/admin',
+        name: 'admin',
+        component: () =>
+            import ('../page/Admin')
+    },
         {
             path: '/leader/attendance-management',
             name: 'leaderAttendance',
             component: () =>
                 import ('../page/LeaderAttendanceManagement')
-        },{
+        }, {
             path: '/leader/absent-management',
             name: 'leaderAbsent',
             component: () =>
                 import ('../page/LeaderAbsentRequest')
-        },{
+        }, {
             path: '/leader/late-management',
             name: 'leaderLate',
             component: () =>
@@ -42,6 +42,12 @@ export const router = new VueRouter({
             name: 'staff',
             component: () =>
                 import ('../page/Staff')
+        },
+        {
+            path: '/staff/salary',
+            name: 'staffSalary',
+            component: () =>
+                import ('../page/StaffSalary')
         },
         {
             path: '/profile',

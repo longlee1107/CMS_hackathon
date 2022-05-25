@@ -171,23 +171,23 @@
                 </h1>
                 <div class="space-y-4">
                   <div>
-                    <label for="number" class="text-lx font-serif">minutes late:</label>
+                    <label for="number" class="text-lg text-black font-serif">minutes late:</label>
                     <input
                       type="number"
                       placeholder="minutes late"
                       id="number"
                       v-model="dateLateForWork"
-                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md"
+                      class="ml-2 outline-none py-1 px-2 text-md text-black border-2 rounded-md"
                     />
                   </div>
                   <div>
-                    <label for="name" class="text-lx font-serif">take off:</label>
+                    <label for="name" class="text-lg font-serif">take off:</label>
                     <input
                       type="text"
                       placeholder="take off"
                       id="name"
                       v-model="contentTakeOff"
-                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md"
+                      class="ml-2 outline-none py-1 px-2 text-black text-md border-2 rounded-md"
                     />
                   </div>
                   <button
@@ -315,6 +315,7 @@ export default {
         console.log(e);
         alert("Submit request failed");
       }
+      this.showModalLateForWork = false
     },
   },
   mounted() {

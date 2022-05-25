@@ -1,13 +1,10 @@
 <template>
   <div>
     <div v-if="currentUser.position == 'ADMINISTRATOR'">
-      <CompoAdminPage />
+      <CompoAdminPage/>
     </div>
     <div v-if="currentUser.position == 'LEADER'">
-      <CompoLeaderPage />
-    </div>
-    <div v-if="currentUser.position == 'STAFF'">
-      <CompoStaffPage />
+      <CompoLeaderPage/>
     </div>
     <!--Profile Card-->
     <div x-data="setup()">
@@ -129,6 +126,8 @@ import CompoAdminPage from "@/components/CompoAdminPage.vue";
 import {lateTimeService} from "@/service/lateTimeService";
 import { overTimeService } from "@/service/overTimeService";
 import { absentService } from "@/service/absentService";
+import CompoLeaderPage from "@/components/CompoLeaderPage";
+
 export default {
   data() {
     return {
@@ -180,6 +179,6 @@ export default {
       }
     }
   },
-  components: { CompoAdminPage },
+  components: { CompoAdminPage,CompoLeaderPage},
 };
 </script>

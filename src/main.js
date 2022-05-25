@@ -14,6 +14,12 @@ Vue.use(VCalendar, {
 });
 Vue.use(Antd);
 
+Vue.filter('formatMinute', (value) => {
+    if (value) {
+        return Number(value) / 60000
+    }
+});
+
 Vue.filter('formatDate', (value) => {
     if (value) {
         return moment(value).format('YYYY/MM/DD hh:mm')

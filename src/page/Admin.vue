@@ -262,12 +262,12 @@ export default {
       overTime:[],
       absentTime:[],
       lateTime:[],
-      totalPage:'',
-      current:1,
+      current: 1,
+      totalPage: '',
     };
   },
   mounted() {
-    this.showUser();
+    this.paginationAdmin();
     this.showPosition();
     this.getOverTimeRequest();
     this.getTimeLateRequest();
@@ -315,14 +315,6 @@ export default {
       await UserService.postNewUser(user);
       this.showUser();
       this.closeModalUser();
-    },
-    async showUser() {
-      try {
-        const response = await UserService.getAllUser();
-        this.users = response.data.data.content;
-      } catch (error) {
-        console.log(error);
-      }
     },
     async showPosition(){
       try {

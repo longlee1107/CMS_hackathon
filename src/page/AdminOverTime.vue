@@ -65,6 +65,7 @@
                         <th class="px-4 py-3">Note</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3">Date</th>
+                        <th class="px-4 py-3">Time OT</th>
                         <th class="px-4 py-3">Request</th>
                       </tr>
                     </thead>
@@ -125,8 +126,12 @@
                           </span>
                         </td>
                         <td class="px-4 py-3 text-sm">
-                          {{ request.timeIn | formatDate }}
+                          {{ request.time_start | formatDate}}
                         </td>
+                        <td class="px-4 py-3 text-sm">
+                          {{ request.time_end | formatMinute}} minute
+                        </td>
+
                         <td class="px-4 py-3 text-sm" v-if="request.status === 'PENDING'">
                           <input
                             type="checkbox"
