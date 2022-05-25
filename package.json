@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
+    "cxlt-vue2-toastr": "^1.1.1",
     "moment": "^2.29.3",
     "v-calendar": "^2.4.1",
     "vue": "^2.6.14",

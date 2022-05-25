@@ -51,7 +51,10 @@
 
 <script>
 import {authService} from "../service/authService";
-
+import Vue from 'vue'
+import CxltToastr from 'cxlt-vue2-toastr'
+Vue.use(CxltToastr)
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 export default {
   data() {
     return {
@@ -104,8 +107,14 @@ export default {
         const data = response.data.data;
         console.log(data)
         localStorage.setItem('token', data.token);
-
-        alert('Login Successfully');
+        this.$toast.success({
+          title:'Login Success',
+          message:'Login Success',
+          position: 'top right',
+          showDuration: 2000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
         if (data.authorities[0] === "ADMINISTRATOR") {
           this.$router.push({name: 'admin'});
         } else if (data.authorities[0] === "LEADER") {
@@ -115,7 +124,14 @@ export default {
         }
       } catch (e) {
         console.log(e);
-        alert('Login Failed');
+        this.$toast.error({
+          title:'Login Failed',
+          message:'Login Failed',
+          position: 'top right',
+          showDuration: 2000,
+          hideMethod:'hinge',
+          showMethod:'bounce',
+        })
       }
     },
   },
