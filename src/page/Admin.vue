@@ -254,7 +254,7 @@ export default {
       email: "",
       password: "",
       birthday: "",
-      avatar: "",
+      avatar: null,
       manager: 1,
       salary: 0,
       positionList: [],
@@ -269,6 +269,7 @@ export default {
   mounted() {
     this.paginationAdmin();
     this.showPosition();
+    this.showUser();
     this.getOverTimeRequest();
     this.getTimeLateRequest();
     this.getAbsentTimeRequest();
@@ -290,36 +291,42 @@ export default {
         console.log(error);
       }
     },
+    async showPosition(){
+      try {
+        const reply = await positionService.getPosition();
+        this.positionList = reply.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     showModalUser() {
       this.showModal = true;
     },
     closeModalUser() {
       this.showModal = false;
     },
-    async submitAddUser() {
+     async submitAddUser() {
       this.staffName = this.staffName.trim();
       this.email = this.email.trim();
       this.password = this.password.trim();
-
       const user = {
         staffName: this.staffName,
         position: this.position,
         email: this.email,
         password: this.password,
         birthday: this.birthday,
-        manager: this.manager,
+        manager:this.manager,
         avatar: this.avatar,
         salary: this.salary,
       };
-      console.log(this.user);
       await UserService.postNewUser(user);
       this.showUser();
       this.closeModalUser();
     },
-    async showPosition(){
+    async showUser() {
       try {
-        const reply = await positionService.getPosition();
-        this.positionList = reply.data;
+        const response = await UserService.getAllUser();
+        this.users = response.data.data.content;
       } catch (error) {
         console.log(error);
       }
@@ -332,6 +339,7 @@ export default {
         console.log(error);
       }
     },
+    
     async getTimeLateRequest(){
       try {
         const log2 = await lateTimeService.getTimeLate();
