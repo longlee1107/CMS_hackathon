@@ -24,10 +24,15 @@
           <!--Calendar-->
           <div class="flex justify-start mx-8">
             <button
-              class="px-3 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+              class="px-3 py-1 mr-1 font-semibold leading-tight text-green-100 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
               @click="getRequestByDate()"
             >
               Filter
+            </button>
+            <button class="px-2  pb-1 font-semibold leading-tight text-red-100 bg-red-700 rounded-full dark:bg-red-700 dark:text-red-100"
+            @click="resetRequest()"
+            >
+              <a-icon type="undo" />
             </button>
           </div>
           <!-- ./Statistics Cards -->
@@ -525,6 +530,10 @@ export default {
         console.log(error);
       }
     },
+    async resetRequest(){
+      this.requestByDate=[];
+      this.showRequest();
+    }
   },
   components: { CompoAdminPage },
 };
