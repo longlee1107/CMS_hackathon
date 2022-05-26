@@ -268,6 +268,26 @@
                     </tbody>
                   </table>
                 </div>
+                <div
+                  class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
+                >
+                  <span class="flex items-center col-span-3">
+                    Showing {{ this.requestByDate.length }} of {{ this.requests.length }}
+                  </span>
+                  <span class="col-span-2"></span>
+                  <!-- Pagination -->
+                  <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                    <nav aria-label="Table navigation">
+                      <a-pagination
+                        @change="showRequest()"
+                        v-model="current"
+                        :default-current="1"
+                        :total="this.totalPage"
+                        :defaultPageSize="1"
+                      />
+                    </nav>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -357,6 +377,9 @@ export default {
           this.timeEnd
         );
         this.requestByDate = reply.data.data.content;
+        if(this.requestByDate.length === 0){
+          alert("No Request Found");
+        }
       } catch (error) {
         console.log(error);
       }

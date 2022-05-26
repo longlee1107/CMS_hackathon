@@ -25,6 +25,18 @@ Vue.filter('formatDate', (value) => {
         return moment(value).format('YYYY/MM/DD hh:mm')
     }
 });
+
+Vue.filter('formatDays', (value) => {
+    if (value) {
+        return moment(value).format('YYYY/MM/DD')
+    }
+});
+
+Vue.filter('formatHour', (value) => {
+    if (value) {
+        return moment(value).format('hh:mm')
+    }
+});
 Vue.filter('formatMiliseconds', (value) => {
     if (value) {
         return moment(value).format('x')

@@ -328,7 +328,10 @@ export default {
       try {
         this.timeStart = Date.parse(this.range.start);
         this.timeEnd = Date.parse(this.range.end);
-        const reply = await absentService.getDayOffByDate(this.timeStart, this.timeEnd);
+        const reply = await timeKeepingService.getRequestByDate(
+          this.timeStart,
+          this.timeEnd
+        );
         this.requestByDate = reply.data.data.content;
       } catch (error) {
         console.log(error);

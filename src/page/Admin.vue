@@ -163,11 +163,11 @@
           <div class="mt-4 mx-4" v-if="this.users.length > 0">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
-                <table class="w-full">
+                <table class="w-full text-center" >
                   <thead>
-                  <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                  <tr class="text-xs font-semibold tracking-wide text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th class="px-4 py-3 w-1 ">Number</th>
-                    <th class="px-4 py-3">Name</th>
+                    <th class="px-4 py-3 text-center">Name</th>
                     <th class="px-4 py-3">Roll</th>
                     <th class="px-4 py-3">Status</th>
                     <th class="px-4 py-3">Profile</th>
@@ -180,7 +180,7 @@
                       <p class="text-center">{{ user.staffId }}</p>
                     </td>
                     <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
+                      <div class="flex items-center justify-center text-sm">
                         <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                           <img class="object-cover w-full h-full rounded-full"
                                src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
@@ -188,7 +188,7 @@
                           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                         </div>
                         <div>
-                          <p class="font-semibold">{{ user.staffName }}</p>
+                          <p class="font-semibold ">{{ user.staffName }}</p>
                           <p class="text-xs text-gray-600 dark:text-gray-400">10x Developer</p>
                         </div>
                       </div>
