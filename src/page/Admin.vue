@@ -210,7 +210,7 @@
               </div>
               <div
                   class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                <span class="flex items-center col-span-3"> Showing {{ this.users.length }} of 100 </span>
+                <span class="flex items-center col-span-3"> Showing {{ this.users.length }} of {{ this.users.length }} </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
                 <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
@@ -231,9 +231,9 @@
 
 <script>
 import AddUserModal from "@/components/AddUserModal.vue";
-import {UserService} from "@/service/UserService";
+import { UserService } from "@/service/UserService";
 import CompoAdminPage from "@/components/CompoAdminPage";
-import {positionService} from "@/service/positionService";
+import { positionService } from "@/service/positionService";
 import { overTimeService } from "@/service/overTimeService";
 import { absentService } from "@/service/absentService";
 import { lateTimeService } from "@/service/lateTimeService";
@@ -284,7 +284,7 @@ export default {
   methods: {
     async paginationAdmin(){
       try {
-        const response = await authService.paging(this.current-1);
+        const response = await authService.paging(this.current - 1);
         this.users = response.data.data.content;
         this.totalPage = response.data.data.totalPages;
       } catch (error) {

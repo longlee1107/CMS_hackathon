@@ -19,7 +19,7 @@
           <input type="search" name="" id="" placeholder="Search"
                  class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent"/>
         </div>
-        <ul class="flex items-center">
+        <ul class="flex my-auto items-center">
           <router-link to="/profile">
             <li>
               <a href="#"
