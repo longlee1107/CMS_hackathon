@@ -491,7 +491,6 @@ export default {
       try {
         const resp = await overTimeService.getOT();
         this.requests = resp.data.data.content;
-        console.log("request", this.requests);
       } catch (error) {
         console.log(error);
       }

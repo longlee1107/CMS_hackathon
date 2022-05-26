@@ -264,6 +264,7 @@ export default {
           timeIn: Date.parse(this.date.start),
         });
         alert("request sent successfully");
+        this.getMyRequest();
       } catch (e) {
         console.log(e);
         alert("Submit request failed");
