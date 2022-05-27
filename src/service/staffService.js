@@ -5,7 +5,7 @@ function postStaff(payload){
 }
 
 function salaryStaff(payload){
-    return Axios.post(`salary/all/${payload}`);
+    return Axios.get(`salary/my-salary/${payload}`);
 }
 
 export const staffService = {
