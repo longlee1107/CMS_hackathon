@@ -112,7 +112,7 @@ export default {
           message:'Login Success',
           position: 'top right',
           showDuration: 2000,
-          hideMethod:'hinge',
+          hideMethod:'bounce',
           showMethod:'bounce',
         })
         if (data.authorities[0] === "ADMINISTRATOR") {
@@ -129,7 +129,7 @@ export default {
           message:'Login Failed',
           position: 'top right',
           showDuration: 2000,
-          hideMethod:'hinge',
+          hideMethod:'bounce',
           showMethod:'bounce',
         })
       }

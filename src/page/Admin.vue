@@ -61,7 +61,7 @@
               </div>
             </div>
             </router-link>
-            
+
             <router-link to="/admin/day-offs">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
@@ -79,7 +79,7 @@
               </div>
             </div>
             </router-link>
-            
+
             <router-link to="/admin/timelate">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
@@ -291,7 +291,7 @@ export default {
   },
   computed: {
     errorMessage() {
-      if (!this.inputValue) return 'Date is required.';
+      if (this.inputValue === '') return 'Date is required.';
       return '';
     },
   },
@@ -353,7 +353,7 @@ export default {
         console.log(error);
       }
     },
-    
+
     async getTimeLateRequest(){
       try {
         const log2 = await lateTimeService.getTimeLate();
