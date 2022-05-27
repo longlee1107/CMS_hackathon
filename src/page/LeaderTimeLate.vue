@@ -336,6 +336,7 @@ export default {
       try {
         const resp = await lateTimeService.getTimeLate();
         this.requests = resp.data.data.content;
+        console.log('this.requests', this.requests);
       } catch (error) {
         console.log(error);
       }

@@ -1,11 +1,10 @@
 <template>
   <div>
     <!-- Header -->
-    <CompoStaffPage/>
+    <CompoStaffPage />
     <!-- ./Sidebar -->
     <div x-data="setup()">
-      <div
-          class="
+      <div class="
           min-h-screen
           flex flex-col flex-auto flex-shrink-0
           antialiased
@@ -15,14 +14,14 @@
           dark:text-white">
         <div class="h-full w-5/6 mx-auto mt-14 mb-10">
           <div class="m-5">
-            <v-date-picker v-model="date"
-                           :attributes="attributes"
-                           is-expanded
-                           :value=[1,2,3]
-                           is-dark
-                           is-range
-                           trim-weeks
-            />
+            <v-date-picker 
+              v-model="date" 
+              :attributes="attributes" 
+              is-expanded 
+              :value=[1,2,3] 
+              is-dark 
+              is-range
+              trim-weeks />
           </div>
           <div>
 
@@ -47,14 +46,13 @@
           mt-4
               gap-2
               rounded-xl">
-            <RequestPoint/>
+            <RequestPoint />
             <div class="mt-4 mx-4" v-if="this.myRequest.length > 0">
               <div class="w-full overflow-hidden rounded-lg shadow-xs">
                 <div class="w-full overflow-x-auto">
                   <table class="w-full">
                     <thead>
-                    <tr
-                        class="
+                      <tr class="
                             text-xs
                             font-semibold
                             tracking-wide
@@ -64,42 +62,34 @@
                             dark:border-gray-700
                             bg-gray-50
                             dark:text-gray-400 dark:bg-gray-800
-                          "
-                    >
-                      <th class="px-4 py-3 w-1 text-center">Number</th>
-                      <th class="px-4 py-3 text-center">Note</th>
-                      <th class="px-4 py-3 text-center">Created at</th>
-                      <th class="px-4 py-3 text-center">Status</th>
-                    </tr>
+                          ">
+                        <th class="px-4 py-3 w-1 text-center">Number</th>
+                        <th class="px-4 py-3 text-center">Note</th>
+                        <th class="px-4 py-3 text-center">Created at</th>
+                        <th class="px-4 py-3 text-center">Status</th>
+                      </tr>
                     </thead>
-                    <tbody
-                        class="
+                    <tbody class="
                           bg-white
                           divide-y
                           dark:divide-gray-700 dark:bg-gray-800
-                        "
-                    >
-                    <tr
-                        v-for="request in myRequest"
-                        :key="request.id"
-                        class="
+                        ">
+                      <tr v-for="request in myRequest" :key="request.id" class="
                             bg-gray-50
                             dark:bg-gray-800
                             hover:bg-gray-100
                             dark:hover:bg-gray-900
                             text-gray-700
                             dark:text-gray-400
-                          "
-                    >
-                      <td class="px-4 py-3">
-                        <p class="text-center">
-                          {{ request.id }}
-                        </p>
-                      </td>
-                      <td class="px-4 py-3 ">
-                        <div class="flex items-center  text-sm">
-                          <div
-                              class="
+                          ">
+                        <td class="px-4 py-3">
+                          <p class="text-center">
+                            {{ request.id }}
+                          </p>
+                        </td>
+                        <td class="px-4 py-3 ">
+                          <div class="flex items-center  text-sm">
+                            <div class="
                                   relative
                                   hidden
                                   w-44
@@ -107,31 +97,26 @@
                                   mr-3
                                   rounded-full
                                   md:block
-                                "
-                          >
-                            <div
-                                class="
+                                ">
+                              <div class="
                                     absolute
                                     inset-0
                                     rounded-full
                                     shadow-inner
-                                  "
-                                aria-hidden="true"
-                            ></div>
+                                  " aria-hidden="true"></div>
+                            </div>
+                            <div>
+                              <p class="font-semibold">
+                                {{ request.note }}
+                              </p>
+                            </div>
                           </div>
-                          <div>
-                            <p class="font-semibold">
-                              {{ request.note }}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm text-center">
-                        {{ request.timeIn | formatDate }}
-                      </td>
-                      <td class="px-4 py-3 text-xs text-center">
-                            <span
-                                class="
+                        </td>
+                        <td class="px-4 py-3 text-sm text-center">
+                          {{ request.timeIn | formatDate }}
+                        </td>
+                        <td class="px-4 py-3 text-xs text-center">
+                          <span class="
                                 px-2
                                 py-1
                                 text-right
@@ -141,12 +126,11 @@
                                 bg-green-100
                                 rounded-full
                                 dark:bg-green-700 dark:text-green-100
-                              "
-                            >
-                              {{ request.status }}
-                            </span>
-                      </td>
-                    </tr>
+                              ">
+                            {{ request.status }}
+                          </span>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -157,11 +141,259 @@
             </div>
           </div>
           <!-- ./Client Table -->
+          <!-- OT -->
+          <div>
+            <p
+              class="arrow-right my-6 mx-3 w-2/12 px-12 py-2 text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800 font-bold">
+              OT
+            </p>
+          </div>
+          <div class="mt-4 mx-4" v-if="this.myOTRequest.length > 0">
+              <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                <div class="w-full overflow-x-auto">
+                  <table class="w-full">
+                    <thead>
+                      <tr class="
+                            text-xs
+                            font-semibold
+                            tracking-wide
+                            text-center text-gray-500
+                            uppercase
+                            border-b
+                            dark:border-gray-700
+                            bg-gray-50
+                            dark:text-gray-400 dark:bg-gray-800
+                          ">
+                        <th class="px-4 py-3 w-1">Number</th>
+                        <th class="px-4 py-3">Note</th>
+                        <th class="px-4 py-3">Date</th>
+                        <th class="px-4 py-3">Time OT (hour)</th>
+                        <th class="px-4 py-3">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="
+                          bg-white
+                          divide-y
+                          dark:divide-gray-700 dark:bg-gray-800
+                        ">
+                      <tr v-for="OTrequest in myOTRequest" :key="OTrequest.id" class="
+                            bg-gray-50
+                            dark:bg-gray-800
+                            hover:bg-gray-100
+                            dark:hover:bg-gray-900
+                            text-gray-700
+                            dark:text-gray-400
+                          ">
+                        <td class="px-4 text-center py-4">
+                            {{ OTrequest.id }}
+                        </td>
+                        <td class="px-4 py-3 text-center text-sm">{{ OTrequest.note }}</td>
+                        <td class="px-4 py-3   text-sm text-center">
+                          {{ OTrequest.time_start | formatDate}}
+                        </td>
+                        <td class="px-4 py-3 text-sm text-center">
+                          {{ OTrequest.time_end | formatHour }} 
+                        </td>
+                        <td class="px-4 py-3 text-center text-sm">
+                          <span
+                            class="px-2 py-1 text-center font-semibold leading-tight text-yellow-50 bg-orange-600 rounded-full dark:bg-orange-600 dark:text-green-50"
+                            v-if="OTrequest.status === 'PENDING'"
+                          >
+                            {{ OTrequest.status }}
+                          </span>
+                          <span
+                            class="px-2 py-1 text-center font-semibold leading-tight text-green-50 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
+                            v-else-if="OTrequest.status === 'APPROVED'"
+                          >
+                            {{ OTrequest.status }}
+                          </span>
+                          <span
+                            class="px-2 py-1 text-center font-semibold leading-tight text-white bg-red-600 rounded-full dark:bg-red-600 dark:text-green-100"
+                            v-else
+                          >
+                            {{ OTrequest.status }}
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div v-else class="italic text-center text-gray-50">
+              No Request Created!
+            </div>
+          <!-- ./OT -->
+          <!-- Late For Work -->
+          <div>
+            <p
+              class="arrow-right my-6 mx-3 w-2/12 px-12 py-2 text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800 font-bold">
+              Late Time
+            </p>
+          </div>
+          <div class="mt-4 mx-4" v-if="this.myLateTimeRequest.length > 0">
+              <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                <div class="w-full overflow-x-auto">
+                  <table class="w-full">
+                    <thead>
+                      <tr class="
+                            text-xs
+                            font-semibold
+                            tracking-wide
+                            text-center text-gray-500
+                            uppercase
+                            border-b
+                            dark:border-gray-700
+                            bg-gray-50
+                            dark:text-gray-400 dark:bg-gray-800
+                          ">
+                        <th class="px-4 py-3 w-1">Number</th>
+                        <th class="px-4 py-3">Note</th>
+                        <th class="px-4 py-3">Day Late</th>
+                        <th class="px-4 py-3">Time Late (hours)</th>
+                        <th class="px-4 py-3">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="
+                          bg-white
+                          divide-y
+                          dark:divide-gray-700 dark:bg-gray-800
+                        ">
+                      <tr v-for="TLrequest in myLateTimeRequest" :key="TLrequest.id" class="
+                            bg-gray-50
+                            dark:bg-gray-800
+                            hover:bg-gray-100
+                            dark:hover:bg-gray-900
+                            text-gray-700
+                            dark:text-gray-400
+                          ">
+                        <td class="px-4 text-center py-4">
+                            {{ TLrequest.id }}
+                        </td>
+                        <td class="px-4 py-3 text-center text-sm">{{ TLrequest.note }}</td>
+                        <td class="px-4 py-3   text-sm text-center">
+                          {{ TLrequest.time_start | formatDays}}
+                        </td>
+                        <td class="px-4 py-3 text-sm text-center">
+                          {{ TLrequest.timeIn | formatHour }} 
+                        </td>
+                        <td class="px-4 py-3 text-center text-sm">
+                          <span
+                            class="px-2 py-1 text-center font-semibold leading-tight text-yellow-50 bg-orange-600 rounded-full dark:bg-orange-600 dark:text-green-50"
+                            v-if="TLrequest.status === 'PENDING'"
+                          >
+                            {{ TLrequest.status }}
+                          </span>
+                          <span
+                            class="px-2 py-1 text-center font-semibold leading-tight text-green-50 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
+                            v-else-if="TLrequest.status === 'APPROVED'"
+                          >
+                            {{ TLrequest.status }}
+                          </span>
+                          <span
+                            class="px-2 py-1 text-center font-semibold leading-tight text-white bg-red-600 rounded-full dark:bg-red-600 dark:text-green-100"
+                            v-else
+                          >
+                            {{ TLrequest.status }}
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div v-else class="italic text-center text-gray-50">
+              No Request Created!
+            </div>
+          <!-- ./Late For Work -->
+          <!-- Absent -->
+          <div>
+            <p
+              class="arrow-right my-6 mx-3 w-2/12 px-12 py-2 text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800 font-bold">
+              Absent
+            </p>
+          </div>
+          <div class="mt-4 mx-4" v-if="this.myAbsentRequest.length > 0">
+              <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                <div class="w-full overflow-x-auto">
+                  <table class="w-full">
+                    <thead>
+                      <tr class="
+                            text-xs
+                            font-semibold
+                            tracking-wide
+                            text-center text-gray-500
+                            uppercase
+                            border-b
+                            dark:border-gray-700
+                            bg-gray-50
+                            dark:text-gray-400 dark:bg-gray-800
+                          ">
+                        <th class="px-4 py-3 w-1">Number</th>
+                        <th class="px-4 py-3">Note</th>
+                        <th class="px-4 py-3">Time Start</th>
+                        <th class="px-4 py-3">Time End</th>
+                        <th class="px-4 py-3">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="
+                          bg-white
+                          divide-y
+                          dark:divide-gray-700 dark:bg-gray-800
+                        ">
+                      <tr v-for="Abrequest in myAbsentRequest" :key="Abrequest.id" class="
+                            bg-gray-50
+                            dark:bg-gray-800
+                            hover:bg-gray-100
+                            dark:hover:bg-gray-900
+                            text-gray-700
+                            dark:text-gray-400
+                          ">
+                        <td class="px-4 text-center py-4">
+                            {{ Abrequest.id }}
+                        </td>
+                        <td class="px-4 py-3 text-center text-sm">{{ Abrequest.note }}</td>
+                        <td class="px-4 py-3   text-sm text-center">
+                          {{ Abrequest.time_start | formatDays}}
+                        </td>
+                        <td class="px-4 py-3 text-sm text-center">
+                          {{ Abrequest.time_end | formatDays }} 
+                        </td>
+                        <td class="px-4 py-3 text-center text-sm">
+                          <span
+                            class="px-2 py-1 text-center font-semibold leading-tight text-yellow-50 bg-orange-600 rounded-full dark:bg-orange-600 dark:text-green-50"
+                            v-if="Abrequest.status === 'PENDING'"
+                          >
+                            {{ Abrequest.status }}
+                          </span>
+                          <span
+                            class="px-2 py-1 text-center font-semibold leading-tight text-green-50 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
+                            v-else-if="Abrequest.status === 'APPROVED'"
+                          >
+                            {{ Abrequest.status }}
+                          </span>
+                          <span
+                            class="px-2 py-1 text-center font-semibold leading-tight text-white bg-red-600 rounded-full dark:bg-red-600 dark:text-green-100"
+                            v-else
+                          >
+                            {{ Abrequest.status }}
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div v-else class="italic text-center text-gray-50">
+              No Request Created!
+            </div>
+          <!-- ./Absent -->
         </div>
-        <div class="fixed top-0 w-[100vw] h-[100vh] z-[10] flex items-center background"
-             v-if="this.showModal === true">
-          <div class=" absolute right-2 top-2 text-white text-4xl cursor-pointer"
-               @click="()=>{this.showModal = false}">x
+        <div class="fixed top-0 w-[100vw] h-[100vh] z-[10] flex items-center background" v-if="this.showModal === true">
+          <div class=" absolute right-2 top-2 text-white text-4xl cursor-pointer" @click="() => { this.showModal = false }">
+            x
           </div>
           <div class="w-1/2 h-2/3 mx-auto flex items-center justify-center bg-white  opacity-100 z-[1000]">
             <form @submit.prevent="takeOff()">
@@ -171,10 +403,10 @@
                   <div>
                     <label for="name" class="text-lx font-serif">take off:</label>
                     <input type="text" placeholder="take off" id="name" v-model="contentTakeOff"
-                           class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md"/>
+                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
                   </div>
                   <button
-                      class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
+                    class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
                     SUBMIT
                   </button>
                 </div>
@@ -184,9 +416,9 @@
         </div>
 
         <div class="fixed top-0 w-[100vw] h-[100vh] z-[10] flex items-center background"
-             v-if="this.showModalLateForWork === true">
+          v-if="this.showModalLateForWork === true">
           <div class=" absolute right-2 top-2 text-white text-4xl cursor-pointer"
-               @click="()=>{this.showModalLateForWork = false}">x
+            @click="() => { this.showModalLateForWork = false }">x
           </div>
           <div class="w-1/2 h-2/3 mx-auto flex items-center justify-center bg-white  opacity-100 z-[1000]">
             <form @submit.prevent="lateForWork()">
@@ -196,15 +428,15 @@
                   <div>
                     <label for="number" class="text-lx font-serif">minutes late:</label>
                     <input type="number" placeholder="minutes late" id="number" v-model="dateLateForWork"
-                           class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md"/>
+                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
                   </div>
                   <div>
                     <label for="name" class="text-lx font-serif">take off:</label>
                     <input type="text" placeholder="take off" id="name" v-model="contentTakeOff"
-                           class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md"/>
+                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
                   </div>
                   <button
-                      class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
+                    class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
                     SUBMIT
                   </button>
                 </div>
@@ -214,9 +446,9 @@
         </div>
 
         <div class="fixed top-0 w-[100vw] h-[100vh] z-[10] flex items-center background"
-             v-if="this.showModalOT === true">
+          v-if="this.showModalOT === true">
           <div class=" absolute right-2 top-2 text-white text-4xl cursor-pointer"
-               @click="()=>{this.showModalOT = false}">x
+            @click="() => { this.showModalOT = false }">x
           </div>
           <div class="w-1/2 h-auto mx-auto flex items-center justify-center bg-white  opacity-100 z-[1000]">
             <form @submit.prevent="handleOT()">
@@ -229,15 +461,15 @@
                   <div>
                     <label for="ot" class="text-lx font-serif">Thời gian làm việc (phút) :</label>
                     <input type="number" placeholder="minutes late" id="ot" v-model="timeOT"
-                           class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md"/>
+                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
                   </div>
                   <div>
                     <label for="noteOT" class="text-lx font-serif">Note :</label>
                     <input type="text" placeholder="minutes late" id="noteOT" v-model="noteOverTime"
-                           class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md"/>
+                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
                   </div>
                   <button
-                      class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
+                    class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
                     SUBMIT
                   </button>
                 </div>
@@ -253,11 +485,15 @@
 <script>
 import Calendar from 'v-calendar/lib/components/calendar.umd'
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
-import {staffService} from "@/service/staffService"
-import {authService} from "@/service/authService"
-import {UserService} from "@/service/UserService";
+import RequestPoint from '../components/requestPoint.vue'
+import { staffService } from "@/service/staffService"
+import { authService } from "@/service/authService"
+import { UserService } from "@/service/UserService";
 import CompoStaffPage from "@/components/CompoStaffPage";
-import {timeKeepingService} from "@/service/timeKeepingService";
+import { timeKeepingService } from "@/service/timeKeepingService";
+import { lateTimeService } from '@/service/lateTimeService';
+import { overTimeService } from '@/service/overTimeService';
+import { absentService } from '@/service/absentService';
 import Vue from 'vue'
 import CxltToastr from 'cxlt-vue2-toastr'
 Vue.use(CxltToastr)
@@ -265,7 +501,7 @@ import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 
 export default {
   name: "Staff",
-  components: {CompoStaffPage},
+  components: { CompoStaffPage, RequestPoint },
   data() {
     return {
       date: "",
@@ -275,12 +511,15 @@ export default {
       contentTakeOff: "",
       dataUser: [],
       currentUser: {},
-      myRequest: {},
+      myRequest: [],
+      myOTRequest: [],
+      myLateTimeRequest: [],
+      myAbsentRequest: [],
       attributes: [],
-      showModalOT:false,
-      dateOT:"",
-      timeOT:"",
-      noteOverTime:"",
+      showModalOT: false,
+      dateOT: "",
+      timeOT: "",
+      noteOverTime: "",
     }
   },
   methods: {
@@ -291,12 +530,12 @@ export default {
     async getMyRequest() {
       const response = await timeKeepingService.getMyRequest();
       this.myRequest = response.data.data.content;
-      const statusColor={
+      const statusColor = {
         "APPROVED": 'green',
         "PENDING": 'orange',
         "REJECTED": 'red'
       }
-      this.attributes = (this.myRequest.map(req=> {
+      this.attributes = (this.myRequest.map(req => {
         return {
           highlight: {
             color: statusColor[req.status],
@@ -309,12 +548,12 @@ export default {
     async Timekeeping() {
       if (this.date === "") {
         this.$toast.error({
-          title:'Please select a date',
-          message:'Please select a date',
+          title: 'Please select a date',
+          message: 'Please select a date',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
         return;
       }
@@ -325,22 +564,22 @@ export default {
           timeIn: Date.parse(this.date.start)
         })
         this.$toast.success({
-          title:'request sent successfully',
-          message:'request sent successfully',
+          title: 'request sent successfully',
+          message: 'request sent successfully',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
       } catch (e) {
         console.log(e)
         this.$toast.error({
-          title:'Submit request failed',
-          message:'Submit request failed',
+          title: 'Submit request failed',
+          message: 'Submit request failed',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
       }
     },
@@ -351,49 +590,49 @@ export default {
     showTakeOff() {
       if (this.date == "") {
         this.$toast.error({
-          title:'Please select a date',
-          message:'Please select a date',
+          title: 'Please select a date',
+          message: 'Please select a date',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
         return;
       }
       this.showModal = true;
     },
-    showOT(){
+    showOT() {
       this.showModalOT = true;
     },
-    async handleOT(){
+    async handleOT() {
       if (this.dateOT === "") {
         this.$toast.error({
-          title:'Please select a date',
-          message:'Please select a date',
+          title: 'Please select a date',
+          message: 'Please select a date',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
         return;
-      }else if (this.timeOT == ""){
+      } else if (this.timeOT == "") {
         this.$toast.error({
-          title:'Enter working time',
-          message:'Enter working time',
+          title: 'Enter working time',
+          message: 'Enter working time',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
         return;
-      }else if (this.noteOverTime == ""){
+      } else if (this.noteOverTime == "") {
         this.$toast.error({
-          title:'Note Over Time',
-          message:'Note Over Time Not Be Empty',
+          title: 'Note Over Time',
+          message: 'Note Over Time Not Be Empty',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
         return;
       }
@@ -403,40 +642,40 @@ export default {
           note: this.noteOverTime,
           staff_id: this.dataUser.staffId,
           status: "PENDING",
-          time_end: Number(this.timeOT)*60000,
+          time_end: Number(this.timeOT) * 60000,
           time_start: Date.parse(this.dateOT),
         })
         this.$toast.success({
-          title:'request sent successfully',
-          message:'request sent successfully',
+          title: 'request sent successfully',
+          message: 'request sent successfully',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
-        this.timeOT ="";
-        this.dateOT ="";
+        this.timeOT = "";
+        this.dateOT = "";
       } catch (e) {
         console.log(e)
         this.$toast.error({
-          title:'Submit request failed',
-          message:'Submit request failed',
+          title: 'Submit request failed',
+          message: 'Submit request failed',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
       }
     },
     async takeOff() {
       if (this.contentTakeOff === "") {
         this.$toast.error({
-          title:'Not Be Empty',
-          message:'contentTakeOff Not Be Empty',
+          title: 'Not Be Empty',
+          message: 'contentTakeOff Not Be Empty',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
         return;
       }
@@ -452,22 +691,22 @@ export default {
         });
         this.contentTakeOff = ""
         this.$toast.success({
-          title:'request sent successfully',
-          message:'request sent successfully',
+          title: 'request sent successfully',
+          message: 'request sent successfully',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
       } catch (e) {
         console.log(e)
         this.$toast.error({
-          title:'Submit request failed',
-          message:'Submit request failed',
+          title: 'Submit request failed',
+          message: 'Submit request failed',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
       }
     },
@@ -477,22 +716,22 @@ export default {
     async lateForWork() {
       if (this.contentTakeOff === "") {
         this.$toast.error({
-          title:'Not Be Empty',
-          message:'contentTakeOff Not Be Empty',
+          title: 'Not Be Empty',
+          message: 'contentTakeOff Not Be Empty',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
         return;
-      }else if (this.dateLateForWork == ""){
+      } else if (this.dateLateForWork == "") {
         this.$toast.error({
-          title:'Not Be Empty',
-          message:'dateLateForWork Not Be Empty',
+          title: 'Not Be Empty',
+          message: 'dateLateForWork Not Be Empty',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
         return;
       }
@@ -506,30 +745,64 @@ export default {
         this.contentTakeOff = "";
         this.dateLateForWork = "";
         this.$toast.success({
-          title:'request sent successfully',
-          message:'request sent successfully',
+          title: 'request sent successfully',
+          message: 'request sent successfully',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
       } catch (e) {
         console.log(e)
         this.$toast.error({
-          title:'Submit request failed',
-          message:'Submit request failed',
+          title: 'Submit request failed',
+          message: 'Submit request failed',
           position: 'top right',
           showDuration: 4000,
-          hideMethod:'hinge',
-          showMethod:'bounce',
+          hideMethod: 'hinge',
+          showMethod: 'bounce',
         })
       }
+    },
+    async getMyAbsentRequest() {
+      try {
+        const log1 = await absentService.getMyDayOff();
+        this.myAbsentRequest = log1.data.data.content;
+        console.log('myAbsentRequest', this.myAbsentRequest);
+
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async getMyOTRequest() {
+      try {
+        const log2 = await overTimeService.getMyOT();
+        this.myOTRequest = log2.data.data.content;
+        console.log('myOTRequest', this.myOTRequest);
+
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async getMyTimeLateRequest() {
+      try {
+        const log3 = await lateTimeService.getMyTimeLate();
+        this.myLateTimeRequest = log3.data.data.content;
+        console.log('myTLRequest', this.myLateTimeRequest);
+
+      } catch (error) {
+        console.log(error)
+      }
+
     }
   },
   mounted() {
     this.getUser();
     this.getProfileOfCurrentUser();
     this.getMyRequest();
+    this.getMyAbsentRequest();
+    this.getMyOTRequest();
+    this.getMyTimeLateRequest()
   }
 }
 </script>
