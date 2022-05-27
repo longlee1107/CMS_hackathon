@@ -375,6 +375,9 @@ export default {
         this.timeEnd = Date.parse(this.range.end);
         const reply = await overTimeService.getOTByDate(this.timeStart, this.timeEnd);
         this.requestByDate = reply.data.data.content;
+        if(this.requestByDate.length === 0){
+          alert("No Request Found");
+        }
       } catch (error) {
         console.log(error);
       }
