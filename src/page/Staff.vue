@@ -250,7 +250,7 @@
                         </td>
                         <td class="px-4 py-3 text-center text-sm">{{ TLrequest.note }}</td>
                         <td class="px-4 py-3   text-sm text-center">
-                          {{ TLrequest.time_start | formatDays}}
+                          {{ TLrequest.dayLate | formatDays}}
                         </td>
                         <td class="px-4 py-3 text-sm text-center">
                           {{ TLrequest.timeIn | formatMinute }} 
