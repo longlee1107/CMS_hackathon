@@ -284,6 +284,10 @@ import { positionService } from "@/service/positionService";
 import RequestPoint from "@/components/requestPoint.vue";
 import UpdateUserInfomation from "./UpdateUserInfomation.vue";
 import CompoLeaderPage from "@/components/CompoLeaderPage";
+import Vue from 'vue'
+import CxltToastr from 'cxlt-vue2-toastr'
+Vue.use(CxltToastr)
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 export default {
   data() {
     return {
@@ -349,7 +353,14 @@ export default {
       try {
         this.staffId = this.$route.params.id;
         await UserService.deleteUserById(this.staffId);
-        alert("Delete User Success!");
+        this.$toast.success({
+          title: 'Delete success',
+          message: 'Delete User Success!',
+          position: 'top right',
+          showDuration: 2000,
+          hideMethod: 'bounce',
+          showMethod: 'bounce',
+        })
         this.$router.push("/admin");
       } catch (error) {
         console.log("error", error);
@@ -368,7 +379,14 @@ export default {
             .positionId,
         };
         await UserService.updateProfileOfUser(this.staffId, this.updateUser);
-        alert("Update User Success!");
+        this.$toast.success({
+          title: 'Update success',
+          message: 'Update User Success!',
+          position: 'top right',
+          showDuration: 2000,
+          hideMethod: 'bounce',
+          showMethod: 'bounce',
+        })
         this.showModal = false;
         this.getProfileById();
       } catch (error) {

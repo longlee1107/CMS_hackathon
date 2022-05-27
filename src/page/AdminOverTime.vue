@@ -305,6 +305,10 @@
 <script>
 import { overTimeService } from "@/service/overTimeService";
 import CompoAdminPage from "@/components/CompoAdminPage.vue";
+import Vue from 'vue'
+import CxltToastr from 'cxlt-vue2-toastr'
+Vue.use(CxltToastr)
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 
 export default {
   data() {
@@ -376,7 +380,14 @@ export default {
         const reply = await overTimeService.getOTByDate(this.timeStart, this.timeEnd);
         this.requestByDate = reply.data.data.content;
         if(this.requestByDate.length === 0){
-          alert("No Request Found");
+          this.$toast.error({
+            title:'Filter failed',
+            message:'Do not have any request in this day',
+            position: 'top right',
+            showDuration: 2000,
+            hideMethod:'bounce',
+            showMethod:'bounce',
+          })
         }
       } catch (error) {
         console.log(error);

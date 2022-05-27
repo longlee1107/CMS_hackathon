@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Header -->
-    <CompoStaffPage />
+    <CompoStaffPage/>
     <!-- ./Sidebar -->
     <div x-data="setup()">
       <div class="
@@ -83,33 +83,11 @@
                             dark:text-gray-400
                           ">
                         <td class="px-4 py-3">
-                          <p class="text-center">
                             {{ request.id }}
-                          </p>
                         </td>
                         <td class="px-4 py-3 ">
-                          <div class="flex items-center  text-sm">
-                            <div class="
-                                  relative
-                                  hidden
-                                  w-44
-                                  h-8
-                                  mr-3
-                                  rounded-full
-                                  md:block
-                                ">
-                              <div class="
-                                    absolute
-                                    inset-0
-                                    rounded-full
-                                    shadow-inner
-                                  " aria-hidden="true"></div>
-                            </div>
-                            <div>
-                              <p class="font-semibold">
+                          <div class="flex items-center ml-64 text-sm">
                                 {{ request.note }}
-                              </p>
-                            </div>
                           </div>
                         </td>
                         <td class="px-4 py-3 text-sm text-center">
@@ -129,8 +107,8 @@
                               ">
                             {{ request.status }}
                           </span>
-                        </td>
-                      </tr>
+                      </td>
+                    </tr>
                     </tbody>
                   </table>
                 </div>
@@ -167,7 +145,7 @@
                         <th class="px-4 py-3 w-1">Number</th>
                         <th class="px-4 py-3">Note</th>
                         <th class="px-4 py-3">Date</th>
-                        <th class="px-4 py-3">Time OT (hour)</th>
+                        <th class="px-4 py-3">Time OT (min)</th>
                         <th class="px-4 py-3">Status</th>
                       </tr>
                     </thead>
@@ -192,7 +170,7 @@
                           {{ OTrequest.time_start | formatDate}}
                         </td>
                         <td class="px-4 py-3 text-sm text-center">
-                          {{ OTrequest.time_end | formatHour }} 
+                          {{ OTrequest.time_end | formatMinute }} 
                         </td>
                         <td class="px-4 py-3 text-center text-sm">
                           <span
@@ -392,18 +370,20 @@
           <!-- ./Absent -->
         </div>
         <div class="fixed top-0 w-[100vw] h-[100vh] z-[10] flex items-center background" v-if="this.showModal === true">
-          <div class=" absolute right-2 top-2 text-white text-4xl cursor-pointer" @click="() => { this.showModal = false }">
+          
+          <div class="w-1/2 h-2/3 mx-auto flex items-center justify-center bg-white  opacity-100 z-[1000]">
+          
+            <form @submit.prevent="takeOff()">
+              <div class=" absolute right-6 top-2 text-white text-4xl cursor-pointer" @click="() => { this.showModal = false }">
             x
           </div>
-          <div class="w-1/2 h-2/3 mx-auto flex items-center justify-center bg-white  opacity-100 z-[1000]">
-            <form @submit.prevent="takeOff()">
               <div class=" bg-white rounded-md px-6 py-10 max-w-2xl mx-auto ">
                 <h1 class="text-center text-2xl font-bold text-gray-500 mb-10">Bảng lý do xin nghỉ</h1>
                 <div class="space-y-4">
                   <div>
-                    <label for="name" class="text-lx font-serif">take off:</label>
+                    <label for="name" class="text-lg text-black font-serif">Lí do xin nghỉ:</label>
                     <input type="text" placeholder="take off" id="name" v-model="contentTakeOff"
-                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
+                      class="ml-2 outline-none py-1 px-2 text-black text-md border-2 rounded-md" />
                   </div>
                   <button
                     class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
@@ -417,7 +397,7 @@
 
         <div class="fixed top-0 w-[100vw] h-[100vh] z-[10] flex items-center background"
           v-if="this.showModalLateForWork === true">
-          <div class=" absolute right-2 top-2 text-white text-4xl cursor-pointer"
+          <div class=" absolute right-6 top-2 text-white text-4xl cursor-pointer"
             @click="() => { this.showModalLateForWork = false }">x
           </div>
           <div class="w-1/2 h-2/3 mx-auto flex items-center justify-center bg-white  opacity-100 z-[1000]">
@@ -447,7 +427,7 @@
 
         <div class="fixed top-0 w-[100vw] h-[100vh] z-[10] flex items-center background"
           v-if="this.showModalOT === true">
-          <div class=" absolute right-2 top-2 text-white text-4xl cursor-pointer"
+          <div class=" absolute right-6 top-2 text-white text-4xl cursor-pointer"
             @click="() => { this.showModalOT = false }">x
           </div>
           <div class="w-1/2 h-auto mx-auto flex items-center justify-center bg-white  opacity-100 z-[1000]">
@@ -459,14 +439,14 @@
                 </div>
                 <div class="space-y-4 mt-4">
                   <div>
-                    <label for="ot" class="text-lx font-serif">Thời gian làm việc (phút) :</label>
-                    <input type="number" placeholder="minutes late" id="ot" v-model="timeOT"
-                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
+                    <label for="ot" class="text-lg text-black font-serif">Thời gian làm việc (phút) :</label>
+                    <input type="number" placeholder="OT Time" id="ot" v-model="timeOT"
+                      class="ml-2 outline-none py-1 px-2 text-md text-black border-2 rounded-md" />
                   </div>
                   <div>
-                    <label for="noteOT" class="text-lx font-serif">Note :</label>
-                    <input type="text" placeholder="minutes late" id="noteOT" v-model="noteOverTime"
-                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
+                    <label for="noteOT" class="text-lg text-black font-serif">Note :</label>
+                    <input type="text" placeholder="note" id="noteOT" v-model="noteOverTime"
+                      class="ml-2 outline-none py-1 px-2 text-md text-black border-2 rounded-md" />
                   </div>
                   <button
                     class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
@@ -548,11 +528,11 @@ export default {
     async Timekeeping() {
       if (this.date === "") {
         this.$toast.error({
-          title: 'Please select a date',
+          title: 'Date',
           message: 'Please select a date',
           position: 'top right',
-          showDuration: 4000,
-          hideMethod: 'hinge',
+          showDuration: 2000,
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
         return;
@@ -560,25 +540,26 @@ export default {
       try {
         const data = await staffService.postStaff({
           note: "chấm công",
-          staff: this.dataUser.staffId,
-          timeIn: Date.parse(this.date.start)
-        })
+          staff: 1,
+          timeIn: Date.parse(this.date.start),
+        });
         this.$toast.success({
-          title: 'request sent successfully',
-          message: 'request sent successfully',
+          title: 'Request success',
+          message: 'Request sent successfully',
           position: 'top right',
-          showDuration: 4000,
-          hideMethod: 'hinge',
+          showDuration: 2000,
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
+        this.getMyRequest();
       } catch (e) {
-        console.log(e)
+        console.log(e);
         this.$toast.error({
-          title: 'Submit request failed',
+          title: 'Request error',
           message: 'Submit request failed',
           position: 'top right',
-          showDuration: 4000,
-          hideMethod: 'hinge',
+          showDuration: 2000,
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
       }
@@ -588,13 +569,13 @@ export default {
       this.dataUser = res.data.data;
     },
     showTakeOff() {
-      if (this.date == "") {
+      if (this.date === "") {
         this.$toast.error({
-          title: 'Please select a date',
+          title: 'Date',
           message: 'Please select a date',
           position: 'top right',
-          showDuration: 4000,
-          hideMethod: 'hinge',
+          showDuration: 2000,
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
         return;
@@ -689,23 +670,23 @@ export default {
           time_end: Date.parse(this.date.end),
           time_start: Date.parse(this.date.start),
         });
-        this.contentTakeOff = ""
+        this.contentTakeOff = "";
         this.$toast.success({
-          title: 'request sent successfully',
-          message: 'request sent successfully',
+          title: 'Request success',
+          message: 'Request sent successfully',
           position: 'top right',
-          showDuration: 4000,
-          hideMethod: 'hinge',
+          showDuration: 2000,
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
       } catch (e) {
-        console.log(e)
+        console.log(e);
         this.$toast.error({
-          title: 'Submit request failed',
+          title: 'Request error',
           message: 'Submit request failed',
           position: 'top right',
-          showDuration: 4000,
-          hideMethod: 'hinge',
+          showDuration: 2000,
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
       }
@@ -745,21 +726,21 @@ export default {
         this.contentTakeOff = "";
         this.dateLateForWork = "";
         this.$toast.success({
-          title: 'request sent successfully',
-          message: 'request sent successfully',
+          title: 'Request success',
+          message: 'Request sent successfully',
           position: 'top right',
-          showDuration: 4000,
-          hideMethod: 'hinge',
+          showDuration: 2000,
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
       } catch (e) {
-        console.log(e)
+        console.log(e);
         this.$toast.error({
-          title: 'Submit request failed',
+          title: 'Request error',
           message: 'Submit request failed',
           position: 'top right',
-          showDuration: 4000,
-          hideMethod: 'hinge',
+          showDuration: 2000,
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
       }
@@ -768,8 +749,6 @@ export default {
       try {
         const log1 = await absentService.getMyDayOff();
         this.myAbsentRequest = log1.data.data.content;
-        console.log('myAbsentRequest', this.myAbsentRequest);
-
       } catch (error) {
         console.log(error)
       }
@@ -778,8 +757,6 @@ export default {
       try {
         const log2 = await overTimeService.getMyOT();
         this.myOTRequest = log2.data.data.content;
-        console.log('myOTRequest', this.myOTRequest);
-
       } catch (error) {
         console.log(error)
       }
@@ -789,11 +766,9 @@ export default {
         const log3 = await lateTimeService.getMyTimeLate();
         this.myLateTimeRequest = log3.data.data.content;
         console.log('myTLRequest', this.myLateTimeRequest);
-
       } catch (error) {
         console.log(error)
       }
-
     }
   },
   mounted() {

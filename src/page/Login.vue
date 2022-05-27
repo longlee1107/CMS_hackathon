@@ -22,17 +22,6 @@
               <p class="error font-semibold text-red-600">{{ err.password }}</p>
             </div>
 
-            <div class="mt-7 flex">
-              <label for="remember_me" class="inline-flex items-center w-full cursor-pointer">
-                <input id="remember_me" type="checkbox"
-                       class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                       name="remember">
-                <span class="ml-2 text-sm text-gray-600">
-                  Remember me
-                </span>
-              </label>
-            </div>
-
             <div class="mt-7">
               <button
                   type="submit"
@@ -112,7 +101,7 @@ export default {
           message:'Login Success',
           position: 'top right',
           showDuration: 2000,
-          hideMethod:'hinge',
+          hideMethod:'bounce',
           showMethod:'bounce',
         })
         if (data.authorities[0] === "ADMINISTRATOR") {
@@ -129,7 +118,7 @@ export default {
           message:'Login Failed',
           position: 'top right',
           showDuration: 2000,
-          hideMethod:'hinge',
+          hideMethod:'bounce',
           showMethod:'bounce',
         })
       }
