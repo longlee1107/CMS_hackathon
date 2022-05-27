@@ -86,7 +86,7 @@
                           <p class="text-center">{{ request.id }}</p>
                         </td>
                         <td class="px-4 py-3">
-                          <div class="flex items-center text-center text-sm">
+                          <div class="flex ml-12 items-center text-center text-sm">
                             <div
                               class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                             >
@@ -110,7 +110,7 @@
                           </div>
                         </td>
                         <td class="px-4 py-3 text-center text-sm">{{ request.note }}</td>
-                        <td class="px-4 py-3 text-xs">
+                        <td class="px-4 py-3 text-center text-sm">
                           <span
                             class="px-2 py-1 text-center font-semibold leading-tight text-yellow-50 bg-orange-600 rounded-full dark:bg-orange-600 dark:text-green-50"
                             v-if="request.status === 'PENDING'"
@@ -181,13 +181,14 @@
                   <table class="w-full">
                     <thead>
                       <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                        class="text-xs text-center font-semibold tracking-wide text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                       >
                         <th class="px-4 py-3 w-1">Number</th>
                         <th class="px-4 py-3">Name</th>
                         <th class="px-4 py-3">Note</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3">Date</th>
+                        <th class="px-4 py-3">Time OT (hour)</th>
                         <th class="px-4 py-3">Request</th>
                       </tr>
                     </thead>
@@ -197,13 +198,13 @@
                       <tr
                         v-for="requestlog in requestByDate"
                         :key="requestlog.id"
-                        class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
+                        class=" bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                       >
                         <td class="px-4 py-3">
                           <p class="text-center">{{ requestlog.id }}</p>
                         </td>
                         <td class="px-4 py-3">
-                          <div class="flex items-center text-sm">
+                          <div class="flex ml-12 items-center text-center text-sm">
                             <div
                               class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                             >
@@ -219,41 +220,42 @@
                               ></div>
                             </div>
                             <div>
-                              <p class="font-semibold">{{ requestlog.staff }}</p>
+                              <p class="text-left font-semibold">{{ requestlog.staff }}</p>
                               <p class="text-xs text-gray-600 dark:text-gray-400">
                                 10x Developer
                               </p>
                             </div>
                           </div>
                         </td>
-                        <td class="px-4 py-3 text-sm">{{ requestlog.note }}</td>
-                        <td class="px-4 py-3 text-xs">
+                        <td class="px-4 py-3 text-center text-sm">{{ requestlog.note }}</td>
+                        <td class="px-4 py-3 text-center text-sm">
                           <span
-                            class="px-2 py-1 font-semibold leading-tight text-yellow-50 bg-orange-600 rounded-full dark:bg-orange-600 dark:text-green-50"
+                            class="px-2 py-1 text-center font-semibold leading-tight text-yellow-50 bg-orange-600 rounded-full dark:bg-orange-600 dark:text-green-50"
                             v-if="requestlog.status === 'PENDING'"
                           >
                             {{ requestlog.status }}
                           </span>
                           <span
-                            class="px-2 py-1 font-semibold leading-tight text-green-50 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
+                            class="px-2 py-1 text-center font-semibold leading-tight text-green-50 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
                             v-else-if="requestlog.status === 'APPROVED'"
                           >
                             {{ requestlog.status }}
                           </span>
                           <span
-                            class="px-2 py-1 font-semibold leading-tight text-white bg-red-600 rounded-full dark:bg-red-600 dark:text-green-100"
+                            class="px-2 py-1 text-center font-semibold leading-tight text-white bg-red-600 rounded-full dark:bg-red-600 dark:text-green-100"
                             v-else
                           >
                             {{ requestlog.status }}
                           </span>
                         </td>
-                        <td class="px-4 py-3 text-sm">
-                          {{ requestlog.timeIn | formatDate }}
+                        <td class="px-4 py-3   text-sm text-center">
+                          {{ requestlog.time_start | formatDate}}
                         </td>
-                        <td
-                          class="px-4 py-3 text-sm"
-                          v-if="requestlog.status === 'PENDING'"
-                        >
+                        <td class="px-4 py-3 text-sm text-center">
+                          {{ requestlog.time_end | formatHour }} 
+                        </td>
+
+                        <td class="px-4 text-center py-3 text-sm" v-if="requestlog.status === 'PENDING'">
                           <input
                             type="checkbox"
                             name=""
@@ -262,7 +264,7 @@
                             :value="requestlog.id"
                           />
                         </td>
-                        <td class="px-4 py-3 text-sm" v-else>
+                        <td class="px-4 py-3 text-center text-sm" v-else>
                           <span class="text-green-500 italic">Checked</span>
                         </td>
                       </tr>

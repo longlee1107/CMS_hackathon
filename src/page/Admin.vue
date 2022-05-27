@@ -8,6 +8,7 @@
 
           <!-- Statistics Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-4 gap-6">
+            <router-link to="/admin">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -23,6 +24,9 @@
                 <p>Users</p>
               </div>
             </div>
+            </router-link>
+
+            <router-link to="/admin/attendance">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -35,9 +39,12 @@
               </div>
               <div class="text-right">
                 <p class="text-2xl">{{this.timeKeeping.length}}</p>
-                <p>TimeKeeping Requests</p>
+                <p>Attendance Requests</p>
               </div>
             </div>
+            </router-link>
+
+            <router-link to="/admin/overtime">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -53,6 +60,9 @@
                 <p>OT Requests</p>
               </div>
             </div>
+            </router-link>
+            
+            <router-link to="/admin/day-offs">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -68,6 +78,9 @@
                 <p>Absent Requests</p>
               </div>
             </div>
+            </router-link>
+            
+            <router-link to="/admin/timelate">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -83,6 +96,7 @@
                 <p>Late Time Requests</p>
               </div>
             </div>
+            </router-link>
           </div>
           <!-- ./Statistics Cards -->
 

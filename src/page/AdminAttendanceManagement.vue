@@ -64,7 +64,7 @@
                   <table class="w-full">
                     <thead>
                       <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                        class="text-xs font-semibold tracking-wide text-center text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                       >
                         <th class="px-4 py-3 w-1">Number</th>
                         <th class="px-4 py-3">Name</th>
@@ -80,13 +80,13 @@
                       <tr
                         v-for="request in requests"
                         :key="request.id"
-                        class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
+                        class="bg-gray-50 text-center dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                       >
                         <td class="px-4 py-3">
                           <p class="text-center">{{ request.id }}</p>
                         </td>
                         <td class="px-4 py-3">
-                          <div class="flex items-center text-sm">
+                          <div class="flex ml-16 items-center text-sm">
                             <div
                               class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                             >
@@ -178,7 +178,7 @@
                   <table class="w-full">
                     <thead>
                       <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                        class="text-xs font-semibold tracking-wide text-center text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                       >
                         <th class="px-4 py-3 w-1">Number</th>
                         <th class="px-4 py-3">Name</th>
@@ -194,13 +194,13 @@
                       <tr
                         v-for="requestlog in requestByDate"
                         :key="requestlog.id"
-                        class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
+                        class="bg-gray-50 text-center dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                       >
                         <td class="px-4 py-3">
                           <p class="text-center">{{ requestlog.id }}</p>
                         </td>
                         <td class="px-4 py-3">
-                          <div class="flex items-center text-sm">
+                          <div class="flex items-center ml-8 text-sm">
                             <div
                               class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                             >
