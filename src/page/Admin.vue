@@ -20,7 +20,7 @@
                 </svg>
               </div>
               <div class="text-right">
-                <p class="text-2xl">{{ this.users.length }}</p>
+                <p class="text-2xl">{{ this.userList.length }}</p>
                 <p>Users</p>
               </div>
             </div>
@@ -263,6 +263,7 @@ export default {
     return {
       showModal: false,
       users: [],
+      userList:[],
       staffName: "",
       position: [],
       email: "",
@@ -340,7 +341,7 @@ export default {
     async showUser() {
       try {
         const response = await UserService.getAllUser();
-        this.users = response.data.data.content;
+        this.userList = response.data.data.content;
       } catch (error) {
         console.log(error);
       }
