@@ -24,10 +24,15 @@
           <!--Calendar-->
           <div class="flex justify-start mx-8">
             <button
-              class="px-3 py-1 mr-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+              class="px-3 py-1 mr-1 font-semibold leading-tight text-green-100 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
               @click="getRequestByDate()"
             >
               Filter
+            </button>
+            <button class="px-2  pb-1 font-semibold leading-tight text-red-100 bg-red-700 rounded-full dark:bg-red-700 dark:text-red-100"
+            @click="resetRequest()"
+            >
+              <a-icon type="undo" />
             </button>
           </div>
           <!-- ./Statistics Cards -->
@@ -58,7 +63,7 @@
                   <table class="w-full">
                     <thead>
                       <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                        class="text-xs font-semibold tracking-wide text-center text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                       >
                         <th class="px-4 py-3 w-1">Number</th>
                         <th class="px-4 py-3">Name</th>
@@ -74,13 +79,13 @@
                       <tr
                         v-for="request in requests"
                         :key="request.id"
-                        class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
+                        class="bg-gray-50 text-center dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                       >
                         <td class="px-4 py-3">
                           <p class="text-center">{{ request.id }}</p>
                         </td>
                         <td class="px-4 py-3">
-                          <div class="flex items-center text-sm">
+                          <div class="flex ml-16 items-center text-sm">
                             <div
                               class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                             >
@@ -153,89 +158,13 @@
                   <!-- Pagination -->
                   <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
                     <nav aria-label="Table navigation">
-                      <ul class="inline-flex items-center">
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                            aria-label="Previous"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              class="w-4 h-4 fill-current"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"
-                                fill-rule="evenodd"
-                              ></path>
-                            </svg>
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            1
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            2
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            3
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            4
-                          </button>
-                        </li>
-                        <li>
-                          <span class="px-3 py-1">...</span>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            8
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            9
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                            aria-label="Next"
-                          >
-                            <svg
-                              class="w-4 h-4 fill-current"
-                              aria-hidden="true"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"
-                                fill-rule="evenodd"
-                              ></path>
-                            </svg>
-                          </button>
-                        </li>
-                      </ul>
+                      <a-pagination
+                        @change="showRequest()"
+                        v-model="current"
+                        :default-current="1"
+                        :total="this.totalPage"
+                        :defaultPageSize="1"
+                      />
                     </nav>
                   </span>
                 </div>
@@ -247,7 +176,7 @@
                   <table class="w-full">
                     <thead>
                       <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                        class="text-xs font-semibold tracking-wide text-center text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                       >
                         <th class="px-4 py-3 w-1">Number</th>
                         <th class="px-4 py-3">Name</th>
@@ -263,13 +192,13 @@
                       <tr
                         v-for="requestlog in requestByDate"
                         :key="requestlog.id"
-                        class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
+                        class="bg-gray-50 text-center dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                       >
                         <td class="px-4 py-3">
                           <p class="text-center">{{ requestlog.id }}</p>
                         </td>
                         <td class="px-4 py-3">
-                          <div class="flex items-center text-sm">
+                          <div class="flex ml-16 items-center text-sm">
                             <div
                               class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                             >
@@ -345,89 +274,13 @@
                   <!-- Pagination -->
                   <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
                     <nav aria-label="Table navigation">
-                      <ul class="inline-flex items-center">
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                            aria-label="Previous"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              class="w-4 h-4 fill-current"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"
-                                fill-rule="evenodd"
-                              ></path>
-                            </svg>
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            1
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            2
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            3
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            4
-                          </button>
-                        </li>
-                        <li>
-                          <span class="px-3 py-1">...</span>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            8
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                          >
-                            9
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                            aria-label="Next"
-                          >
-                            <svg
-                              class="w-4 h-4 fill-current"
-                              aria-hidden="true"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"
-                                fill-rule="evenodd"
-                              ></path>
-                            </svg>
-                          </button>
-                        </li>
-                      </ul>
+                      <a-pagination
+                        @change="showRequest()"
+                        v-model="current"
+                        :default-current="1"
+                        :total="this.totalPage"
+                        :defaultPageSize="1"
+                      />
                     </nav>
                   </span>
                 </div>
@@ -520,10 +373,17 @@ export default {
           this.timeEnd
         );
         this.requestByDate = reply.data.data.content;
+        if(this.requestByDate.length === 0){
+          alert("No Request Found");
+        }
       } catch (error) {
         console.log(error);
       }
     },
+    async resetRequest(){
+      this.requestByDate=[];
+      this.showRequest();
+    }
   },
   components: { CompoAdminPage },
 };

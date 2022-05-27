@@ -16,9 +16,14 @@ function paging(payload){
     return Axios.get(`/staffs?page=${payload}&size=10`);
 }
 
+function overTime(payload){
+    return Axios.post(`/ots`,payload);
+}
+
 export const authService = {
     doLogin,
     takeOff,
     lateForWork,
-    paging
+    paging,
+    overTime
 };

@@ -20,11 +20,22 @@
               is-range
               v-model="range"
               :model-config="modelConfig"
-              @click="checkDate()"
             />
           </div>
           <!--Calendar-->
-
+            <div class="flex justify-start mx-8">
+            <button
+              class="px-3 py-1 mr-1 font-semibold leading-tight text-green-100 bg-green-700 rounded-full dark:bg-green-700 dark:text-green-100"
+              @click="getRequestByDate()"
+            >
+              Filter
+            </button>
+            <button class="px-2  pb-1 font-semibold leading-tight text-red-100 bg-red-700 rounded-full dark:bg-red-700 dark:text-red-100"
+            @click="resetRequest()"
+            >
+              <a-icon type="undo" />
+            </button>
+          </div>
           <!-- ./Statistics Cards -->
 
           <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4"></div>
@@ -243,6 +254,7 @@
 <script>
 import { timeKeepingService } from "@/service/timeKeepingService";
 import CompoLeaderPage from "@/components/CompoLeaderPage";
+import { absentService } from "@/service/absentService";
 
 export default {
   components: { CompoLeaderPage },
@@ -312,7 +324,23 @@ export default {
         console.log(error);
       }
     },
-    async checkDate() {},
+   async getRequestByDate() {
+      try {
+        this.timeStart = Date.parse(this.range.start);
+        this.timeEnd = Date.parse(this.range.end);
+        const reply = await timeKeepingService.getRequestByDate(
+          this.timeStart,
+          this.timeEnd
+        );
+        this.requestByDate = reply.data.data.content;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async resetRequest(){
+      this.requestByDate=[];
+      this.showRequest();
+    }
   },
 };
 </script>

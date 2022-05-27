@@ -8,6 +8,7 @@
 
           <!-- Statistics Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-4 gap-6">
+            <router-link to="/admin">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -23,6 +24,9 @@
                 <p>Users</p>
               </div>
             </div>
+            </router-link>
+
+            <router-link to="/admin/attendance">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -35,9 +39,12 @@
               </div>
               <div class="text-right">
                 <p class="text-2xl">{{this.timeKeeping.length}}</p>
-                <p>TimeKeeping Requests</p>
+                <p>Attendance Requests</p>
               </div>
             </div>
+            </router-link>
+
+            <router-link to="/admin/overtime">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -53,6 +60,9 @@
                 <p>OT Requests</p>
               </div>
             </div>
+            </router-link>
+            
+            <router-link to="/admin/day-offs">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -68,6 +78,9 @@
                 <p>Absent Requests</p>
               </div>
             </div>
+            </router-link>
+            
+            <router-link to="/admin/timelate">
             <div
                 class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
               <div
@@ -83,6 +96,7 @@
                 <p>Late Time Requests</p>
               </div>
             </div>
+            </router-link>
           </div>
           <!-- ./Statistics Cards -->
 
@@ -163,11 +177,11 @@
           <div class="mt-4 mx-4" v-if="this.users.length > 0">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
-                <table class="w-full">
+                <table class="w-full text-center" >
                   <thead>
-                  <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                  <tr class="text-xs font-semibold tracking-wide text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th class="px-4 py-3 w-1 ">Number</th>
-                    <th class="px-4 py-3">Name</th>
+                    <th class="px-4 py-3 text-center">Name</th>
                     <th class="px-4 py-3">Roll</th>
                     <th class="px-4 py-3">Status</th>
                     <th class="px-4 py-3">Profile</th>
@@ -180,7 +194,7 @@
                       <p class="text-center">{{ user.staffId }}</p>
                     </td>
                     <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
+                      <div class="flex items-center justify-center text-sm">
                         <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                           <img class="object-cover w-full h-full rounded-full"
                                src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
@@ -188,7 +202,7 @@
                           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                         </div>
                         <div>
-                          <p class="font-semibold">{{ user.staffName }}</p>
+                          <p class="font-semibold ">{{ user.staffName }}</p>
                           <p class="text-xs text-gray-600 dark:text-gray-400">10x Developer</p>
                         </div>
                       </div>
@@ -210,7 +224,7 @@
               </div>
               <div
                   class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                <span class="flex items-center col-span-3"> Showing {{ this.users.length }} of 100 </span>
+                <span class="flex items-center col-span-3"> Showing {{ this.users.length }} of {{ this.users.length }} </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
                 <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
@@ -231,9 +245,9 @@
 
 <script>
 import AddUserModal from "@/components/AddUserModal.vue";
-import {UserService} from "@/service/UserService";
+import { UserService } from "@/service/UserService";
 import CompoAdminPage from "@/components/CompoAdminPage";
-import {positionService} from "@/service/positionService";
+import { positionService } from "@/service/positionService";
 import { overTimeService } from "@/service/overTimeService";
 import { absentService } from "@/service/absentService";
 import { lateTimeService } from "@/service/lateTimeService";
@@ -254,7 +268,7 @@ export default {
       email: "",
       password: "",
       birthday: "",
-      avatar: "",
+      avatar: null,
       manager: 1,
       salary: 0,
       positionList: [],
@@ -269,6 +283,7 @@ export default {
   mounted() {
     this.paginationAdmin();
     this.showPosition();
+    this.showUser();
     this.getOverTimeRequest();
     this.getTimeLateRequest();
     this.getAbsentTimeRequest();
@@ -283,9 +298,17 @@ export default {
   methods: {
     async paginationAdmin(){
       try {
-        const response = await authService.paging(this.current-1);
+        const response = await authService.paging(this.current - 1);
         this.users = response.data.data.content;
         this.totalPage = response.data.data.totalPages;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async showPosition(){
+      try {
+        const reply = await positionService.getPosition();
+        this.positionList = reply.data;
       } catch (error) {
         console.log(error);
       }
@@ -296,30 +319,28 @@ export default {
     closeModalUser() {
       this.showModal = false;
     },
-    async submitAddUser() {
+     async submitAddUser() {
       this.staffName = this.staffName.trim();
       this.email = this.email.trim();
       this.password = this.password.trim();
-
       const user = {
         staffName: this.staffName,
         position: this.position,
         email: this.email,
         password: this.password,
         birthday: this.birthday,
-        manager: this.manager,
+        manager:this.manager,
         avatar: this.avatar,
         salary: this.salary,
       };
-      console.log(this.user);
       await UserService.postNewUser(user);
       this.showUser();
       this.closeModalUser();
     },
-    async showPosition(){
+    async showUser() {
       try {
-        const reply = await positionService.getPosition();
-        this.positionList = reply.data;
+        const response = await UserService.getAllUser();
+        this.users = response.data.data.content;
       } catch (error) {
         console.log(error);
       }
@@ -332,6 +353,7 @@ export default {
         console.log(error);
       }
     },
+    
     async getTimeLateRequest(){
       try {
         const log2 = await lateTimeService.getTimeLate();

@@ -95,8 +95,23 @@
               </p>
             </div>
           </div>
-          <div>
-            <a-progress type="circle" :percent="percent" />
+          <div class="grid grid-cols-2 gap-4 mt-4">
+            <div class="border-2 bg-white rounded-2xl text-center">
+              <h1 class="font-bold uppercase p-3">Number of TimeKeeping</h1>
+              <p class="font-bold text-2xl">{{this.myRequest.length}}</p>
+            </div>
+            <div class="border-2 bg-white rounded-2xl text-center">
+              <h1 class="font-bold uppercase p-3">Number of AbsentTime Requests</h1>
+              <p class="font-bold text-2xl">{{this.myAbsent.length}}</p>
+            </div>
+            <div class="border-2 bg-white rounded-2xl text-center">
+              <h1 class="font-bold uppercase p-3">Number of TimeLate Requests</h1>
+              <p class="font-bold text-2xl">{{this.myTimeLate.length}}</p>
+            </div>
+            <div class="border-2 bg-white rounded-2xl text-center">
+              <h1 class="font-bold uppercase p-3">Number of OT Requests</h1>
+              <p class="font-bold text-2xl">{{this.myOverTime.length}}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -108,6 +123,9 @@
 import { UserService } from "@/service/UserService";
 import { timeKeepingService } from "@/service/timeKeepingService";
 import CompoAdminPage from "@/components/CompoAdminPage.vue";
+import {lateTimeService} from "@/service/lateTimeService";
+import { overTimeService } from "@/service/overTimeService";
+import { absentService } from "@/service/absentService";
 import CompoLeaderPage from "@/components/CompoLeaderPage";
 
 export default {
@@ -115,11 +133,17 @@ export default {
     return {
       currentUser: {},
       myRequest: {},
+      myTimeLate:{},
+      myOverTime:{},
+      myAbsent:{}
     };
   },
   mounted() {
     this.getProfileOfCurrentUser();
     this.getMyRequest();
+    this.getMyAbsent();
+    this.getMyOverTime();
+    this.getMyTimeLate();
   },
   methods: {
     async getProfileOfCurrentUser() {
@@ -130,7 +154,30 @@ export default {
       const response = await timeKeepingService.getMyRequest();
       this.myRequest = response.data.data.content;
     },
-    
+    async getMyTimeLate(){
+      try {
+        const res1 = await lateTimeService.getMyTimeLate();
+        this.myTimeLate = res1.data.data.content;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getMyOverTime(){
+      try {
+        const res2 = await overTimeService.getMyOT();
+        this.myOverTime = res2.data.data.content;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getMyAbsent(){
+      try {
+        const res3 = await absentService.getMyDayOff();
+        this.myAbsent = res3.data.data.content;
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
   components: { CompoAdminPage,CompoLeaderPage},
 };
