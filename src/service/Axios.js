@@ -72,6 +72,7 @@ function del(endpointApiUrl, payLoad = {}) {
     return getInstance().delete(endpointApiUrl, payLoad);
 }
 
+
 export const Axios = {
     axiosInstance,
     getHeaders,

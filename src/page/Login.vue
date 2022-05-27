@@ -12,25 +12,14 @@
 
             <div>
               <input type="text" v-model="user.username" placeholder="Username"
-                     class="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                     class="mt-1 pl-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
               <p class="error font-semibold text-red-600">{{ err.username }} </p>
             </div>
 
             <div class="mt-7">
               <input type="password" v-model="user.password" placeholder="Password"
-                     class="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                     class="mt-1 pl-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
               <p class="error font-semibold text-red-600">{{ err.password }}</p>
-            </div>
-
-            <div class="mt-7 flex">
-              <label for="remember_me" class="inline-flex items-center w-full cursor-pointer">
-                <input id="remember_me" type="checkbox"
-                       class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                       name="remember">
-                <span class="ml-2 text-sm text-gray-600">
-                  Remember me
-                </span>
-              </label>
             </div>
 
             <div class="mt-7">
@@ -51,7 +40,10 @@
 
 <script>
 import {authService} from "../service/authService";
-
+import Vue from 'vue'
+import CxltToastr from 'cxlt-vue2-toastr'
+Vue.use(CxltToastr)
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 export default {
   data() {
     return {
@@ -104,16 +96,31 @@ export default {
         const data = response.data.data;
         console.log(data)
         localStorage.setItem('token', data.token);
-
-        alert('Login Successfully');
+        this.$toast.success({
+          title:'Login Success',
+          message:'Login Success',
+          position: 'top right',
+          showDuration: 2000,
+          hideMethod:'bounce',
+          showMethod:'bounce',
+        })
         if (data.authorities[0] === "ADMINISTRATOR") {
           this.$router.push({name: 'admin'});
-        } else if (data.authorities[0] === "LEADER"){
+        } else if (data.authorities[0] === "LEADER") {
           this.$router.push({name: 'leader'});
+        } else if (data.authorities[0] === "STAFF") {
+          this.$router.push({name: 'staff'});
         }
       } catch (e) {
         console.log(e);
-        alert('Login Failed');
+        this.$toast.error({
+          title:'Login Failed',
+          message:'Login Failed',
+          position: 'top right',
+          showDuration: 2000,
+          hideMethod:'bounce',
+          showMethod:'bounce',
+        })
       }
     },
   },

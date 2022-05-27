@@ -1,17 +1,12 @@
 <template>
   <div>
-    <div v-if="currentUser.position == 'ADMINISTRATOR'">
-      <CompoAdminPage/>
-    </div>
-    <div v-if="currentUser.position == 'LEADER'">
-      <CompoLeaderPage/>
-    </div>
-    <!--Profile Card-->
+    <CompoStaffPage />
+    <!-- Profile Card -->
     <div x-data="setup()">
       <div
         class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-black"
       >
-        <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
+        <div class="h-full w-5/6 mx-auto mt-14 mb-10">
           <div class="md:grid grid-cols-4 grid-rows-2 bg-white gap-2 p-4 rounded-xl">
             <div class="md:col-span-1 h-48 shadow-xl">
               <div class="flex w-full h-full relative">
@@ -122,28 +117,26 @@
 <script>
 import { UserService } from "@/service/UserService";
 import { timeKeepingService } from "@/service/timeKeepingService";
-import CompoAdminPage from "@/components/CompoAdminPage.vue";
+import CompoStaffPage from "@/components/CompoStaffPage.vue";
 import {lateTimeService} from "@/service/lateTimeService";
 import { overTimeService } from "@/service/overTimeService";
 import { absentService } from "@/service/absentService";
-import CompoLeaderPage from "@/components/CompoLeaderPage";
-
 export default {
   data() {
     return {
       currentUser: {},
-      myRequest: {},
-      myTimeLate:{},
-      myOverTime:{},
-      myAbsent:{}
+      myRequest: [],
+      myTimeLate:[],
+      myOverTime:[],
+      myAbsent:[]
     };
   },
   mounted() {
     this.getProfileOfCurrentUser();
     this.getMyRequest();
     this.getMyAbsent();
-    this.getMyOverTime();
     this.getMyTimeLate();
+    this.getMyOverTime();
   },
   methods: {
     async getProfileOfCurrentUser() {
@@ -179,6 +172,6 @@ export default {
       }
     }
   },
-  components: { CompoAdminPage,CompoLeaderPage},
+  components: { CompoStaffPage },
 };
 </script>
