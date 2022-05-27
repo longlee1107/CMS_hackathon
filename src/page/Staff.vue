@@ -26,18 +26,18 @@
           <div>
 
           </div>
-          <div class="flex justify-evenly text-xl ">
+          <div class="md:flex grid grid-cols-1 justify-evenly text-xl ">
             <div>
-              <button class="w-64 h-10 rounded-lg bg-blue-400" @click="Timekeeping()">Chấm công</button>
+              <button class="w-64 h-10 rounded-lg ml-8 mb-4 bg-blue-400" @click="Timekeeping()">Chấm công</button>
             </div>
             <div>
-              <button class="w-64 h-10 rounded-lg bg-blue-400" @click="showLateForWork()">Xin đi muộn</button>
+              <button class="w-64 h-10 rounded-lg ml-8 mb-4 bg-blue-400" @click="showLateForWork()">Xin đi muộn</button>
             </div>
             <div>
-              <button class="w-64 h-10 rounded-lg bg-blue-400" @click="showTakeOff()">Xin nghỉ</button>
+              <button class="w-64 h-10 rounded-lg ml-8 mb-4 bg-blue-400" @click="showTakeOff()">Xin nghỉ</button>
             </div>
             <div>
-              <button class="w-64 h-10 rounded-lg bg-blue-400" @click="showOT()">OT</button>
+              <button class="w-64 h-10 rounded-lg ml-8 bg-blue-400" @click="showOT()">OT</button>
             </div>
 
           </div>
@@ -86,7 +86,7 @@
                             {{ request.id }}
                         </td>
                         <td class="px-4 py-3 ">
-                          <div class="flex items-center ml-64 text-sm">
+                          <div class="flex items-center md:ml-20 lg:ml-64 text-sm">
                                 {{ request.note }}
                           </div>
                         </td>
@@ -122,7 +122,7 @@
           <!-- OT -->
           <div>
             <p
-              class="arrow-right my-6 mx-3 w-2/12 px-12 py-2 text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800 font-bold">
+              class="arrow-right my-6 mx-3 w-1/2 md:w-1/6 px-12 py-2 text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800 font-bold">
               OT
             </p>
           </div>
@@ -205,7 +205,7 @@
           <!-- Late For Work -->
           <div>
             <p
-              class="arrow-right my-6 mx-3 w-2/12 px-12 py-2 text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800 font-bold">
+              class="arrow-right my-6 mx-3  w-3/4 md:w-1/4 px-12 py-2 text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800 font-bold">
               Late Time
             </p>
           </div>
@@ -253,7 +253,7 @@
                           {{ TLrequest.time_start | formatDays}}
                         </td>
                         <td class="px-4 py-3 text-sm text-center">
-                          {{ TLrequest.timeIn | formatHour }} 
+                          {{ TLrequest.timeIn | formatMinute }} 
                         </td>
                         <td class="px-4 py-3 text-center text-sm">
                           <span
@@ -288,7 +288,7 @@
           <!-- Absent -->
           <div>
             <p
-              class="arrow-right my-6 mx-3 w-2/12 px-12 py-2 text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800 font-bold">
+              class="arrow-right my-6 mx-3 w-1/2 md:w-1/4 px-12 py-2 text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800 font-bold">
               Absent
             </p>
           </div>
@@ -406,14 +406,14 @@
                 <h1 class="text-center text-2xl font-bold text-gray-500 mb-10">Bảng lý do xin đi muộn</h1>
                 <div class="space-y-4">
                   <div>
-                    <label for="number" class="text-lx font-serif">minutes late:</label>
+                    <label for="number" class="text-lg text-black font-serif">minutes late:</label>
                     <input type="number" placeholder="minutes late" id="number" v-model="dateLateForWork"
-                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
+                      class="ml-2 outline-none py-1 px-2 text-black text-md border-2 rounded-md" />
                   </div>
                   <div>
-                    <label for="name" class="text-lx font-serif">take off:</label>
+                    <label for="name" class="text-lg text-black font-serif">take off:</label>
                     <input type="text" placeholder="take off" id="name" v-model="contentTakeOff"
-                      class="ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" />
+                      class="ml-2 outline-none py-1 px-2 text-md text-black  border-2 rounded-md" />
                   </div>
                   <button
                     class=" px-6 py-2 mx-auto block rounded-md text-lg font-semibold text-indigo-100 bg-indigo-600  ">
@@ -592,7 +592,7 @@ export default {
           message: 'Please select a date',
           position: 'top right',
           showDuration: 4000,
-          hideMethod: 'hinge',
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
         return;
@@ -602,7 +602,7 @@ export default {
           message: 'Enter working time',
           position: 'top right',
           showDuration: 4000,
-          hideMethod: 'hinge',
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
         return;
@@ -612,7 +612,7 @@ export default {
           message: 'Note Over Time Not Be Empty',
           position: 'top right',
           showDuration: 4000,
-          hideMethod: 'hinge',
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
         return;
@@ -631,7 +631,7 @@ export default {
           message: 'request sent successfully',
           position: 'top right',
           showDuration: 4000,
-          hideMethod: 'hinge',
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
         this.timeOT = "";
@@ -643,10 +643,12 @@ export default {
           message: 'Submit request failed',
           position: 'top right',
           showDuration: 4000,
-          hideMethod: 'hinge',
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
       }
+      this.showModalOT = false;
+      this.getMyOTRequest();
     },
     async takeOff() {
       if (this.contentTakeOff === "") {
@@ -655,7 +657,7 @@ export default {
           message: 'contentTakeOff Not Be Empty',
           position: 'top right',
           showDuration: 4000,
-          hideMethod: 'hinge',
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
         return;
@@ -690,18 +692,32 @@ export default {
           showMethod: 'bounce',
         })
       }
+      this.showModal = false;
+      this.getMyAbsentRequest();
     },
     showLateForWork() {
-      this.showModalLateForWork = true;
+      if(this.date === ""){
+        this.$toast.error({
+          title: 'Date',
+          message: 'Please select a date',
+          position: 'top right',
+          showDuration: 2000,
+          hideMethod: 'bounce',
+          showMethod: 'bounce',
+        })
+        return;
+      }else{
+        this.showModalLateForWork = true;
+      }
     },
     async lateForWork() {
       if (this.contentTakeOff === "") {
         this.$toast.error({
           title: 'Not Be Empty',
-          message: 'contentTakeOff Not Be Empty',
+          message: 'Not Be Empty',
           position: 'top right',
           showDuration: 4000,
-          hideMethod: 'hinge',
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
         return;
@@ -711,7 +727,7 @@ export default {
           message: 'dateLateForWork Not Be Empty',
           position: 'top right',
           showDuration: 4000,
-          hideMethod: 'hinge',
+          hideMethod: 'bounce',
           showMethod: 'bounce',
         })
         return;
@@ -721,8 +737,10 @@ export default {
           note: this.contentTakeOff,
           staff: this.dataUser.staffId,
           status: "PENDING",
+          dayLate: Date.parse(this.date),
           timeIn: Number(this.dateLateForWork) * 60000,
         });
+        console.log("ok",this.data)
         this.contentTakeOff = "";
         this.dateLateForWork = "";
         this.$toast.success({
@@ -744,6 +762,8 @@ export default {
           showMethod: 'bounce',
         })
       }
+      this.showModalLateForWork = false;
+      this.getMyTimeLateRequest();
     },
     async getMyAbsentRequest() {
       try {
