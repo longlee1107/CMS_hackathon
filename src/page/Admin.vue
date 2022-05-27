@@ -115,16 +115,16 @@
                 <div class="w-96 h-full p-4">
                   <form @submit.prevent class="">
                     <div class="grid grid-cols-1">
-                      <label for="" class="font-bold">Name</label>
+                      <label class="font-bold">Name</label>
                       <input type="text" v-model="staffName"
                              class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                      <label for="" class="font-bold">Email</label>
+                      <label class="font-bold">Email</label>
                       <input type="text" v-model="email"
                              class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                      <label for="" class="font-bold">Password</label>
+                      <label class="font-bold">Password</label>
                       <input type="password" v-model="password"
                              class="px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl">
-                      <label for="" class="font-bold">Position</label>
+                      <label class="font-bold">Position</label>
                       <div class="grid grid-cols-2">
                         <div class="">
                           <input type="radio" value="3" v-model="position"
@@ -137,22 +137,16 @@
                           <span class="font-bold">Staff</span>
                         </div>
                       </div>
-                      <label class="block text-gray-600 text-sm font-bold mb-2" for="birthday">Select Date</label>
+                      <label class="block text-gray-600 text-sm font-bold mb-2">Select Date</label>
                       <div class="flex w-full">
                         <v-date-picker v-model="birthday" class="flex-grow">
                           <template v-slot="{ inputValue, inputEvents }">
                             <input id="date"
                                    class="bg-white text-gray-700 w-full py-2 px-3 appearance-none border rounded-3xl focus:outline-none"
-                                   :class="{ 'border-red-600': errorMessage }" :value="inputValue" v-on="inputEvents"/>
+                                   :value="inputValue" v-on="inputEvents" placeholder="Choose your birthday pls"/>
                           </template>
                         </v-date-picker>
                       </div>
-                      <p class="text-red-600 text-xs italic mt-1" v-if="errorMessage">
-                        {{ errorMessage }}
-                      </p>
-                      <p class="text-blue-500 text-xs font-bold mt-1" v-else>
-                        We got it. Thanks!
-                      </p>
                       <label for="" class="font-bold">Salary</label>
                       <div>
                         <input class="w-3/4 px-3 border-2 border-sky-400 bg-blue-200 h-8 rounded-2xl" type="number"
@@ -288,12 +282,6 @@ export default {
     this.getTimeLateRequest();
     this.getAbsentTimeRequest();
     this.getTimeKeepingRequest();
-  },
-  computed: {
-    errorMessage() {
-      if (this.inputValue === '') return 'Date is required.';
-      return '';
-    },
   },
   methods: {
     async paginationAdmin(){
